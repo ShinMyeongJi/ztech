@@ -1,0 +1,4 @@
+class StockInfo{
+  constructor() {
+  }
+}
