@@ -3,7 +3,6 @@ var express = require('express');
 var mysql = require('mysql');
 var dbconfig = require('../../database.js');
 var connection = mysql.createConnection(dbconfig);
-
 var router = express.Router();
 
 router.get('/', function(req, res) {
