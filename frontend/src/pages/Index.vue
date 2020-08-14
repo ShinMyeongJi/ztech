@@ -94,6 +94,7 @@
                           <th scope="col">제목</th>
                           <th scope="col">작성자</th>
                           <th scope="col">날짜</th>
+
                         </tr>
                       </thead>
                       <tbody>
@@ -106,7 +107,7 @@
                             <div class="media align-items-center">
 
                               <div class="media-body">
-                                <span class="mb-0 text-sm">{{v.subject}}</span>
+                                <span class="mb-0 text-sm" style="overflow: hidden;">{{v.subject}}</span>
                               </div>
                             </div>
                           </th>
@@ -118,6 +119,7 @@
                           <td>
                              {{v.crt_dt}}
                           </td>
+
 
 
                         </tr>
