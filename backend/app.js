@@ -3,8 +3,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var dotenv = require('dotenv');
-dotenv.config();
+
+var sequelize = require('./models').sequelize;
+
 
 const cors = require('cors');
 
@@ -13,6 +14,7 @@ var usersRouter = require('./routes/users');
 var listRouter = require('./src/controllers/lists');
 
 var app = express();
+sequelize.sync();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

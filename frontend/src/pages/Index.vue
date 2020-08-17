@@ -49,7 +49,7 @@
       getSomething(){
         console.log("getSomething");
         axios.get("/lists").then(response=>{
-          this.boardList = response.data
+          this.boardList = response.data.infos
           console.log(this.boardList)
         })
       }
