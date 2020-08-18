@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Index from './pages/Index.vue';
 import Landing from './pages/Landing.vue';
 import Login from './pages/Login.vue';
+import Timeline from './pages/timeline/timeline.vue';
 import Profile from './pages/Profile.vue';
 import MainNavbar from './layout/MainNavbar.vue';
 import MainFooter from './layout/MainFooter.vue';
@@ -13,11 +14,21 @@ Vue.prototype.$http = axios;
 
 export default new Router({
   linkExactActiveClass: 'active',
+  mode:'history',
   routes: [
     {
       path: '/',
       name: 'index',
       components: { default: Index, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: 'black' }
+      }
+    },
+    {
+      path: '/timeline',
+      name: 'timeline',
+      components: { default: Timeline, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: 'black' }

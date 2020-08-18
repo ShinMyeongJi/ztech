@@ -1,3 +1,26 @@
+<script>
+  import { DropDown, Navbar, NavLink } from '@/components';
+  import { Popover } from 'element-ui';
+  export default {
+    name: 'main-navbar',
+    props: {
+      transparent: Boolean,
+      colorOnScroll: Number
+    },
+    components: {
+      DropDown,
+      Navbar,
+      NavLink,
+      [Popover.name]: Popover
+    },
+    methods : {
+      goToPage(){
+        this.$router.push('/timeline')
+      }
+    }
+  };
+</script>
+
 <template>
   <navbar
     position="fixed"
@@ -27,11 +50,11 @@
       <li class="nav-item">
         <a
           class="nav-link"
-          href="https://www.creative-tim.com/product/vue-now-ui-kit"
-          target="_blank"
+          href="javascript:void(0);"
+          @click="goToPage"
         >
-          <i class="now-ui-icons arrows-1_cloud-download-93"></i>
-          <p>Download</p>
+          <i class="now-ui-icons design_bullet-list-67"></i>
+          <p>Timeline</p>
         </a>
       </li>
       <drop-down
@@ -67,16 +90,7 @@
           <i class="now-ui-icons users_single-02"></i> Profile
         </nav-link>
       </drop-down>
-      <li class="nav-item">
-        <a
-          class="nav-link btn btn-neutral"
-          href="https://www.creative-tim.com/product/vue-now-ui-kit-pro"
-          target="_blank"
-        >
-          <i class="now-ui-icons arrows-1_share-66"></i>
-          <p>Upgrade to PRO</p>
-        </a>
-      </li>
+
 
       <li class="nav-item">
         <a
@@ -121,22 +135,5 @@
   </navbar>
 </template>
 
-<script>
-import { DropDown, Navbar, NavLink } from '@/components';
-import { Popover } from 'element-ui';
-export default {
-  name: 'main-navbar',
-  props: {
-    transparent: Boolean,
-    colorOnScroll: Number
-  },
-  components: {
-    DropDown,
-    Navbar,
-    NavLink,
-    [Popover.name]: Popover
-  }
-};
-</script>
 
 <style scoped></style>
