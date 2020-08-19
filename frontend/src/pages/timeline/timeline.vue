@@ -77,28 +77,36 @@
 
 
               <div class="feed-card js-profile-card">
-                <div>
+
                 <div class="feed-card__img">
                   <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1537638518/Ba%C5%9Fl%C4%B1ks%C4%B1z-1.jpg" alt="profile card">
                 </div>
-                <div>
-                  <span>aaaaaa</span>
-                </div>
-                </div>
-                <!--<div class="feed-card__cnt js-profile-cnt">
-                  <div class="feed-card__name">Muhammed Erdem</div>
-                  <div class="feed-card__txt">Front-end Developer from <strong>Mesopotamia</strong></div>
-                  <div class="feed-card-loc">
-        <span class="feed-card-loc__icon">
-          <svg class="icon"><use xlink:href="#icon-location"></use></svg>
-        </span>
 
-                    <span class="feed-card-loc__txt">
-          Istanbul, Turkey
-        </span>
+                <div class="feed-card__cnt js-profile-cnt">
+                  <div class="feed-card__name" >Muhammed Erdem</div>
+                  <div class="feed-card__txt">Front-end Developer from <strong>Mesopotamia</strong></div>
+                  <hr />
+
+                  <div class="feed-card-inf__item">
+
+                    <div class="feed-card-inf__txt">FollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowing</div>
                   </div>
 
-                  <div class="feed-card-inf">
+                  <div class="feed-card-social">
+                    <a href="https://www.facebook.com/iaMuhammedErdem" class="feed-card-social__item facebook" target="_blank">
+                      <div style="width: 120px; height:120px; background-size: cover; background-position: center center; overflow: hidden;">
+                        <img src="img/bg1.jpg" />
+                      </div>
+                    </a>
+
+                    <a href="https://twitter.com/iaMuhammedErdem" class="feed-card-social__item twitter" target="_blank">
+                      <span class="icon-font">
+                          <svg class="icon"><use xlink:href="#icon-twitter"></use></svg>
+                      </span>
+                    </a>
+                  </div>
+
+                  <!--<div class="feed-card-inf">
                     <div class="feed-card-inf__item">
                       <div class="feed-card-inf__title">1598</div>
                       <div class="feed-card-inf__txt">Followers</div>
@@ -118,58 +126,15 @@
                       <div class="feed-card-inf__title">85</div>
                       <div class="feed-card-inf__txt">Works</div>
                     </div>
-                  </div>
+                  </div>-->
 
-                  <div class="feed-card-social">
-                    <a href="https://www.facebook.com/iaMuhammedErdem" class="feed-card-social__item facebook" target="_blank">
-          <span class="icon-font">
-              <svg class="icon"><use xlink:href="#icon-facebook"></use></svg>
-          </span>
-                    </a>
 
-                    <a href="https://twitter.com/iaMuhammedErdem" class="feed-card-social__item twitter" target="_blank">
-          <span class="icon-font">
-              <svg class="icon"><use xlink:href="#icon-twitter"></use></svg>
-          </span>
-                    </a>
-
-                    <a href="https://www.instagram.com/iamuhammederdem" class="feed-card-social__item instagram" target="_blank">
-          <span class="icon-font">
-              <svg class="icon"><use xlink:href="#icon-instagram"></use></svg>
-          </span>
-                    </a>
-
-                    <a href="https://www.behance.net/iaMuhammedErdem" class="feed-card-social__item behance" target="_blank">
-          <span class="icon-font">
-              <svg class="icon"><use xlink:href="#icon-behance"></use></svg>
-          </span>
-                    </a>
-
-                    <a href="https://github.com/muhammederdem" class="feed-card-social__item github" target="_blank">
-          <span class="icon-font">
-              <svg class="icon"><use xlink:href="#icon-github"></use></svg>
-          </span>
-                    </a>
-
-                    <a href="https://codepen.io/JavaScriptJunkie" class="feed-card-social__item codepen" target="_blank">
-          <span class="icon-font">
-              <svg class="icon"><use xlink:href="#icon-codepen"></use></svg>
-          </span>
-                    </a>
-
-                    <a href="http://muhammederdem.com.tr/" class="feed-card-social__item link" target="_blank">
-          <span class="icon-font">
-              <svg class="icon"><use xlink:href="#icon-link"></use></svg>
-          </span>
-                    </a>
-
-                  </div>
 
                   <div class="feed-card-ctr">
-                    <button class="feed-card__button button&#45;&#45;blue js-message-btn">Message</button>
-                    <button class="feed-card__button button&#45;&#45;orange">Follow</button>
+                    <button class="feed-card__button button--blue js-message-btn">Message</button>
+                    <button class="feed-card__button button--orange">Follow</button>
                   </div>
-                </div>-->
+                </div>
 
                 <div class="feed-card-message js-message">
                   <form class="feed-card-form">

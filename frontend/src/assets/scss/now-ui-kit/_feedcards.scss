@@ -111,21 +111,21 @@ a, a:hover {
 
   &__cnt {
     margin-top: -35px;
-    text-align: center;
-    padding: 0 20px;
-    padding-bottom: 40px;
+    /*text-align: center;*/
+    padding: 28px 120px;
+    /*padding-bottom: 40px;*/
     transition: all .3s;
   }
 
   &__name {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 24px;
     color: #6944ff;
-    margin-bottom: 15px;
+    margin-bottom: 2px;
   }
 
   &__txt {
-    font-size: 18px;
+    font-size: 12px;
     font-weight: 500;
     color: #324e63;
     margin-bottom: 15px;
@@ -161,7 +161,7 @@ a, a:hover {
     margin-top: 35px;
 
     &__item {
-      padding: 10px 35px;
+      padding: 10px 5px;
       min-width: 150px;
 
       @media screen and (max-width: 768px) {
@@ -194,10 +194,10 @@ a, a:hover {
 
     &__item {
       display: inline-flex;
-      width: 55px;
-      height: 55px;
+      width: 120px;
+      height: 120px;
       margin: 15px;
-      border-radius: 50%;
+      //border-radius: 100%;
       align-items: center;
       justify-content: center;
       color: #fff;
