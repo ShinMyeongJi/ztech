@@ -12,13 +12,14 @@
   import SignupForm from './../components/SignupForm';
   import ExamplesSection from './../components/ExamplesSection';
   import DownloadSection from './../components/DownloadSection';
+  import { Button } from '@/components';
   import axios from "axios";
-
 
   export default {
     name: 'index',
     bodyClass: 'index-page',
     components: {
+      [Button.name]: Button,
       //Parallax,
       BasicElements,
       Navigation,
@@ -94,46 +95,36 @@
 
                   <div class="feed-card-social">
                     <a href="https://www.facebook.com/iaMuhammedErdem" class="feed-card-social__item facebook" target="_blank">
-                      <div style="width: 120px; height:120px; background-size: cover; background-position: center center; overflow: hidden;">
-                        <img src="img/bg1.jpg" />
+                      <div>
+                        <img src="img/bg1.jpg" class="feed-card-social__item__uploaded-img" />
                       </div>
                     </a>
 
-                    <a href="https://twitter.com/iaMuhammedErdem" class="feed-card-social__item twitter" target="_blank">
-                      <span class="icon-font">
-                          <svg class="icon"><use xlink:href="#icon-twitter"></use></svg>
-                      </span>
+                    <a href="https://www.facebook.com/iaMuhammedErdem" class="feed-card-social__item facebook" target="_blank">
+                      <div>
+                        <img src="img/bg1.jpg" class="feed-card-social__item__uploaded-img" />
+                      </div>
                     </a>
                   </div>
 
-                  <!--<div class="feed-card-inf">
-                    <div class="feed-card-inf__item">
-                      <div class="feed-card-inf__title">1598</div>
-                      <div class="feed-card-inf__txt">Followers</div>
-                    </div>
+                  <hr/>
+                  <div style="display:table;">
+                    <i class="now-ui-icons ui-2_chat-round"><span style="font-size: 10px; display:table-cell; vertical-align: middle;">댓글</span></i>
+                  </div>
+                  <!--<div class="container" id="news">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <textarea class="form-control" placeholder="Share comment" rows="3"></textarea>
+                        <n-button class="pull-right" type="primary" round>등록</n-button>
 
-                    <div class="feed-card-inf__item">
-                      <div class="feed-card-inf__title">65</div>
-                      <div class="feed-card-inf__txt">Following</div>
-                    </div>
-
-                    <div class="feed-card-inf__item">
-                      <div class="feed-card-inf__title">123</div>
-                      <div class="feed-card-inf__txt">Articles</div>
-                    </div>
-
-                    <div class="feed-card-inf__item">
-                      <div class="feed-card-inf__title">85</div>
-                      <div class="feed-card-inf__txt">Works</div>
+                      </div>
                     </div>
                   </div>-->
 
-
-
-                  <div class="feed-card-ctr">
-                    <button class="feed-card__button button--blue js-message-btn">Message</button>
-                    <button class="feed-card__button button--orange">Follow</button>
-                  </div>
+<!--                  <div class="feed-card-ctr">
+                    <button class="feed-card__button button&#45;&#45;blue js-message-btn">Message</button>
+                    <button class="feed-card__button button&#45;&#45;orange">Follow</button>
+                  </div>-->
                 </div>
 
                 <div class="feed-card-message js-message">

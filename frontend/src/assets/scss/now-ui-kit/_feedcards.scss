@@ -14,9 +14,22 @@ body {
   color: #324e63;
 }
 
+.btn-default{
+  color:#fff;
+  background-color:#477bc3;
+  border:0;
+  margin:10px;
+}
+
 a, a:hover {
   text-decoration: none;
 }
+
+#news {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 
 .icon {
   display: inline-block;
@@ -194,29 +207,48 @@ a, a:hover {
 
     &__item {
       display: inline-flex;
-      width: 120px;
-      height: 120px;
+      width: 200px;
+      height: 200px;
       margin: 15px;
       //border-radius: 100%;
       align-items: center;
       justify-content: center;
       color: #fff;
       background: #405de6;
-      box-shadow: 0px 7px 30px rgba(43,98,169,0.5);
+      box-shadow: 0px 10px 15px rgba(43,98,169,0.5);
       position: relative;
       font-size: 21px;
       flex-shrink: 0;
       transition: all .3s;
 
+      &__img-div {
+       /* width: 120px;
+        height:120px;
+        overflow: hidden;
+        position:relative;*/
+      }
+
+      &__uploaded-img {
+        width : 200px;
+        height: 200px;
+        object-fit: cover;
+        object-position: center;
+
+        @media screen and (max-width: 768px) {
+          width: 60px;
+          height: 60px;
+        }
+      }
+
       @media screen and (max-width: 768px) {
-        width: 50px;
-        height: 50px;
-        margin: 10px;
+        width: 60px;
+        height: 60px;
       }
 
       @media screen and (min-width: 768px){
         &:hover {
-          transform: scale(1.2);
+          transform: scale(1.05);
+          opacity: 0.8;
         }
       }
 
@@ -435,6 +467,7 @@ a, a:hover {
     border-radius: 12px;
     transition: all .3s;
   }
+
 
 }
 
