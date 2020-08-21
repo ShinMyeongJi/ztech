@@ -44,6 +44,20 @@ a, a:hover {
   margin: 20px;
 }
 
+.feed-bottom{
+  padding-left : 10px;
+  display: table;
+  float : right;
+
+  &.text {
+    font-size: 12px;
+    vertical-align: middle;
+    display: table-cell;
+    padding-bottom: 5px;
+    padding-left: 5px;
+  }
+}
+
 .feed-wrapper {
   width: 100%;
   height: auto;
@@ -73,6 +87,8 @@ a, a:hover {
   border-radius: 12px;
   max-width: 1000px;
   position: relative;
+  padding-bottom: 20px;
+  margin-bottom : 100px;
 
   &.active {
     .profile-card__cnt {
@@ -105,7 +121,7 @@ a, a:hover {
     // overflow: hidden;
     position: relative;
     // z-index: 2;
-    box-shadow: 0px 5px 30px 0px rgb(108, 68, 252), 0px 0px 0px 7px rgba(107, 74, 255, 0.5);
+    box-shadow: 0px 5px 15px 0px rgb(108, 68, 252), 0px 0px 0px 5px rgba(107, 74, 255, 0.5);
 
     @media screen and (max-width: 576px) {
       width: 120px;
@@ -166,37 +182,8 @@ a, a:hover {
 
   }
 
-  &-bottom{
-    display: flex;
-    position: relative;
-    margin-top: 35px;
 
-    &__item {
-      padding: 10px 5px;
-      min-width: 150px;
 
-      @media screen and (max-width: 768px) {
-        padding: 10px 20px;
-        min-width: 120px;
-      }
-
-    }
-
-    &__title {
-      font-weight: 700;
-      font-size: 27px;
-      //color: #6944ff;
-      color: #324e63;
-    }
-
-    &__txt {
-
-      vertical-align: middle;
-      font-weight: 500;
-      margin-top: 7px;
-    }
-
-  }
 
 
   &-inf {
