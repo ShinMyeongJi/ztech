@@ -14,12 +14,12 @@ body {
   color: #324e63;
 }
 
-.btn-default{
+/*.btn-default{
   color:#fff;
   background-color:#477bc3;
   border:0;
   margin:10px;
-}
+}*/
 
 a, a:hover {
   text-decoration: none;
@@ -166,6 +166,39 @@ a, a:hover {
 
   }
 
+  &-bottom{
+    display: flex;
+    position: relative;
+    margin-top: 35px;
+
+    &__item {
+      padding: 10px 5px;
+      min-width: 150px;
+
+      @media screen and (max-width: 768px) {
+        padding: 10px 20px;
+        min-width: 120px;
+      }
+
+    }
+
+    &__title {
+      font-weight: 700;
+      font-size: 27px;
+      //color: #6944ff;
+      color: #324e63;
+    }
+
+    &__txt {
+
+      vertical-align: middle;
+      font-weight: 500;
+      margin-top: 7px;
+    }
+
+  }
+
+
   &-inf {
     display: flex;
     justify-content: center;
@@ -239,6 +272,7 @@ a, a:hover {
           height: 60px;
         }
       }
+
 
       @media screen and (max-width: 768px) {
         width: 60px;

@@ -108,9 +108,15 @@
                   </div>
 
                   <hr/>
-                  <div style="display:table;">
-                    <i class="now-ui-icons ui-2_chat-round"><span style="font-size: 10px; display:table-cell; vertical-align: middle;">댓글</span></i>
+                  <div class="feed-card-bottom__item" >
+                    <i class="now-ui-icons ui-2_chat-round" ></i>
+                    <div class="feed-card-bottom__txt">13</div>
                   </div>
+
+                  <!--<div class="feed-bottom" style="display: table; float : right;">
+                    <i class="now-ui-icons ui-2_chat-round"></i>
+                    <span class="" style="font-size: 12px; vertical-align: middle; display: table-cell; padding-bottom: 5px; padding-left: 5px;">sdg</span>
+                  </div>-->
                   <!--<div class="container" id="news">
                     <div class="panel panel-default">
                       <div class="panel-body">
