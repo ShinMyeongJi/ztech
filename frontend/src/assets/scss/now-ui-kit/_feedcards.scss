@@ -21,6 +21,22 @@ body {
   margin:10px;
 }*/
 
+.write-btn {
+  position: relative;
+  text-align: right;
+  margin-right: 80px;
+  margin-bottom: -65px;
+  z-index: 5;
+}
+.write-btn img{
+  width: 60px;
+  height: 60px;
+}
+
+.write-btn img:hover{
+  cursor: pointer;
+}
+
 a, a:hover {
   text-decoration: none;
 }

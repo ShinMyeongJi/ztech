@@ -72,13 +72,18 @@
           <div class="timeline-header">
             <h2>TIMELINE</h2>
           </div>
-          <div class="section">
+          <div class="write-btn">
 
-              <div class="feed-card js-profile-card">
+            <img src="img/write_icon.png">
+
+          </div>
+          <div class="section" >
+             <div class="feed-card js-profile-card">
 
                 <div class="feed-card__img">
                   <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1537638518/Ba%C5%9Fl%C4%B1ks%C4%B1z-1.jpg" alt="profile card">
                 </div>
+
 
                 <div class="feed-card__cnt js-profile-cnt">
                   <div class="feed-card__name" >Muhammed Erdem</div>
@@ -112,8 +117,9 @@
                   </div>
                   <div class="feed-bottom" >
                     <a href="javascript:void(0)"><i class="now-ui-icons ui-2_like"></i></a>
-                    <span class="feed-bottom text">sdg</span>
+                    <span class="feed-bottom text">900</span>
                   </div>
+
                   <!--<div class="container" id="news">
                     <div class="panel panel-default">
                       <div class="panel-body">
