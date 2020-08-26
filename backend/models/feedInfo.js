@@ -1,5 +1,7 @@
+
+
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('feed_info', {
+  var feedInfo = sequelize.define('feed_info', {
     feed_id: {
       primaryKey :true,
       type: DataTypes.INTEGER,
@@ -36,6 +38,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull:true
     }
+  }, {
+    timestamps : false
   });
 
+  return feedInfo;
 };
