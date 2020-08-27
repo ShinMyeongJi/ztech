@@ -38,14 +38,19 @@
     },
     data() {
       return {
-        boardList : []
+        feedList : []
       }
     },
     created() {
-
+      this.getFeeds()
     },
     methods : {
-
+      getFeeds(){
+        axios.get('/feeds').then(response =>{
+          this.feedList = response.data.infos
+          console.log(this.feedList)
+        })
+      }
     }
   };
 </script>
@@ -77,22 +82,21 @@
             <img src="img/write_icon.png">
 
           </div>
-          <div class="section" >
-             <div class="feed-card js-profile-card">
+          <div class="section">
+             <div class="feed-card js-profile-card" v-for="(v, idx) in feedList" v-bind:key="idx">
 
                 <div class="feed-card__img">
-                  <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1537638518/Ba%C5%9Fl%C4%B1ks%C4%B1z-1.jpg" alt="profile card">
+                  <img src="https://image.flaticon.com/icons/svg/847/847969.svg" alt="profile card">
                 </div>
 
 
                 <div class="feed-card__cnt js-profile-cnt">
-                  <div class="feed-card__name" >Muhammed Erdem</div>
-                  <div class="feed-card__txt"><strong>Mesopotamia</strong> Front-end Developer from </div>
+                  <div class="feed-card__name" >{{v.subject}}</div>
+                  <div class="feed-card__txt"><strong>{{v.name}}</strong> {{v.crt_dt}}</div>
                   <hr />
 
                   <div class="feed-card-inf__item">
-
-                    <div class="feed-card-inf__txt">FollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowing</div>
+                    <div class="feed-card-inf__txt">{{v.content}}</div>
                   </div>
 
                   <div class="feed-card-social">
@@ -117,125 +121,48 @@
                   </div>
                   <div class="feed-bottom" >
                     <a href="javascript:void(0)"><i class="now-ui-icons ui-2_like"></i></a>
-                    <span class="feed-bottom text">900</span>
+                    <span class="feed-bottom text">{{v.like}}</span>
                   </div>
 
-                  <!--<div class="container" id="news">
-                    <div class="panel panel-default">
-                      <div class="panel-body">
-                        <textarea class="form-control" placeholder="Share comment" rows="3"></textarea>
-                        <n-button class="pull-right" type="primary" round>등록</n-button>
-
-                      </div>
-                    </div>
-                  </div>-->
-
-<!--                  <div class="feed-card-ctr">
-                    <button class="feed-card__button button&#45;&#45;blue js-message-btn">Message</button>
-                    <button class="feed-card__button button&#45;&#45;orange">Follow</button>
-                  </div>-->
                 </div>
 
-                <!--<div class="feed-card-message js-message">
-                  <form class="feed-card-form">
-                    <div class="feed-card-form__container">
-                      <textarea placeholder="Say something..."></textarea>
-                    </div>
-
-                    <div class="feed-card-form__bottom">
-                      <button class="feed-card__button button&#45;&#45;blue js-message-close">
-                        Send
-                      </button>
-
-                      <button class="feed-card__button button&#45;&#45;gray js-message-close">
-                        Cancel
-                      </button>
-                    </div>
-                  </form>
-
-                  <div class="feed-card__overlay js-message-close"></div>
-                </div>-->
 
               </div>
 
+            <!--<div class="container" id="news">
+                            <div class="panel panel-default">
+                              <div class="panel-body">
+                                <textarea class="form-control" placeholder="Share comment" rows="3"></textarea>
+                                <n-button class="pull-right" type="primary" round>등록</n-button>
 
-            <div class="feed-card js-profile-card">
+                              </div>
+                            </div>
+                          </div>-->
 
-              <div class="feed-card__img">
-                <img src="https://res.cloudinary.com/muhammederdem/image/upload/v1537638518/Ba%C5%9Fl%C4%B1ks%C4%B1z-1.jpg" alt="profile card">
-              </div>
-
-              <div class="feed-card__cnt js-profile-cnt">
-                <div class="feed-card__name" >Muhammed Erdem</div>
-                <div class="feed-card__txt"><strong>Mesopotamia</strong> Front-end Developer from </div>
-                <hr />
-
-                <div class="feed-card-inf__item">
-
-                  <div class="feed-card-inf__txt">FollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowingFollowing</div>
+            <!--                  <div class="feed-card-ctr">
+                             <button class="feed-card__button button&#45;&#45;blue js-message-btn">Message</button>
+                             <button class="feed-card__button button&#45;&#45;orange">Follow</button>
+                           </div>-->
+            <!--<div class="feed-card-message js-message">
+              <form class="feed-card-form">
+                <div class="feed-card-form__container">
+                  <textarea placeholder="Say something..."></textarea>
                 </div>
 
-                <div class="feed-card-social">
-                  <a href="https://www.facebook.com/iaMuhammedErdem" class="feed-card-social__item facebook" target="_blank">
-                    <div>
-                      <img src="img/bg1.jpg" class="feed-card-social__item__uploaded-img" />
-                    </div>
-                  </a>
+                <div class="feed-card-form__bottom">
+                  <button class="feed-card__button button&#45;&#45;blue js-message-close">
+                    Send
+                  </button>
 
-                  <a href="https://www.facebook.com/iaMuhammedErdem" class="feed-card-social__item facebook" target="_blank">
-                    <div>
-                      <img src="img/bg1.jpg" class="feed-card-social__item__uploaded-img" />
-                    </div>
-                  </a>
+                  <button class="feed-card__button button&#45;&#45;gray js-message-close">
+                    Cancel
+                  </button>
                 </div>
+              </form>
 
-                <hr/>
+              <div class="feed-card__overlay js-message-close"></div>
+            </div>-->
 
-                <div class="feed-bottom" >
-                  <a href=""><i class="now-ui-icons ui-2_chat-round"></i></a>
-                  <span class="feed-bottom text">sdg</span>
-                </div>
-                <div class="feed-bottom" >
-                  <a href="javascript:void(0)"><i class="now-ui-icons ui-2_like"></i></a>
-                  <span class="feed-bottom text">sdg</span>
-                </div>
-                <!--<div class="container" id="news">
-                  <div class="panel panel-default">
-                    <div class="panel-body">
-                      <textarea class="form-control" placeholder="Share comment" rows="3"></textarea>
-                      <n-button class="pull-right" type="primary" round>등록</n-button>
-
-                    </div>
-                  </div>
-                </div>-->
-
-                <!--                  <div class="feed-card-ctr">
-                                    <button class="feed-card__button button&#45;&#45;blue js-message-btn">Message</button>
-                                    <button class="feed-card__button button&#45;&#45;orange">Follow</button>
-                                  </div>-->
-              </div>
-
-              <!--<div class="feed-card-message js-message">
-                <form class="feed-card-form">
-                  <div class="feed-card-form__container">
-                    <textarea placeholder="Say something..."></textarea>
-                  </div>
-
-                  <div class="feed-card-form__bottom">
-                    <button class="feed-card__button button&#45;&#45;blue js-message-close">
-                      Send
-                    </button>
-
-                    <button class="feed-card__button button&#45;&#45;gray js-message-close">
-                      Cancel
-                    </button>
-                  </div>
-                </form>
-
-                <div class="feed-card__overlay js-message-close"></div>
-              </div>-->
-
-            </div>
 
           </div>
         </div>
