@@ -1,5 +1,5 @@
 <script>
-  //import { Parallax } from '@/components';
+  import { Parallax } from '@/components';
   import BasicElements from './../components/BasicElementsSection';
   import Navigation from './../components/Navigation';
   import TabsSection from './../components/Tabs';
@@ -12,15 +12,15 @@
   import SignupForm from './../components/SignupForm';
   import ExamplesSection from './../components/ExamplesSection';
   import DownloadSection from './../components/DownloadSection';
-  import { Button } from '@/components';
+
   import axios from "axios";
 
   export default {
     name: 'index',
     bodyClass: 'index-page',
     components: {
-      [Button.name]: Button,
-      //Parallax,
+
+      Parallax,
       BasicElements,
       Navigation,
       TabsSection,
@@ -42,25 +42,18 @@
       }
     },
     created() {
-      this.getFeeds()
+
     },
-    methods : {
-      getFeeds(){
-        axios.get('/feeds').then(response =>{
-          this.feedList = response.data.infos
-          console.log(this.feedList)
-        })
-      }
-    }
+
   };
 </script>
 
 <template>
   <div>
-    <!--<div class="page-header page-header-small">
+    <div class="page-header page-header-small">
       <parallax
           class="page-header-image"
-          style="background-image:url('img/timeline_bg.jpg')"
+          style="background-image:url('img/bg1.jpg')"
       >
       </parallax>
       <div class="container">
@@ -69,105 +62,8 @@
           <h5>TIMELINE</h5>
         </div>
       </div>
-    </div>-->
-
-    <div class="section">
-      <div class="container">
-        <div class="card">
-          <div class="timeline-header">
-            <h2>TIMELINE</h2>
-          </div>
-          <div class="write-btn">
-
-            <img src="img/write_icon.png">
-
-          </div>
-          <div class="section">
-            <div class="feed-card js-profile-card" v-for="(v, idx) in feedList" v-bind:key="idx">
-
-              <div class="feed-card__img">
-                <img src="https://image.flaticon.com/icons/svg/847/847969.svg" alt="profile card">
-              </div>
-
-
-              <div class="feed-card__cnt js-profile-cnt">
-                <div class="feed-card__name" >{{v.subject}}</div>
-                <div class="feed-card__txt"><strong>{{v.name}}</strong> {{v.crt_dt}}</div>
-                <hr />
-
-                <div class="feed-card-inf__item">
-                  <div class="feed-card-inf__txt">{{v.content}}</div>
-                </div>
-
-                <div class="feed-card-social">
-                  <a href="https://www.facebook.com/iaMuhammedErdem" class="feed-card-social__item facebook" target="_blank">
-                    <div>
-                      <img src="img/bg1.jpg" class="feed-card-social__item__uploaded-img" />
-                    </div>
-                  </a>
-
-                  <a href="https://www.facebook.com/iaMuhammedErdem" class="feed-card-social__item facebook" target="_blank">
-                    <div>
-                      <img src="img/bg1.jpg" class="feed-card-social__item__uploaded-img" />
-                    </div>
-                  </a>
-                </div>
-
-                <hr/>
-
-                <div class="feed-bottom" >
-                  <a href=""><i class="now-ui-icons ui-2_chat-round"></i></a>
-                  <span class="feed-bottom text">sdg</span>
-                </div>
-                <div class="feed-bottom" >
-                  <a href="javascript:void(0)"><i class="now-ui-icons ui-2_like"></i></a>
-                  <span class="feed-bottom text">{{v.like}}</span>
-                </div>
-
-              </div>
-
-
-            </div>
-
-            <!--<div class="container" id="news">
-                            <div class="panel panel-default">
-                              <div class="panel-body">
-                                <textarea class="form-control" placeholder="Share comment" rows="3"></textarea>
-                                <n-button class="pull-right" type="primary" round>등록</n-button>
-
-                              </div>
-                            </div>
-                          </div>-->
-
-            <!--                  <div class="feed-card-ctr">
-                             <button class="feed-card__button button&#45;&#45;blue js-message-btn">Message</button>
-                             <button class="feed-card__button button&#45;&#45;orange">Follow</button>
-                           </div>-->
-            <!--<div class="feed-card-message js-message">
-              <form class="feed-card-form">
-                <div class="feed-card-form__container">
-                  <textarea placeholder="Say something..."></textarea>
-                </div>
-
-                <div class="feed-card-form__bottom">
-                  <button class="feed-card__button button&#45;&#45;blue js-message-close">
-                    Send
-                  </button>
-
-                  <button class="feed-card__button button&#45;&#45;gray js-message-close">
-                    Cancel
-                  </button>
-                </div>
-              </form>
-
-              <div class="feed-card__overlay js-message-close"></div>
-            </div>-->
-
-
-          </div>
-        </div>
-      </div>
     </div>
+
 
     <basic-elements></basic-elements>
     <navigation></navigation>
@@ -198,5 +94,3 @@
     <download-section></download-section>
   </div>
 </template>
-
-<style></style>

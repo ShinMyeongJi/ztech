@@ -16,8 +16,9 @@
       <div
         class="modal-dialog"
         :class="[{ 'modal-notice': type === 'notice' }, modalClasses]"
+        style="max-width: 800px; height: 650px;"
       >
-        <div class="modal-content">
+        <div class="modal-content" style="height: 100%;">
           <slot name="base-content">
             <div class="modal-header" :class="headerClasses">
               <slot name="close-button">

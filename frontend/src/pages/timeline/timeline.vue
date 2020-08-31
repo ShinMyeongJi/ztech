@@ -12,7 +12,7 @@
   import SignupForm from './../components/SignupForm';
   import ExamplesSection from './../components/ExamplesSection';
   import DownloadSection from './../components/DownloadSection';
-  import { Button } from '@/components';
+  import { Button, Modal } from '@/components';
   import axios from "axios";
 
   export default {
@@ -34,11 +34,17 @@
       ExamplesSection,
       DownloadSection,
       // eslint-disable-next-line vue/no-unused-components
-      axios
+      axios,
+      // eslint-disable-next-line vue/no-unused-components
+      Modal
     },
     data() {
       return {
-        feedList : []
+        feedList : [],
+        modals: {
+          classic: false,
+          mini: false
+        }
       }
     },
     created() {
@@ -79,8 +85,24 @@
           </div>
           <div class="write-btn">
 
-            <img src="img/write_icon.png">
-
+            <img src="img/write_icon.png" @click="modals.classic = true">
+            <modal :show.sync="modals.classic" headerClasses="justify-content-center" style="z-index: 15;">
+              <h4 slot="header" class="title title-up">Modal title</h4>
+              <p>
+                Far far away, behind the word mountains, far from the countries Vokalia
+                and Consonantia, there live the blind texts. Separated they live in
+                Bookmarksgrove right at the coast of the Semantics, a large language
+                ocean. A small river named Duden flows by their place and supplies it
+                with the necessary regelialia. It is a paradisematic country, in which
+                roasted parts of sentences fly into your mouth.
+              </p>
+              <template slot="footer">
+                <n-button>Nice Button</n-button>
+                <n-button type="danger" @click.native="modals.classic = false"
+                >Close</n-button
+                >
+              </template>
+            </modal>
           </div>
           <div class="section">
              <div class="feed-card js-profile-card" v-for="(v, idx) in feedList" v-bind:key="idx">
