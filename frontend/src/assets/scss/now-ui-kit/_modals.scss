@@ -42,11 +42,12 @@
     padding-right: 24px;
     padding-bottom: 16px;
     padding-left: 24px;
-    -webkit-justify-content: space-between; /* Safari 6.1+ */
-    justify-content: space-between;
+   // -webkit-justify-content: space-between; /* Safari 6.1+ */
+   // justify-content: space-between;
 
     button {
       margin: 0;
+      margin-left: 10px;
       padding-left: 16px;
       padding-right: 16px;
       width: auto;

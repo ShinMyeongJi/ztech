@@ -1,0 +1,33 @@
+#bio {
+ // display: block;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  height: 300px;
+  margin: 0;
+  outline: 0;
+  padding: 15px;
+  width: 100%;
+  background-color: #e8eeef;
+  color: #8a97a0;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+  margin-bottom: 10px;
+  resize: none;
+}
+
+.add-btn{
+
+  width: 80px;
+  height: 80px;
+  background: dodgerblue;
+  border: 0px;
+  border-radius: 10px;
+}
+
+.add-btn > span {
+  display: block;
+  font-size: 12px;
+  color: white;
+  margin-top: -10px;
+}

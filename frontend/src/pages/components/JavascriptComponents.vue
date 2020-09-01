@@ -1,6 +1,6 @@
 <template>
   <div class="section section-javascript" id="javascriptComponents">
-    <div class="container">
+    <!--<div class="container">
       <h3 class="title">Javascript components</h3>
       <div class="row" id="modals">
         <div class="col-md-6 modal-buttons">
@@ -130,7 +130,7 @@
           <br />
         </div>
       </div>
-    </div>
+    </div>-->
     <!-- Classic Modal -->
     <modal :show.sync="modals.classic" headerClasses="justify-content-center">
       <h4 slot="header" class="title title-up">Modal title</h4>
