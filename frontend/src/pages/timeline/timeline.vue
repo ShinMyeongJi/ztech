@@ -56,6 +56,9 @@
           this.feedList = response.data.infos
           console.log(this.feedList)
         })
+      },
+      popPickImg(){
+        console.log(this.$refs.file_input.click())
       }
     }
   };
@@ -92,10 +95,11 @@
                 <fieldset> <!--style="position: relative;"-->
                   <textarea id="bio" name="user_bio"></textarea>
                   <!--<button style="position: absolute; bottom: 30px; right: 680px; background: transparent;"><i class="now-ui-icons design_image"/></button>-->
-                  <button class="add-btn float-left">
+                  <button class="add-btn float-left" @click="popPickImg">
                     <i class="now-ui-icons design_image" style="color: white;"/>
                     <span>사진</span>
                   </button>
+                  <input type="file" class="file_input_hidden" ref="file_input" multiple="multiple"/>
                 </fieldset>
 
               <template slot="footer">

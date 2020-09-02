@@ -16,8 +16,15 @@
   resize: none;
 }
 
-.add-btn{
+.file_input_hidden{
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
 
+
+.add-btn{
   width: 80px;
   height: 80px;
   background: dodgerblue;
