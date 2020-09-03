@@ -15,6 +15,68 @@
   margin-bottom: 10px;
   resize: none;
 }
+.thumb-block{
+
+}
+
+
+.thumb-item {
+  position: relative;
+  float: left;
+}
+
+.thumb-img{
+  border-radius: 10px;
+  width: 80px;
+  height: 80px;
+}
+a.remImage img {
+
+  box-shadow: none;
+  position: absolute;
+  right: 7px;
+  top: -5px;
+  margin-top: 4px;
+  opacity: 0;
+  display: block;
+  //transition: all .5s ease-in-out;
+}
+.test:hover a.remImage img {
+  width: 20px;
+  height: 20px;
+  opacity: 1;
+  z-index: 99;
+  position: absolute;
+  top: 5px;
+}
+.test:after {
+  content: '';
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  display: block;
+  background: rgba(255, 255, 255, 0.2);
+  top: 0px;
+  z-index: 0;
+  opacity: 0;
+}
+.test:hover:after{
+  opacity: 1;
+}
+
+.delete-icon{
+  width:15px;
+  height:15px;
+}
+
+
+.img-delete-btn{
+  position: absolute;
+  top: 5px;
+  z-index: 99;
+  width: 20px;
+  height: 20px;
+}
 
 .file_input_hidden{
   position: absolute;
@@ -22,7 +84,6 @@
   height: 0;
   overflow: hidden;
 }
-
 
 .add-btn{
   width: 80px;
@@ -38,3 +99,4 @@
   color: white;
   margin-top: -10px;
 }
+

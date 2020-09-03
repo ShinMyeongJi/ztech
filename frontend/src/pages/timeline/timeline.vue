@@ -44,7 +44,8 @@
         modals: {
           classic: false,
           mini: false
-        }
+        },
+        imgs : []
       }
     },
     created() {
@@ -88,18 +89,37 @@
           </div>
           <div class="write-btn">
 
-            <img src="img/write_icon.png" @click="modals.classic = true">
+            <img class="select-img" src="img/write_icon.png" @click="modals.classic = true">
             <modal :show.sync="modals.classic" headerClasses="justify-content-center">
               <h4 slot="header" class="title title-up">새 피드 작성</h4>
 
                 <fieldset> <!--style="position: relative;"-->
                   <textarea id="bio" name="user_bio"></textarea>
                   <!--<button style="position: absolute; bottom: 30px; right: 680px; background: transparent;"><i class="now-ui-icons design_image"/></button>-->
+                  <div class="float-left thumb-block" >
+
+                    <div class="thumb-item">
+                      <img class="thumb-img" src="img/ryan.jpg">
+                      <a class="remImage" href="#" id="delete">
+                        <img class="delete-icon" src="img/criss-cross.png">
+                      </a>
+                    </div>
+
+                    <div class="thumb-item">
+                      <img class="thumb-img" src="img/ryan.jpg">
+                      <a class="remImage" href="#" id="delete">
+                        <img class="delete-icon" src="img/criss-cross.png">
+                      </a>
+                    </div>
+
+
+                  </div>
+
                   <button class="add-btn float-left" @click="popPickImg">
                     <i class="now-ui-icons design_image" style="color: white;"/>
                     <span>사진</span>
                   </button>
-                  <input type="file" class="file_input_hidden" ref="file_input" multiple="multiple"/>
+                  <input type="file" class="file_input_hidden" ref="file_input" multiple="multiple" accept="image/x-png,image/gif,image/jpeg"/>
                 </fieldset>
 
               <template slot="footer">
