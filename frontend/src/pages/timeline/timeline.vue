@@ -45,7 +45,9 @@
           classic: false,
           mini: false
         },
-        imgs : []
+        files : [],
+        filesPreview: [],
+        imgUrls: []
       }
     },
     created() {
@@ -59,8 +61,25 @@
         })
       },
       popPickImg(){
-        console.log(this.$refs.file_input.click())
+        this.$refs.file_input.click()
+
+        /*for(let i = 0; i< this.$refs.file_input.files.length; i++){
+          this.filesPreview.push(this.$refs.file_input.files[i])
+        }*/
+      },
+      fileSelected(e){
+        console.log(e)
+        let files = e.target.files
+
+        for(var i = 0; i < files.length; i++){
+          this.imgUrls.push(URL.createObjectURL(files[i]))
+
+        }
+        console.log(this.imgUrls)
+       // this.imgUrls.push()
       }
+
+
     }
   };
 </script>
@@ -98,28 +117,20 @@
                   <!--<button style="position: absolute; bottom: 30px; right: 680px; background: transparent;"><i class="now-ui-icons design_image"/></button>-->
                   <div class="float-left thumb-block" >
 
-                    <div class="thumb-item">
-                      <img class="thumb-img" src="img/ryan.jpg">
-                      <a class="remImage" href="#" id="delete">
+                    <div class="thumb-item" v-for="(v,idx) in imgUrls" v-bind:key="idx">
+                      <img class="thumb-img" :src="v">
+                      <a class="remImage" href="javascript:void(0)">
                         <img class="delete-icon" src="img/criss-cross.png">
                       </a>
                     </div>
-
-                    <div class="thumb-item">
-                      <img class="thumb-img" src="img/ryan.jpg">
-                      <a class="remImage" href="#" id="delete">
-                        <img class="delete-icon" src="img/criss-cross.png">
-                      </a>
-                    </div>
-
-
+                    <button class="add-btn float-left" @click="popPickImg">
+                      <i class="now-ui-icons design_image" style="color: white;"/>
+                      <span>사진</span>
+                    </button>
                   </div>
 
-                  <button class="add-btn float-left" @click="popPickImg">
-                    <i class="now-ui-icons design_image" style="color: white;"/>
-                    <span>사진</span>
-                  </button>
-                  <input type="file" class="file_input_hidden" ref="file_input" multiple="multiple" accept="image/x-png,image/gif,image/jpeg"/>
+
+                  <input v-on:change="fileSelected" type="file" class="file_input_hidden" ref="file_input" multiple="multiple" accept="image/x-png,image/gif,image/jpeg"/>
                 </fieldset>
 
               <template slot="footer">

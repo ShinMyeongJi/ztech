@@ -22,6 +22,7 @@
 
 .thumb-item {
   position: relative;
+  margin-right: 10px;
   float: left;
 }
 
@@ -41,7 +42,7 @@ a.remImage img {
   display: block;
   //transition: all .5s ease-in-out;
 }
-.test:hover a.remImage img {
+.thumb-item:hover a.remImage img {
   width: 20px;
   height: 20px;
   opacity: 1;
@@ -49,7 +50,7 @@ a.remImage img {
   position: absolute;
   top: 5px;
 }
-.test:after {
+.thumb-item:after {
   content: '';
   width: 80px;
   height: 80px;
@@ -60,7 +61,7 @@ a.remImage img {
   z-index: 0;
   opacity: 0;
 }
-.test:hover:after{
+.thumb-item:hover:after{
   opacity: 1;
 }
 
