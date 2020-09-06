@@ -24,12 +24,15 @@
   position: relative;
   margin-right: 10px;
   float: left;
+  overflow: hidden;
 }
 
 .thumb-img{
+  border: 1px dashed rgba(77, 88, 99, 0.33);
   border-radius: 10px;
   width: 80px;
   height: 80px;
+  object-fit: cover;
 }
 a.remImage img {
 
