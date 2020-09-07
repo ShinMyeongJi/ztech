@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sequelize = require('./models').sequelize;
+var dotenv = require('dotenv');
+dotenv.config();
 
 
 const cors = require('cors');

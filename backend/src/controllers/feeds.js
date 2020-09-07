@@ -14,10 +14,9 @@ aws.config.update({
 })
 
 var router = express.Router();
-
 const upload = multer({
   storage : multerS3({
-    s3: s3,
+    s3: new aws.S3(),
     bucket: 'imagesforztech',
     contentType: multerS3.AUTO_CONTENT_TYPE,
     acl: 'public-read',
@@ -37,6 +36,7 @@ router.get('/', async(req, res)=> {
   }
 });
 
+
 router.post('/upload', upload.single('img'), (req, res) => {
   try{
     console.log("req.file: ", req.file);
@@ -47,6 +47,6 @@ router.post('/upload', upload.single('img'), (req, res) => {
     console.log(e);
     response(res, 500, "서버 에러")
   }
-})
+});
 
 module.exports = router;
