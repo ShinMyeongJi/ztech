@@ -35,7 +35,7 @@ router.get('/', async(req, res)=> {
     console.error(e);
   }
 });
-//테스트
+
 
 router.post('/upload', upload.single('img'), (req, res) => {
   try{
