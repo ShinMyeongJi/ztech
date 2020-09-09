@@ -35,17 +35,22 @@ router.get('/', async(req, res)=> {
     console.error(e);
   }
 });
-//아오오옹
 
-router.post('/upload', upload.single('img'), (req, res) => {
+
+router.post('/upload', upload.array('img'), (req, res) => {
   try{
-    console.log("req.file: ", req.file);
+    console.log("req.file: ", req.files);
 
-    let payLoad = {url : req.file.location};
-    response(res, 200, payLoad);
+    const locations = [];
+    for(let i = 0; i < req.files.length; i++){
+      locations.push(req.files[i])
+    }
+
+    res.status(200).json({locations})
+
   }catch (e) {
-    console.log(e);
-    response(res, 500, "서버 에러")
+    let errMsg = "서버 에러"
+    res.status(500).json({errMsg})
   }
 });
 
