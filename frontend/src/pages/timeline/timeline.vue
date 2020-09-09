@@ -45,7 +45,7 @@
           classic: false,
           mini: false
         },
-        files : [],
+        img : [],
         filesPreview: [],
         imgUrls: []
       }
@@ -76,7 +76,16 @@
 
         }
         console.log(this.imgUrls)
-       // this.imgUrls.push()
+      },
+      upload(){
+        let formData = new FormData();
+        for(let i = 0; i < this.$refs.file_input.files.length; i++){
+          formData.append('img', this.$refs.file_input.files[i])
+        }
+        axios.post('/feeds/upload', formData)
+        .then(response => {
+          console.log(response)
+        })
       }
 
 
@@ -135,7 +144,7 @@
 
               <template slot="footer">
 
-                <n-button type="primary">완료</n-button>
+                <n-button type="primary" @click="upload">완료</n-button>
                 <n-button type="warning" @click.native="modals.classic = false">취소</n-button>
 
               </template>
