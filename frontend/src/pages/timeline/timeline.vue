@@ -86,6 +86,10 @@
         .then(response => {
           console.log(response)
         })
+      },
+      deletePic(idx){
+        this.imgUrls.splice(idx, 1)
+        this.$delete(this.$refs.file_input, 1)
       }
 
 
@@ -129,7 +133,7 @@
                     <div class="thumb-item" v-for="(v,idx) in imgUrls" v-bind:key="idx">
                       <img class="thumb-img" :src="v">
                       <a class="remImage" href="javascript:void(0)">
-                        <img class="delete-icon" src="img/criss-cross.png">
+                        <img class="delete-icon" src="img/criss-cross.png" @click="deletePic(idx)">
                       </a>
                     </div>
                     <button class="add-btn float-left" @click="popPickImg">

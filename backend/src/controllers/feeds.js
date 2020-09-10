@@ -22,7 +22,7 @@ const upload = multer({
     acl: 'public-read',
     key: (req, file, cb) => {
       console.log(file)
-      cb(null, file.originalname);
+      cb(null, file.originalname+ "_" + new Date().valueOf() +path.extname(file.originalname) );
     }
   })
 })
@@ -43,6 +43,7 @@ router.post('/upload', upload.array('img'), (req, res) => {
 
     const locations = [];
     for(let i = 0; i < req.files.length; i++){
+      console.log()
       locations.push(req.files[i])
     }
 
