@@ -14,6 +14,7 @@ aws.config.update({
 })
 
 var router = express.Router();
+var imgUrls = ""
 const upload = multer({
   storage : multerS3({
     s3: new aws.S3(),
@@ -22,7 +23,8 @@ const upload = multer({
     acl: 'public-read',
     key: (req, file, cb) => {
       console.log(file)
-      cb(null, file.originalname+ "_" + new Date().valueOf() +path.extname(file.originalname) );
+      let extName = path.extname(file.originalname)
+      cb(null, path.basename(file.originalname, extName) + "_" + new Date().valueOf() + extName);
     }
   })
 })
@@ -36,17 +38,28 @@ router.get('/', async(req, res)=> {
   }
 });
 
+router.post('/insert', async(req, res)=> {
+  console.log(req.body)
+
+  let feed = req.body
+  feed.imgs = imgUrls
+  const result = await feedInfo.create(feed)
+  res.send(result)
+})
 
 router.post('/upload', upload.array('img'), (req, res) => {
   try{
-    console.log("req.file: ", req.files);
+    imgUrls = ""
+    console.log("req.file: ", req);
 
     const locations = [];
     for(let i = 0; i < req.files.length; i++){
-      console.log()
       locations.push(req.files[i])
+      imgUrls += req.files[i].location
+      if(req.files.length-1 != i) imgUrls += ","
     }
 
+    console.log("imgUrls : " + imgUrls)
     res.status(200).json({locations})
 
   }catch (e) {

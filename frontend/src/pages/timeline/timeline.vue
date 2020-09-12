@@ -47,7 +47,16 @@
         },
         img : [],
         filesPreview: [],
-        imgUrls: []
+        imgUrls: [],
+        feed : {
+          subject : "",
+          name : "shinmj",
+          content : "",
+          imgs : "",
+          like : 0,
+          crt_dt : new Date(),
+          mod_dt : null
+        }
       }
     },
     created() {
@@ -58,6 +67,12 @@
         axios.get('/feeds').then(response =>{
           this.feedList = response.data.infos
           console.log(this.feedList)
+        })
+      },
+      postFeeds(){
+        axios.post('/feeds/insert', this.feed)
+        .then(response =>{
+          console.log(response)
         })
       },
       popPickImg(){
@@ -72,8 +87,14 @@
         let files = e.target.files
 
         for(var i = 0; i < files.length; i++){
-          this.imgUrls.push(URL.createObjectURL(files[i]))
 
+          this.imgUrls.push(URL.createObjectURL(files[i]))
+          if(this.imgUrls.length == 11) {
+            this.imgUrls.splice(10,1)
+            alert("이미지는 10개까지 업로드 할 수 있습니다.")
+            e.preventDefault();
+            break;
+          }
         }
         console.log(this.imgUrls)
       },
@@ -82,9 +103,13 @@
         for(let i = 0; i < this.$refs.file_input.files.length; i++){
           formData.append('img', this.$refs.file_input.files[i])
         }
-        axios.post('/feeds/upload', formData)
-        .then(response => {
+        axios.post('/feeds/upload', formData).then(response => {
           console.log(response)
+          if(response.status == 200){
+            this.postFeeds()
+          }else{
+            alert(response.statusText)
+          }
         })
       },
       deletePic(idx){
@@ -125,8 +150,12 @@
             <modal :show.sync="modals.classic" headerClasses="justify-content-center">
               <h4 slot="header" class="title title-up">새 피드 작성</h4>
 
+
+
                 <fieldset> <!--style="position: relative;"-->
-                  <textarea id="bio" name="user_bio"></textarea>
+                  <input class="title_text" placeholder="제목을 입력하세요." v-model="feed.subject"/>
+                  <!--<textarea class="title_text" name="user_bio" rows="1"></textarea>-->
+                  <textarea class="content_text" name="user_bio" placeholder="내용을 입력하세요." v-model="feed.content"></textarea>
                   <!--<button style="position: absolute; bottom: 30px; right: 680px; background: transparent;"><i class="now-ui-icons design_image"/></button>-->
                   <div class="float-left thumb-block" >
 
