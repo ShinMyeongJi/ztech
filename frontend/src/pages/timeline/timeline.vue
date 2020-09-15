@@ -14,12 +14,15 @@
   import DownloadSection from './../components/DownloadSection';
   import { Button, Modal } from '@/components';
   import axios from "axios";
+  import {Carousel, CarouselItem} from "element-ui";
 
   export default {
     name: 'index',
     bodyClass: 'index-page',
     components: {
       [Button.name]: Button,
+      [Carousel.name]: Carousel,
+      [CarouselItem.name]: CarouselItem,
       //Parallax,
       BasicElements,
       Navigation,
@@ -43,7 +46,8 @@
         feedList : [],
         modals: {
           classic: false,
-          mini: false
+          mini: false,
+          carousel: false
         },
         img : [],
         filesPreview: [],
@@ -115,6 +119,9 @@
       deletePic(idx){
         this.imgUrls.splice(idx, 1)
         this.$delete(this.$refs.file_input, 1)
+      },
+      splitLink(text){
+        return text.split(',')
       }
 
 
@@ -201,17 +208,25 @@
                   </div>
 
                   <div class="feed-card-social">
-                    <a href="https://www.facebook.com/iaMuhammedErdem" class="feed-card-social__item facebook" target="_blank">
+                    <a v-for="(img, i) in splitLink(v.imgs).slice(0,3)" v-bind:key="i" href="javascript:void(0);" @click="modals.carousel=true"
+                       class="feed-card-social__item">
                       <div>
-                        <img src="img/bg1.jpg" class="feed-card-social__item__uploaded-img" />
+                        <img :src="img" class="feed-card-social__item__uploaded-img" />
                       </div>
                     </a>
+                    <modal :show.sync="modals.carousel" headerClasses="justify-content-center">
 
-                    <a href="https://www.facebook.com/iaMuhammedErdem" class="feed-card-social__item facebook" target="_blank">
-                      <div>
-                        <img src="img/bg1.jpg" class="feed-card-social__item__uploaded-img" />
-                      </div>
-                    </a>
+                      <fieldset>
+
+                      </fieldset>
+
+                      <template slot="footer">
+
+                        <n-button type="primary" @click="upload">완료</n-button>
+                        <n-button type="warning" @click.native="modals.carousel = false">취소</n-button>
+
+                      </template>
+                    </modal>
                   </div>
 
                   <hr/>
