@@ -60,7 +60,9 @@
           like : 0,
           crt_dt : new Date(),
           mod_dt : null
-        }
+        },
+        showImgs : [],
+        slideIndex : 0
       }
     },
     created() {
@@ -81,10 +83,6 @@
       },
       popPickImg(){
         this.$refs.file_input.click()
-
-        /*for(let i = 0; i< this.$refs.file_input.files.length; i++){
-          this.filesPreview.push(this.$refs.file_input.files[i])
-        }*/
       },
       fileSelected(e){
         console.log(e)
@@ -122,6 +120,12 @@
       },
       splitLink(text){
         return text.split(',')
+      },
+      showTotalImgs(idx, i){
+        this.showImgs = this.splitLink(this.feedList[idx].imgs)
+        this.modals.carousel=true
+        this.slideIndex = i
+        console.log(this.slideIndex)
       }
 
 
@@ -208,25 +212,12 @@
                   </div>
 
                   <div class="feed-card-social">
-                    <a v-for="(img, i) in splitLink(v.imgs).slice(0,3)" v-bind:key="i" href="javascript:void(0);" @click="modals.carousel=true"
+                    <a v-for="(img, i) in splitLink(v.imgs).slice(0,3)" v-bind:key="i" href="javascript:void(0);" @click="showTotalImgs(idx ,i)"
                        class="feed-card-social__item">
                       <div>
                         <img :src="img" class="feed-card-social__item__uploaded-img" />
                       </div>
                     </a>
-                    <modal :show.sync="modals.carousel" headerClasses="justify-content-center">
-
-                      <fieldset>
-
-                      </fieldset>
-
-                      <template slot="footer">
-
-                        <n-button type="primary" @click="upload">완료</n-button>
-                        <n-button type="warning" @click.native="modals.carousel = false">취소</n-button>
-
-                      </template>
-                    </modal>
                   </div>
 
                   <hr/>
@@ -244,6 +235,27 @@
 
 
               </div>
+
+            <modal :show.sync="modals.carousel" headerClasses="justify-content-center">
+
+              <fieldset>
+                <div class="section" id="carousel">
+                  <div class="container">
+                    <div class="row justify-content-center">
+                      <div class="col-12">
+                        <el-carousel height="500px" :autoplay="false" :initial-index="slideIndex">
+                          <el-carousel-item v-for="(img, i) in showImgs" v-bind:key="i">
+                            <img class="d-block" :src=img />
+                          </el-carousel-item>
+
+                        </el-carousel>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+            </modal>
 
             <!--<div class="container" id="news">
                             <div class="panel panel-default">
