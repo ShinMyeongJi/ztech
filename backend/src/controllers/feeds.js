@@ -31,7 +31,11 @@ const upload = multer({
 
 router.get('/', async(req, res)=> {
   try{
-    const infos = await feedInfo.findAll();
+    const infos = await feedInfo.findAll({
+      order : [
+        ['crt_dt', 'DESC']
+      ]
+    });
     res.send({infos});
   }catch (e) {
     console.error(e);

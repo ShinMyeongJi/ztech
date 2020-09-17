@@ -49,7 +49,6 @@
           mini: false,
           carousel: false
         },
-        img : [],
         filesPreview: [],
         imgUrls: [],
         feed : {
@@ -109,6 +108,7 @@
           console.log(response)
           if(response.status == 200){
             this.postFeeds()
+            this.$router.go(this.$router.currentRoute)
           }else{
             alert(response.statusText)
           }
@@ -233,18 +233,63 @@
 
                 </div>
 
+               <div class="comments">
+                 <!--<div class="comment-wrap">
+                   <div class="photo">
+                     <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>
+                   </div>
+                   <div class="comment-block">
+                     <form action="">
+                       <textarea class="comment-input" name="" id="" cols="30" rows="3" placeholder="Add comment..."></textarea>
+                     </form>
+                   </div>
+                 </div>
+-->
+                 <div class="comment-wrap">
+                   <div class="photo">
+                     <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
+                   </div>
+                   <div class="comment-block">
+                     <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto temporibus iste nostrum dolorem natus recusandae incidunt voluptatum. Eligendi voluptatum ducimus architecto tempore, quaerat explicabo veniam fuga corporis totam reprehenderit quasi
+                       sapiente modi tempora at perspiciatis mollitia, dolores voluptate. Cumque, corrupti?</p>
+                     <div class="bottom-comment">
+                       <div class="comment-date">Aug 24, 2014 @ 2:35 PM</div>
+                       <ul class="comment-actions">
+                         <li class="complain">Complain</li>
+                         <li class="reply">Reply</li>
+                       </ul>
+                     </div>
+                   </div>
+                 </div>
+
+                 <div class="comment-wrap">
+                   <div class="photo">
+                     <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"></div>
+                   </div>
+                   <div class="comment-block">
+                     <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto temporibus iste nostrum dolorem natus recusandae incidunt voluptatum. Eligendi voluptatum ducimus architecto tempore, quaerat explicabo veniam fuga corporis totam.</p>
+                     <div class="bottom-comment">
+                       <div class="comment-date">Aug 23, 2014 @ 10:32 AM</div>
+                       <ul class="comment-actions">
+                         <li class="complain">Complain</li>
+                         <li class="reply">Reply</li>
+                       </ul>
+                     </div>
+                   </div>
+                 </div>
+               </div>
 
               </div>
 
             <modal :show.sync="modals.carousel" headerClasses="justify-content-center">
 
               <fieldset>
-                <div class="section" id="carousel">
+                <div class="section" id="carousel" style="padding: 10px;">
                   <div class="container">
                     <div class="row justify-content-center">
                       <div class="col-12">
                         <el-carousel height="500px" :autoplay="false" :initial-index="slideIndex">
-                          <el-carousel-item v-for="(img, i) in showImgs" v-bind:key="i">
+                          <el-carousel-item v-for="(img, i) in showImgs" v-bind:key="i" style="overflow: scroll;">
                             <img class="d-block" :src=img />
                           </el-carousel-item>
 
