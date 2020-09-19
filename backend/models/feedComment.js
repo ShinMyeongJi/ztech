@@ -1,29 +1,33 @@
 module.exports = (sequelize, DataTypes) => {
-  var feedInfo = sequelize.define('feed_info', {
-    feed_id: {
+  var feedComment = sequelize.define('feed_comment', {
+    comment_id: {
       primaryKey :true,
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,
       autoIncrement : true
     },
-    subject: {
-      type: DataTypes.STRING(30),
-      allowNull: false,
+    comment_depth : {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
-    name: {
+    feed_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    user_name: {
       type: DataTypes.STRING(10),
-      allowNull: false,
+      allowNull: false
     },
-    content: {
-      type: DataTypes.STRING(10000),
-      allowNull: true,
-    },
-    imgs: {
-      type: DataTypes.STRING(5000),
-      allowNull: true
+    comment: {
+      type: DataTypes.STRING(2000),
+      allowNull: false
     },
     like: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    dislike: {
       type: DataTypes.INTEGER,
       defaultValue: 0
     },
@@ -42,5 +46,5 @@ module.exports = (sequelize, DataTypes) => {
     collate : "utf8_general_ci"
   });
 
-  return feedInfo;
+  return feedComment;
 };
