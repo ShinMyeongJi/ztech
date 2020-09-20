@@ -1,5 +1,6 @@
 var express = require('express');
 var feedInfo = require('../../models').feedInfo;
+var feedComment = require('../../models').feedComment;
 
 const multer = require('multer')
 const multerS3 = require('multer-s3')
