@@ -66,6 +66,7 @@
     },
     created() {
       this.getFeeds()
+      this.getComments(4)
     },
     methods : {
       getFeeds(){
@@ -126,6 +127,11 @@
         this.modals.carousel=true
         this.slideIndex = i
         console.log(this.slideIndex)
+      },
+      getComments(id){
+        axios.get(`/feeds/comment/${id}`).then(response => {
+          console.log(response)
+        })
       }
 
 

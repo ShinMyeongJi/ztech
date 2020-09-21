@@ -43,6 +43,15 @@ router.get('/', async(req, res)=> {
   }
 });
 
+router.get('/comment/:feedId', async(req, res)=>{
+  try{
+    console.log(req.params)
+    //const comment = await feedComment.findBy
+  }catch (e) {
+    console.error(e);
+  }
+})
+
 router.post('/insert', async(req, res)=> {
   console.log(req.body)
 
