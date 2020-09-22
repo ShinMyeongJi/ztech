@@ -61,12 +61,13 @@
           mod_dt : null
         },
         showImgs : [],
-        slideIndex : 0
+        slideIndex : 0,
+        comments : []
       }
     },
     created() {
       this.getFeeds()
-      this.getComments(4)
+      console.log(this.getComments(4))
     },
     methods : {
       getFeeds(){
@@ -129,9 +130,13 @@
         console.log(this.slideIndex)
       },
       getComments(id){
-        axios.get(`/feeds/comment/${id}`).then(response => {
-          console.log(response)
+
+        axios.get(`/feeds/comment/${id}`)
+        .then(response => {
+          this.comments = response.data.comment
         })
+
+
       }
 
 
@@ -251,7 +256,8 @@
                    </div>
                  </div>
 -->
-                 <div class="comment-wrap">
+                <!-- <div class="comment-wrap" v-for="(com, i) in getComments(v.feed_id)" v-bind:key="i">
+
                    <div class="photo">
                      <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
                    </div>
@@ -266,9 +272,9 @@
                        </ul>
                      </div>
                    </div>
-                 </div>
+                 </div>-->
 
-                 <div class="comment-wrap">
+                 <!--<div class="comment-wrap">
                    <div class="photo">
                      <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"></div>
                    </div>
@@ -282,7 +288,8 @@
                        </ul>
                      </div>
                    </div>
-                 </div>
+                 </div>-->
+
                </div>
 
               </div>

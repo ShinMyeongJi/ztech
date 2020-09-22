@@ -45,8 +45,12 @@ router.get('/', async(req, res)=> {
 
 router.get('/comment/:feedId', async(req, res)=>{
   try{
-    console.log(req.params)
-    //const comment = await feedComment.findBy
+    const comment = await feedComment.findAll({
+      where : {
+        feed_id : req.params.feedId
+      }
+    })
+    res.send({comment})
   }catch (e) {
     console.error(e);
   }
