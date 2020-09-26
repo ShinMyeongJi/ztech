@@ -67,7 +67,6 @@
     },
     created() {
       this.getFeeds()
-      console.log(this.getComments(4))
     },
     methods : {
       getFeeds(){
@@ -128,18 +127,7 @@
         this.modals.carousel=true
         this.slideIndex = i
         console.log(this.slideIndex)
-      },
-      getComments(id){
-
-        axios.get(`/feeds/comment/${id}`)
-        .then(response => {
-          this.comments = response.data.comment
-        })
-
-
       }
-
-
     }
   };
 </script>
@@ -256,23 +244,23 @@
                    </div>
                  </div>
 -->
-                <!-- <div class="comment-wrap" v-for="(com, i) in getComments(v.feed_id)" v-bind:key="i">
-
-                   <div class="photo">
-                     <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
-                   </div>
-                   <div class="comment-block">
-                     <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto temporibus iste nostrum dolorem natus recusandae incidunt voluptatum. Eligendi voluptatum ducimus architecto tempore, quaerat explicabo veniam fuga corporis totam reprehenderit quasi
-                       sapiente modi tempora at perspiciatis mollitia, dolores voluptate. Cumque, corrupti?</p>
-                     <div class="bottom-comment">
-                       <div class="comment-date">Aug 24, 2014 @ 2:35 PM</div>
-                       <ul class="comment-actions">
-                         <li class="complain">Complain</li>
-                         <li class="reply">Reply</li>
-                       </ul>
+                 <span v-if="v.replies">
+                   <div class="comment-wrap"  v-for="(com, idx) in v.replies" v-bind:key="idx">
+                     <div class="photo">
+                       <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
+                     </div>
+                     <div class="comment-block">
+                       <p class="comment-text">{{com.comment}}</p>
+                       <div class="bottom-comment">
+                         <div class="comment-date">Aug 24, 2014 @ 2:35 PM</div>
+                         <ul class="comment-actions">
+                           <li class="complain">Complain</li>
+                           <li class="reply">Reply</li>
+                         </ul>
+                       </div>
                      </div>
                    </div>
-                 </div>-->
+                 </span>
 
                  <!--<div class="comment-wrap">
                    <div class="photo">

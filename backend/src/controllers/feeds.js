@@ -37,24 +37,30 @@ router.get('/', async(req, res)=> {
         ['crt_dt', 'DESC']
       ]
     });
+
+    if(infos) {
+      for(let info of infos) {
+        let comments = await feedInfo.findOne({
+          include : {
+            model : feedComment,
+            where : {
+              feed_id : info.feed_id
+            }
+          }
+        })
+        if(comments) {
+          info.setDataValue("replies", comments.dataValues.feed_comments)
+        }
+
+      }
+    }
+
     res.send({infos});
   }catch (e) {
     console.error(e);
   }
 });
 
-router.get('/comment/:feedId', async(req, res)=>{
-  try{
-    const comment = await feedComment.findAll({
-      where : {
-        feed_id : req.params.feedId
-      }
-    })
-    res.send({comment})
-  }catch (e) {
-    console.error(e);
-  }
-})
 
 router.post('/insert', async(req, res)=> {
   console.log(req.body)
