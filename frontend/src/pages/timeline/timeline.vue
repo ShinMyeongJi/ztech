@@ -14,6 +14,7 @@
   import DownloadSection from './../components/DownloadSection';
   import { Button, Modal } from '@/components';
   import axios from "axios";
+  import moment from "moment";
   import {Carousel, CarouselItem} from "element-ui";
 
   export default {
@@ -39,7 +40,9 @@
       // eslint-disable-next-line vue/no-unused-components
       axios,
       // eslint-disable-next-line vue/no-unused-components
-      Modal
+      Modal,
+      // eslint-disable-next-line vue/no-unused-components
+      moment
     },
     data() {
       return {
@@ -63,6 +66,11 @@
         showImgs : [],
         slideIndex : 0,
         comments : []
+      }
+    },
+    filters : {
+      dateFormat :function (value) {
+        return moment(String(value)).format('YYYY-MM-DD hh:mm')
       }
     },
     created() {
@@ -247,14 +255,20 @@
                  <span v-if="v.replies">
                    <div class="comment-wrap"  v-for="(com, idx) in v.replies" v-bind:key="idx">
                      <div class="photo">
-                       <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg')"></div>
+                       <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
                      </div>
                      <div class="comment-block">
                        <p class="comment-text">{{com.comment}}</p>
                        <div class="bottom-comment">
-                         <div class="comment-date">Aug 24, 2014 @ 2:35 PM</div>
+                         <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
+                         <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
                          <ul class="comment-actions">
-                           <li class="complain">Complain</li>
+                           <li class="complain">
+                             <a href="javascript:void(0)">
+                               <i class="now-ui-icons ui-2_like"></i>
+                               <span style="margin-left: 8px; color: darkgray">0</span>
+                             </a>
+                           </li>
                            <li class="reply">Reply</li>
                          </ul>
                        </div>
