@@ -253,6 +253,10 @@
                  </div>
 -->
                  <span v-if="v.replies">
+
+                   <hr/>
+
+                   <a href="" class="comment-more">댓글 더 보기 > </a>
                    <div class="comment-wrap"  v-for="(com, idx) in v.replies" v-bind:key="idx">
                      <div class="photo">
                        <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
@@ -260,7 +264,7 @@
                      <div class="comment-block">
                        <p class="comment-text">{{com.comment}}</p>
                        <div class="bottom-comment">
-                         <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
+                          <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
                          <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
                          <ul class="comment-actions">
                            <li class="complain">
@@ -274,6 +278,18 @@
                        </div>
                      </div>
                    </div>
+
+                   <div class="comment-wrap">
+                     <div class="comment-write-block">
+                       <p class="comment-text"></p>
+                       <textarea rows="5"></textarea>
+
+                       <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="warning">취소</n-button>
+                       <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="primary">확인</n-button>
+
+                     </div>
+                   </div>
+                   <hr/>
                  </span>
 
                  <!--<div class="comment-wrap">
@@ -317,39 +333,7 @@
 
             </modal>
 
-            <!--<div class="container" id="news">
-                            <div class="panel panel-default">
-                              <div class="panel-body">
-                                <textarea class="form-control" placeholder="Share comment" rows="3"></textarea>
-                                <n-button class="pull-right" type="primary" round>등록</n-button>
 
-                              </div>
-                            </div>
-                          </div>-->
-
-            <!--                  <div class="feed-card-ctr">
-                             <button class="feed-card__button button&#45;&#45;blue js-message-btn">Message</button>
-                             <button class="feed-card__button button&#45;&#45;orange">Follow</button>
-                           </div>-->
-            <!--<div class="feed-card-message js-message">
-              <form class="feed-card-form">
-                <div class="feed-card-form__container">
-                  <textarea placeholder="Say something..."></textarea>
-                </div>
-
-                <div class="feed-card-form__bottom">
-                  <button class="feed-card__button button&#45;&#45;blue js-message-close">
-                    Send
-                  </button>
-
-                  <button class="feed-card__button button&#45;&#45;gray js-message-close">
-                    Cancel
-                  </button>
-                </div>
-              </form>
-
-              <div class="feed-card__overlay js-message-close"></div>
-            </div>-->
 
 
           </div>

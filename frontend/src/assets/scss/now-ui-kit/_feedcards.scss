@@ -570,10 +570,7 @@ a, a:hover {
     border-radius: 0.1875rem;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
   }
-  .comment-block textarea {
-    width: 100%;
-    resize: none;
-  }
+
 
   .comment-text {
     line-height: 1.3125rem;
@@ -611,6 +608,40 @@ a, a:hover {
   .comment-actions li:hover {
     color: #0095ff;
   }
+
+  .comment-line{
+    border: dashed 0.3px;
+    border-color: lightgray;
+  }
+
+  .comment-write-block {
+    margin: 0px;
+    background-color: #fff;
+    display: table-cell;
+    vertical-align: top;
+  }
+
+  .comment-write-block textarea {
+    width: 100%;
+    resize: none;
+    border-width : 1px;
+    border-color: lightgray;
+    height: auto;
+  }
+
+  .comment-more{
+    color: dimgray;
+    float: right;
+    font-size: 12px;
+  }
+
+  .comment-write-btn{
+    margin-top: -15px;
+    margin-bottom: -10px;
+    margin-left: 5px;
+  }
+
+
 
 }
 
