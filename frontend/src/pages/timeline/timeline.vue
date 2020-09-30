@@ -266,10 +266,10 @@
                            <li class="complain">
                              <a href="javascript:void(0)">
                                <i class="now-ui-icons ui-2_like"></i>
-                               <span style="margin-left: 8px; color: darkgray">0</span>
+                               <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
                              </a>
                            </li>
-                           <li class="reply">Reply</li>
+                           <li class="reply">답글</li>
                          </ul>
                        </div>
                      </div>
