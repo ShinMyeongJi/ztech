@@ -135,6 +135,9 @@
         this.modals.carousel=true
         this.slideIndex = i
         console.log(this.slideIndex)
+      },
+      showTextArea(feedId, commentId) {
+        console.log(feedId)
       }
     }
   };
@@ -273,13 +276,13 @@
                                <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
                              </a>
                            </li>
-                           <li class="reply">답글</li>
+                           <li class="reply" @click="showTextArea(v.feed_id, com.comment_id)">답글</li>
                          </ul>
                        </div>
                      </div>
                    </div>
 
-                   <div class="comment-wrap">
+                   <div class="comment-wrap" :id="`com-text-area-${v.feed_id}`">
                      <div class="comment-write-block">
                        <p class="comment-text"></p>
                        <textarea rows="5"></textarea>
@@ -289,28 +292,15 @@
 
                      </div>
                    </div>
+
                    <hr/>
                  </span>
-
-                 <!--<div class="comment-wrap">
-                   <div class="photo">
-                     <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/felipenogs/128.jpg')"></div>
-                   </div>
-                   <div class="comment-block">
-                     <p class="comment-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto temporibus iste nostrum dolorem natus recusandae incidunt voluptatum. Eligendi voluptatum ducimus architecto tempore, quaerat explicabo veniam fuga corporis totam.</p>
-                     <div class="bottom-comment">
-                       <div class="comment-date">Aug 23, 2014 @ 10:32 AM</div>
-                       <ul class="comment-actions">
-                         <li class="complain">Complain</li>
-                         <li class="reply">Reply</li>
-                       </ul>
-                     </div>
-                   </div>
-                 </div>-->
-
                </div>
 
               </div>
+            <div class="add-btn-wrapper" style="text-align: center;">
+              <n-button class="btn-primary add-show-btn" style="width: 100%;">더 보기</n-button>
+            </div>
 
             <modal :show.sync="modals.carousel" headerClasses="justify-content-center">
 
