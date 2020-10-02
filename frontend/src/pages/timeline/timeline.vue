@@ -260,27 +260,54 @@
                    <hr/>
 
                    <a href="" class="comment-more">댓글 더 보기 > </a>
-                   <div class="comment-wrap"  v-for="(com, idx) in v.replies" v-bind:key="idx">
-                     <div class="photo">
-                       <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
-                     </div>
-                     <div class="comment-block">
-                       <p class="comment-text">{{com.comment}}</p>
-                       <div class="bottom-comment">
-                          <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
-                         <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
-                         <ul class="comment-actions">
-                           <li class="complain">
-                             <a href="javascript:void(0)">
-                               <i class="now-ui-icons ui-2_like"></i>
-                               <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
-                             </a>
-                           </li>
-                           <li class="reply" @click="showTextArea(v.feed_id, com.comment_id)">답글</li>
-                         </ul>
+                    <div v-for="(com, idx) in v.replies" v-bind:key="idx">
+                      <div class="comment-wrap">
+                       <div class="photo">
+                         <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
                        </div>
-                     </div>
-                   </div>
+                       <div class="comment-block">
+                         <p class="comment-text">{{com.comment}}</p>
+                         <div class="bottom-comment">
+                            <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
+                           <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
+                           <ul class="comment-actions">
+                             <li class="complain">
+                               <a href="javascript:void(0)">
+                                 <i class="now-ui-icons ui-2_like"></i>
+                                 <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
+                               </a>
+                             </li>
+                             <li class="reply" @click="showTextArea(v.feed_id, com.comment_id)">답글</li>
+                           </ul>
+                         </div>
+                       </div>
+                      </div>
+                       <div style="display: table; margin-left: 60px;">
+                        <div class="comment-wrap">
+                         <div class="photo">
+                           <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
+                         </div>
+                         <div class="comment-block">
+                           <p class="comment-text">{{com.comment}}</p>
+                           <div class="bottom-comment">
+                              <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
+                             <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
+                             <ul class="comment-actions">
+                               <li class="complain">
+                                 <a href="javascript:void(0)">
+                                   <i class="now-ui-icons ui-2_like"></i>
+                                   <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
+                                 </a>
+                               </li>
+                               <li class="reply" @click="showTextArea(v.feed_id, com.comment_id)">답글</li>
+                             </ul>
+                           </div>
+                         </div>
+                        </div>
+                       </div>
+
+                  </div>
+
 
                    <div class="comment-wrap" :id="`com-text-area-${v.feed_id}`">
                      <div class="comment-write-block">
