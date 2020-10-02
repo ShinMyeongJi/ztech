@@ -138,6 +138,9 @@
       },
       showTextArea(feedId, commentId) {
         console.log(feedId)
+      },
+      goToPage(){
+        this.$router.push('/timeline/detail')
       }
     }
   };
@@ -153,7 +156,6 @@
       </parallax>
       <div class="container">
         <div class="content-center brand" style="padding-top: 100px">
-          <img class="n-logo" src="img/z-tech_icon.png" alt="" />
           <h5>TIMELINE</h5>
         </div>
       </div>
@@ -161,10 +163,10 @@
 
     <div class="section">
       <div class="container">
-        <div class="card">
+       <!-- <div class="card">
           <div class="timeline-header">
             <h2>TIMELINE</h2>
-          </div>
+          </div>-->
           <div class="write-btn">
 
             <img class="select-img" src="img/write_icon.png" @click="modals.classic = true">
@@ -259,7 +261,7 @@
 
                    <hr/>
 
-                   <a href="" class="comment-more">댓글 더 보기 > </a>
+                   <a href="" class="comment-more" @click="goToPage">댓글 더 보기 > </a>
                     <div v-for="(com, idx) in v.replies" v-bind:key="idx">
                       <div class="comment-wrap">
                        <div class="photo">
@@ -325,7 +327,7 @@
                </div>
 
               </div>
-            <div class="add-btn-wrapper" style="text-align: center;">
+            <div class="add-btn-wrapper" style="text-align: center; padding-left: 60px; padding-right: 60px;">
               <n-button class="btn-primary add-show-btn" style="width: 100%;">더 보기</n-button>
             </div>
 
@@ -354,7 +356,7 @@
 
 
           </div>
-        </div>
+       <!-- </div>-->
       </div>
     </div>
 

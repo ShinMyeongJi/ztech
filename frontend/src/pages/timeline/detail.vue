@@ -1,5 +1,5 @@
 <script>
-  import { Parallax } from '@/components';
+  //import { Parallax } from '@/components';
   import BasicElements from './../components/BasicElementsSection';
   import Navigation from './../components/Navigation';
   import TabsSection from './../components/Tabs';
@@ -14,13 +14,14 @@
   import DownloadSection from './../components/DownloadSection';
 
   import axios from "axios";
+  import moment from "moment";
 
   export default {
     name: 'index',
     bodyClass: 'index-page',
     components: {
 
-      Parallax,
+     // Parallax,
       BasicElements,
       Navigation,
       TabsSection,
@@ -38,13 +39,103 @@
     },
     data() {
       return {
-        feedList : []
+        feedList : [],
+        modals: {
+          classic: false,
+          mini: false,
+          carousel: false
+        },
+        filesPreview: [],
+        imgUrls: [],
+        feed : {
+          subject : "",
+          name : "shinmj",
+          content : "",
+          imgs : "",
+          like : 0,
+          crt_dt : new Date(),
+          mod_dt : null
+        },
+        showImgs : [],
+        slideIndex : 0,
+        comments : []
+      }
+    },
+    filters : {
+      dateFormat :function (value) {
+        return moment(String(value)).format('YYYY-MM-DD hh:mm')
       }
     },
     created() {
-
+      this.getFeeds()
     },
+    methods : {
+      getFeeds(){
+        axios.get('/feeds').then(response =>{
+          this.feedList = response.data.infos
+          console.log(this.feedList)
+        })
+      },
+      postFeeds(){
+        axios.post('/feeds/insert', this.feed)
+        .then(response =>{
+          console.log(response)
+        })
+      },
+      popPickImg(){
+        this.$refs.file_input.click()
+      },
+      fileSelected(e){
+        console.log(e)
+        let files = e.target.files
 
+        for(var i = 0; i < files.length; i++){
+
+          this.imgUrls.push(URL.createObjectURL(files[i]))
+          if(this.imgUrls.length == 11) {
+            this.imgUrls.splice(10,1)
+            alert("이미지는 10개까지 업로드 할 수 있습니다.")
+            e.preventDefault();
+            break;
+          }
+        }
+        console.log(this.imgUrls)
+      },
+      upload(){
+        let formData = new FormData();
+        for(let i = 0; i < this.$refs.file_input.files.length; i++){
+          formData.append('img', this.$refs.file_input.files[i])
+        }
+        axios.post('/feeds/upload', formData).then(response => {
+          console.log(response)
+          if(response.status == 200){
+            this.postFeeds()
+            this.$router.go(this.$router.currentRoute)
+          }else{
+            alert(response.statusText)
+          }
+        })
+      },
+      deletePic(idx){
+        this.imgUrls.splice(idx, 1)
+        this.$delete(this.$refs.file_input, 1)
+      },
+      splitLink(text){
+        return text.split(',')
+      },
+      showTotalImgs(idx, i){
+        this.showImgs = this.splitLink(this.feedList[idx].imgs)
+        this.modals.carousel=true
+        this.slideIndex = i
+        console.log(this.slideIndex)
+      },
+      showTextArea(feedId, commentId) {
+        console.log(feedId)
+      },
+      goToPage(){
+        this.$router.push('/timeline/detail')
+      }
+    }
   };
 </script>
 
@@ -53,7 +144,7 @@
     <div class="page-header page-header-small">
       <parallax
           class="page-header-image"
-          style="background-image:url('img/bg1.jpg')"
+          style="background-image:url('/img/timeline_bg.jpg')"
       >
       </parallax>
       <div class="container">
@@ -61,6 +152,142 @@
           <img class="n-logo" src="img/z-tech_icon.png" alt="" />
           <h5>TIMELINE</h5>
         </div>
+      </div>
+    </div>
+
+
+    <div class="section">
+      <div class="container">
+
+
+          <div class="section">
+            <div class="feed-card js-profile-card" v-for="(v, idx) in feedList" v-bind:key="idx">
+
+              <div class="feed-card__img">
+                <img src="https://image.flaticon.com/icons/svg/847/847969.svg" alt="profile card">
+              </div>
+
+
+              <div class="feed-card__cnt js-profile-cnt">
+                <div class="feed-card__name" >{{v.subject}}</div>
+                <div class="feed-card__txt"><strong>{{v.name}}</strong> {{v.crt_dt}}</div>
+                <hr />
+
+                <div class="feed-card-inf__item">
+                  <div class="feed-card-inf__txt">{{v.content}}</div>
+                </div>
+
+                <div class="feed-card-social">
+                  <a v-for="(img, i) in splitLink(v.imgs).slice(0,3)" v-bind:key="i" href="javascript:void(0);" @click="showTotalImgs(idx ,i)"
+                     class="feed-card-social__item">
+                    <div>
+                      <img :src="img" class="feed-card-social__item__uploaded-img" />
+                    </div>
+                  </a>
+                </div>
+
+                <hr/>
+
+                <div class="feed-bottom" >
+                  <a href=""><i class="now-ui-icons ui-2_chat-round"></i></a>
+                  <span class="feed-bottom text">sdg</span>
+                </div>
+                <div class="feed-bottom" >
+                  <a href="javascript:void(0)"><i class="now-ui-icons ui-2_like"></i></a>
+                  <span class="feed-bottom text">{{v.like}}</span>
+                </div>
+
+              </div>
+
+              <div class="comments">
+                <!--<div class="comment-wrap">
+                  <div class="photo">
+                    <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>
+                  </div>
+                  <div class="comment-block">
+                    <form action="">
+                      <textarea class="comment-input" name="" id="" cols="30" rows="3" placeholder="Add comment..."></textarea>
+                    </form>
+                  </div>
+                </div>
+-->
+                <span v-if="v.replies">
+
+                   <hr/>
+
+                   <a href="" class="comment-more" @click="goToPage">댓글 더 보기 > </a>
+                    <div v-for="(com, idx) in v.replies" v-bind:key="idx">
+                      <div class="comment-wrap">
+                       <div class="photo">
+                         <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
+                       </div>
+                       <div class="comment-block">
+                         <p class="comment-text">{{com.comment}}</p>
+                         <div class="bottom-comment">
+                            <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
+                           <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
+                           <ul class="comment-actions">
+                             <li class="complain">
+                               <a href="javascript:void(0)">
+                                 <i class="now-ui-icons ui-2_like"></i>
+                                 <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
+                               </a>
+                             </li>
+                             <li class="reply" @click="showTextArea(v.feed_id, com.comment_id)">답글</li>
+                           </ul>
+                         </div>
+                       </div>
+                      </div>
+                       <div style="display: table; margin-left: 60px;">
+                        <div class="comment-wrap">
+                         <div class="photo">
+                           <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
+                         </div>
+                         <div class="comment-block">
+                           <p class="comment-text">{{com.comment}}</p>
+                           <div class="bottom-comment">
+                              <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
+                             <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
+                             <ul class="comment-actions">
+                               <li class="complain">
+                                 <a href="javascript:void(0)">
+                                   <i class="now-ui-icons ui-2_like"></i>
+                                   <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
+                                 </a>
+                               </li>
+                               <li class="reply" @click="showTextArea(v.feed_id, com.comment_id)">답글</li>
+                             </ul>
+                           </div>
+                         </div>
+                        </div>
+                       </div>
+
+                  </div>
+
+
+                   <div class="comment-wrap" :id="`com-text-area-${v.feed_id}`">
+                     <div class="comment-write-block">
+                       <p class="comment-text"></p>
+                       <textarea rows="5"></textarea>
+
+                       <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="warning">취소</n-button>
+                       <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="primary">확인</n-button>
+
+                     </div>
+                   </div>
+
+                   <hr/>
+                 </span>
+              </div>
+
+            </div>
+
+
+
+
+
+          </div>
+
       </div>
     </div>
 
