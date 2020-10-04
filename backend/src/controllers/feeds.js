@@ -65,6 +65,44 @@ router.get('/', async(req, res)=> {
 });
 
 
+router.get('/feed/:feedId', async(req, res)=>{
+  try{
+    const infos = await feedInfo.findAll({
+      order : [
+        ['crt_dt', 'DESC']
+      ],
+      where : {
+        feed_id : req.params.feedId
+      }
+    });
+
+    if(infos) {
+      for(let info of infos) {
+        let comments = await feedInfo.findOne({
+          include : [
+            {
+              model : feedComment,
+              where : {
+                feed_id : info.feed_id
+              }
+            }
+          ]
+        })
+        if(comments) {
+          info.setDataValue("replies", comments.dataValues.feed_comments)
+        }
+
+      }
+    }
+
+    res.send({infos});
+  }catch (e)  {
+    console.error(e);
+  }
+
+
+});
+
 router.post('/insert', async(req, res)=> {
   console.log(req.body)
 

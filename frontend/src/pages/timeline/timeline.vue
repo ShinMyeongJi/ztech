@@ -139,8 +139,8 @@
       showTextArea(feedId, commentId) {
         console.log(feedId)
       },
-      goToPage(){
-        this.$router.push('/timeline/detail')
+      goToDetail(feedId){
+        this.$router.push(`/timeline/detail?feedId=${feedId}`)
       }
     }
   };
@@ -261,7 +261,7 @@
 
                    <hr/>
 
-                   <a href="" class="comment-more" @click="goToPage">댓글 더 보기 > </a>
+                   <a href="" class="comment-more" @click="goToDetail(v.feed_id)">댓글 더 보기 > </a>
                     <div v-for="(com, idx) in v.replies" v-bind:key="idx">
                       <div class="comment-wrap">
                        <div class="photo">

@@ -58,7 +58,8 @@
         },
         showImgs : [],
         slideIndex : 0,
-        comments : []
+        comments : [],
+        feedId : 0
       }
     },
     filters : {
@@ -67,13 +68,15 @@
       }
     },
     created() {
+      this.feedId = this.$route.query.feedId
+      console.log(this.feedId)
       this.getFeeds()
     },
     methods : {
       getFeeds(){
-        axios.get('/feeds').then(response =>{
-          this.feedList = response.data.infos
-          console.log(this.feedList)
+        axios.get(`/feeds/feed/${this.feedId}`).then(response =>{
+
+          console.log(response.data)
         })
       },
       postFeeds(){
@@ -156,7 +159,7 @@
     </div>
 
 
-    <div class="section">
+    <!--<div class="section">
       <div class="container">
 
 
@@ -200,7 +203,7 @@
               </div>
 
               <div class="comments">
-                <!--<div class="comment-wrap">
+                &lt;!&ndash;<div class="comment-wrap">
                   <div class="photo">
                     <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>
                   </div>
@@ -210,7 +213,7 @@
                     </form>
                   </div>
                 </div>
--->
+&ndash;&gt;
                 <span v-if="v.replies">
 
                    <hr/>
@@ -224,7 +227,7 @@
                        <div class="comment-block">
                          <p class="comment-text">{{com.comment}}</p>
                          <div class="bottom-comment">
-                            <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
+                            &lt;!&ndash;<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>&ndash;&gt;
                            <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
                            <ul class="comment-actions">
                              <li class="complain">
@@ -246,7 +249,7 @@
                          <div class="comment-block">
                            <p class="comment-text">{{com.comment}}</p>
                            <div class="bottom-comment">
-                              <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
+                              &lt;!&ndash;<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>&ndash;&gt;
                              <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
                              <ul class="comment-actions">
                                <li class="complain">
@@ -289,7 +292,7 @@
           </div>
 
       </div>
-    </div>
+    </div>-->
 
 
     <basic-elements></basic-elements>
