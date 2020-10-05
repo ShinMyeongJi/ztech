@@ -12,6 +12,7 @@
   import SignupForm from './../components/SignupForm';
   import ExamplesSection from './../components/ExamplesSection';
   import DownloadSection from './../components/DownloadSection';
+  import comment from '../../components/comment';
   import { Button, Modal } from '@/components';
   import axios from "axios";
   import moment from "moment";
@@ -37,6 +38,7 @@
       SignupForm,
       ExamplesSection,
       DownloadSection,
+      comment,
       // eslint-disable-next-line vue/no-unused-components
       axios
     },
@@ -259,11 +261,11 @@
                          </div>
                         </div>
                        </div>
-
+                      <comment></comment>
                   </div>
 
 
-                   <div class="comment-wrap" :id="`com-text-area-${feed.feed_id}`">
+                   <div class="comment-wrap">
                      <div class="comment-write-block">
                        <p class="comment-text"></p>
                        <textarea rows="5"></textarea>
