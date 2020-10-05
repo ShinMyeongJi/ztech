@@ -12,15 +12,18 @@
   import SignupForm from './../components/SignupForm';
   import ExamplesSection from './../components/ExamplesSection';
   import DownloadSection from './../components/DownloadSection';
-
+  import { Button, Modal } from '@/components';
   import axios from "axios";
   import moment from "moment";
+  import {Carousel, CarouselItem} from "element-ui";
 
   export default {
     name: 'index',
     bodyClass: 'index-page',
     components: {
-
+      [Button.name]: Button,
+      [Carousel.name]: Carousel,
+      [CarouselItem.name]: CarouselItem,
      // Parallax,
       BasicElements,
       Navigation,
@@ -39,7 +42,7 @@
     },
     data() {
       return {
-        feedList : [],
+        feed : {},
         modals: {
           classic: false,
           mini: false,
@@ -47,15 +50,6 @@
         },
         filesPreview: [],
         imgUrls: [],
-        feed : {
-          subject : "",
-          name : "shinmj",
-          content : "",
-          imgs : "",
-          like : 0,
-          crt_dt : new Date(),
-          mod_dt : null
-        },
         showImgs : [],
         slideIndex : 0,
         comments : [],
@@ -75,8 +69,8 @@
     methods : {
       getFeeds(){
         axios.get(`/feeds/feed/${this.feedId}`).then(response =>{
-
-          console.log(response.data)
+          this.feed = response.data.infos[0]
+          console.log(this.feed)
         })
       },
       postFeeds(){
@@ -126,8 +120,8 @@
       splitLink(text){
         return text.split(',')
       },
-      showTotalImgs(idx, i){
-        this.showImgs = this.splitLink(this.feedList[idx].imgs)
+      showTotalImgs(i){
+        this.showImgs = this.splitLink(this.feed.imgs)
         this.modals.carousel=true
         this.slideIndex = i
         console.log(this.slideIndex)
@@ -137,6 +131,9 @@
       },
       goToPage(){
         this.$router.push('/timeline/detail')
+      },
+      addCommentForm(){
+
       }
     }
   };
@@ -159,12 +156,11 @@
     </div>
 
 
-    <!--<div class="section">
+    <div class="section">
       <div class="container">
 
-
           <div class="section">
-            <div class="feed-card js-profile-card" v-for="(v, idx) in feedList" v-bind:key="idx">
+            <div class="feed-card js-profile-card">
 
               <div class="feed-card__img">
                 <img src="https://image.flaticon.com/icons/svg/847/847969.svg" alt="profile card">
@@ -172,16 +168,16 @@
 
 
               <div class="feed-card__cnt js-profile-cnt">
-                <div class="feed-card__name" >{{v.subject}}</div>
-                <div class="feed-card__txt"><strong>{{v.name}}</strong> {{v.crt_dt}}</div>
+                <div class="feed-card__name" >{{feed.subject}}</div>
+                <div class="feed-card__txt"><strong>{{feed.name}}</strong> {{feed.crt_dt}}</div>
                 <hr />
 
                 <div class="feed-card-inf__item">
-                  <div class="feed-card-inf__txt">{{v.content}}</div>
+                  <div class="feed-card-inf__txt">{{feed.content}}</div>
                 </div>
 
                 <div class="feed-card-social">
-                  <a v-for="(img, i) in splitLink(v.imgs).slice(0,3)" v-bind:key="i" href="javascript:void(0);" @click="showTotalImgs(idx ,i)"
+                  <a v-for="(img, i) in splitLink(feed.imgs).slice(0,3)" v-bind:key="i" href="javascript:void(0);" @click="showTotalImgs(i)"
                      class="feed-card-social__item">
                     <div>
                       <img :src="img" class="feed-card-social__item__uploaded-img" />
@@ -197,13 +193,13 @@
                 </div>
                 <div class="feed-bottom" >
                   <a href="javascript:void(0)"><i class="now-ui-icons ui-2_like"></i></a>
-                  <span class="feed-bottom text">{{v.like}}</span>
+                  <span class="feed-bottom text">{{feed.like}}</span>
                 </div>
 
               </div>
 
               <div class="comments">
-                &lt;!&ndash;<div class="comment-wrap">
+                <!--<div class="comment-wrap">
                   <div class="photo">
                     <div class="avatar" style="background-image: url('https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg')"></div>
                   </div>
@@ -212,14 +208,13 @@
                       <textarea class="comment-input" name="" id="" cols="30" rows="3" placeholder="Add comment..."></textarea>
                     </form>
                   </div>
-                </div>
-&ndash;&gt;
-                <span v-if="v.replies">
+                </div>-->
+                <span v-if="feed.replies">
 
                    <hr/>
 
                    <a href="" class="comment-more" @click="goToPage">댓글 더 보기 > </a>
-                    <div v-for="(com, idx) in v.replies" v-bind:key="idx">
+                    <div v-for="(com, idx) in feed.replies" v-bind:key="idx">
                       <div class="comment-wrap">
                        <div class="photo">
                          <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
@@ -227,7 +222,7 @@
                        <div class="comment-block">
                          <p class="comment-text">{{com.comment}}</p>
                          <div class="bottom-comment">
-                            &lt;!&ndash;<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>&ndash;&gt;
+                            <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
                            <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
                            <ul class="comment-actions">
                              <li class="complain">
@@ -236,7 +231,7 @@
                                  <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
                                </a>
                              </li>
-                             <li class="reply" @click="showTextArea(v.feed_id, com.comment_id)">답글</li>
+                             <li class="reply" @click="addCommentForm">답글</li>
                            </ul>
                          </div>
                        </div>
@@ -249,7 +244,7 @@
                          <div class="comment-block">
                            <p class="comment-text">{{com.comment}}</p>
                            <div class="bottom-comment">
-                              &lt;!&ndash;<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>&ndash;&gt;
+                              <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
                              <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
                              <ul class="comment-actions">
                                <li class="complain">
@@ -258,7 +253,7 @@
                                    <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
                                  </a>
                                </li>
-                               <li class="reply" @click="showTextArea(v.feed_id, com.comment_id)">답글</li>
+                               <li class="reply" @click="showTextArea(feed.feed_id, com.comment_id)">답글</li>
                              </ul>
                            </div>
                          </div>
@@ -268,7 +263,7 @@
                   </div>
 
 
-                   <div class="comment-wrap" :id="`com-text-area-${v.feed_id}`">
+                   <div class="comment-wrap" :id="`com-text-area-${feed.feed_id}`">
                      <div class="comment-write-block">
                        <p class="comment-text"></p>
                        <textarea rows="5"></textarea>
@@ -292,7 +287,7 @@
           </div>
 
       </div>
-    </div>-->
+    </div>
 
 
     <basic-elements></basic-elements>
