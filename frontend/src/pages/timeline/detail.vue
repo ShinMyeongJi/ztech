@@ -19,6 +19,7 @@
   import {Carousel, CarouselItem} from "element-ui";
 
   export default {
+
     name: 'index',
     bodyClass: 'index-page',
     components: {
@@ -38,6 +39,7 @@
       SignupForm,
       ExamplesSection,
       DownloadSection,
+      // eslint-disable-next-line vue/no-unused-components
       comment,
       // eslint-disable-next-line vue/no-unused-components
       axios
@@ -134,8 +136,32 @@
       goToPage(){
         this.$router.push('/timeline/detail')
       },
-      addCommentForm(){
+      addCommentForm(idx){
 
+        var commentDiv = document.createElement('div')
+        commentDiv.className = 'comment-wrap'
+
+        commentDiv.innerHTML = '    <div class="comment-write-block">'
+            + '      <p class="comment-text"></p>'
+            + '      <textarea rows="5"></textarea>'
+            + ''
+            + '      <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="warning">취소</n-button>'
+            + '      <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="primary">확인</n-button>'
+            + ''
+            + '    </div>'
+
+        // var commentHtml = '<div class="comment-wrap">'
+        // + '    <div class="comment-write-block">'
+        // + '      <p class="comment-text"></p>'
+        // + '      <textarea rows="5"></textarea>'
+        // + ''
+        // + '      <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="warning">취소</n-button>'
+        // + '      <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="primary">확인</n-button>'
+        // + ''
+        // + '    </div>'
+        // + '  </div>'
+        let comm = document.getElementById('comm-' + idx);
+        comm.appendChild(commentDiv)
       }
     }
   };
@@ -216,8 +242,10 @@
                    <hr/>
 
                    <a href="" class="comment-more" @click="goToPage">댓글 더 보기 > </a>
-                    <div v-for="(com, idx) in feed.replies" v-bind:key="idx">
+                    <div v-for="(com, idx) in feed.replies" v-bind:key="idx" :id="'comm-' + idx">
+
                       <div class="comment-wrap">
+
                        <div class="photo">
                          <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
                        </div>
@@ -233,12 +261,16 @@
                                  <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
                                </a>
                              </li>
-                             <li class="reply" @click="addCommentForm">답글</li>
+                             <li class="reply" @click="addCommentForm(idx)">답글</li>
                            </ul>
                          </div>
                        </div>
+
                       </div>
-                       <div style="display: table; margin-left: 60px;">
+
+
+
+                       <!--<div style="display: table; margin-left: 60px;">
                         <div class="comment-wrap">
                          <div class="photo">
                            <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
@@ -246,7 +278,7 @@
                          <div class="comment-block">
                            <p class="comment-text">{{com.comment}}</p>
                            <div class="bottom-comment">
-                              <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
+                              &lt;!&ndash;<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>&ndash;&gt;
                              <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
                              <ul class="comment-actions">
                                <li class="complain">
@@ -260,8 +292,7 @@
                            </div>
                          </div>
                         </div>
-                       </div>
-                      <comment></comment>
+                       </div>-->
                   </div>
 
 
