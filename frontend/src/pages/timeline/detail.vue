@@ -145,8 +145,8 @@
             + '      <p class="comment-text"></p>'
             + '      <textarea rows="5"></textarea>'
             + ''
-            + '      <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="warning">취소</n-button>'
-            + '      <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="primary">확인</n-button>'
+            + '      <button type="button" size="sm" class="btn comment-write-btn float-right font-weight-light btn-warning btn-sm" >취소</button>'
+            + '      <button type="button" size="sm" class="btn comment-write-btn float-right font-weight-light btn-primary btn-sm" >확인</button>'
             + ''
             + '    </div>'
 
@@ -205,7 +205,7 @@
                 </div>
 
                 <div class="feed-card-social">
-                  <a v-for="(img, i) in splitLink(feed.imgs).slice(0,3)" v-bind:key="i" href="javascript:void(0);" @click="showTotalImgs(i)"
+                  <a v-for="(img, i) in splitLink(feed.imgs)" v-bind:key="i" href="javascript:void(0);" @click="showTotalImgs(i)"
                      class="feed-card-social__item">
                     <div>
                       <img :src="img" class="feed-card-social__item__uploaded-img" />
@@ -270,7 +270,7 @@
 
 
 
-                       <!--<div style="display: table; margin-left: 60px;">
+                       <div style="display: table; margin-left: 60px;">
                         <div class="comment-wrap">
                          <div class="photo">
                            <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
@@ -278,7 +278,7 @@
                          <div class="comment-block">
                            <p class="comment-text">{{com.comment}}</p>
                            <div class="bottom-comment">
-                              &lt;!&ndash;<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>&ndash;&gt;
+                              <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
                              <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
                              <ul class="comment-actions">
                                <li class="complain">
@@ -287,12 +287,12 @@
                                    <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
                                  </a>
                                </li>
-                               <li class="reply" @click="showTextArea(feed.feed_id, com.comment_id)">답글</li>
+                               <li class="reply" @click="showTextArea(idx)">답글</li>
                              </ul>
                            </div>
                          </div>
                         </div>
-                       </div>-->
+                       </div>
                   </div>
 
 
