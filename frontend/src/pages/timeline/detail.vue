@@ -269,30 +269,31 @@
                       </div>
 
 
-
-                       <div style="display: table; margin-left: 60px;" v-for="(sub, i) in feed.replies.sub_comments" v-bind:key="i">
-                        <div class="comment-wrap">
-                         <div class="photo">
-                           <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
-                         </div>
-                         <div class="comment-block">
-                           <p class="comment-text">{{sub.comment}}</p>
-                           <div class="bottom-comment">
-                              <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
-                             <div class="comment-date">{{sub.crt_dt | dateFormat}}</div>
-                             <ul class="comment-actions">
-                               <li class="complain">
-                                 <a href="javascript:void(0)">
-                                   <i class="now-ui-icons ui-2_like"></i>
-                                   <span style="margin-left: 8px; color: darkgray">{{sub.like}}</span>
-                                 </a>
-                               </li>
-                               <li class="reply" @click="showTextArea(idx)">답글</li>
-                             </ul>
+                      <div v-if="com.sub_comments">
+                         <div style="display: table; margin-left: 60px;" v-for="(sub, i) in com.sub_comments" v-bind:key="i">
+                          <div class="comment-wrap">
+                           <div class="photo">
+                             <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
                            </div>
+                           <div class="comment-block">
+                             <p class="comment-text">{{sub.comment}}</p>
+                             <div class="bottom-comment">
+                                <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
+                               <div class="comment-date">{{sub.crt_dt | dateFormat}}</div>
+                               <ul class="comment-actions">
+                                 <li class="complain">
+                                   <a href="javascript:void(0)">
+                                     <i class="now-ui-icons ui-2_like"></i>
+                                     <span style="margin-left: 8px; color: darkgray">{{sub.like}}</span>
+                                   </a>
+                                 </li>
+                                 <li class="reply" @click="showTextArea(idx)">답글</li>
+                               </ul>
+                             </div>
+                           </div>
+                          </div>
                          </div>
                         </div>
-                       </div>
 
                   </div>
 
