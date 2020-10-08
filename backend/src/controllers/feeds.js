@@ -46,7 +46,8 @@ router.get('/', async(req, res)=> {
             {
               model : feedComment,
               where : {
-                feed_id : info.feed_id
+                feed_id : info.feed_id,
+                parent_com_id : null
               }
             }
           ]
@@ -83,15 +84,38 @@ router.get('/feed/:feedId', async(req, res)=>{
             {
               model : feedComment,
               where : {
-                feed_id : info.feed_id
+                feed_id : info.feed_id,
+                parent_com_id : null
               }
             }
           ]
         })
+
+        if(comments){
+          for(let comment of comments.dataValues.feed_comments){
+            let sub_coms = await feedInfo.findOne({
+              include : [
+                {
+                  model : feedComment,
+                  where : {
+                    parent_com_id : comment.comment_id
+                  },
+                  order : [
+                      ['comment_id', 'ASC']
+                  ]
+                }
+              ]
+            })
+
+            if(sub_coms){
+              comment.setDataValue("sub_comments", sub_coms.dataValues.feed_comments)
+            }
+          }
+        }
+
         if(comments) {
           info.setDataValue("replies", comments.dataValues.feed_comments)
         }
-
       }
     }
 
