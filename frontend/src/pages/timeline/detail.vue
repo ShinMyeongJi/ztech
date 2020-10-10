@@ -57,7 +57,15 @@
         showImgs : [],
         slideIndex : 0,
         comments : [],
-        feedId : 0
+        feedId : 0,
+        commentForm : '    <div class="comment-write-block">'
+            + '      <p class="comment-text"></p>'
+            + '      <textarea rows="5"></textarea>'
+            + ''
+            + '      <button type="button" size="sm" class="btn comment-write-btn float-right font-weight-light btn-warning btn-sm" >취소</button>'
+            + '      <button type="button" size="sm" class="btn comment-write-btn float-right font-weight-light btn-primary btn-sm" >확인</button>'
+            + ''
+            + '    </div>'
       }
     },
     filters : {
@@ -137,30 +145,19 @@
         this.$router.push('/timeline/detail')
       },
       addCommentForm(idx){
-
         var commentDiv = document.createElement('div')
         commentDiv.className = 'comment-wrap'
+        commentDiv.innerHTML = this.commentForm
 
-        commentDiv.innerHTML = '    <div class="comment-write-block">'
-            + '      <p class="comment-text"></p>'
-            + '      <textarea rows="5"></textarea>'
-            + ''
-            + '      <button type="button" size="sm" class="btn comment-write-btn float-right font-weight-light btn-warning btn-sm" >취소</button>'
-            + '      <button type="button" size="sm" class="btn comment-write-btn float-right font-weight-light btn-primary btn-sm" >확인</button>'
-            + ''
-            + '    </div>'
-
-        // var commentHtml = '<div class="comment-wrap">'
-        // + '    <div class="comment-write-block">'
-        // + '      <p class="comment-text"></p>'
-        // + '      <textarea rows="5"></textarea>'
-        // + ''
-        // + '      <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="warning">취소</n-button>'
-        // + '      <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="primary">확인</n-button>'
-        // + ''
-        // + '    </div>'
-        // + '  </div>'
         let comm = document.getElementById('comm-' + idx);
+        comm.appendChild(commentDiv)
+      },
+      addCommentSubForm(idx){
+        var commentDiv = document.createElement('div')
+        commentDiv.className = 'comment-wrap'
+        commentDiv.innerHTML = this.commentForm
+
+        let comm = document.getElementById('subComm-' + idx);
         comm.appendChild(commentDiv)
       }
     }
@@ -242,57 +239,62 @@
                    <hr/>
 
                    <a href="" class="comment-more" @click="goToPage">댓글 더 보기 > </a>
-                    <div v-for="(com, idx) in feed.replies" v-bind:key="idx" :id="'comm-' + idx">
+                    <div v-for="(com, idx) in feed.replies" v-bind:key="idx">
+                      <div  :id="'comm-' + idx">
+                        <div class="comment-wrap">
 
-                      <div class="comment-wrap">
-
-                       <div class="photo">
-                         <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
-                       </div>
-                       <div class="comment-block">
-                         <p class="comment-text">{{com.comment}}</p>
-                         <div class="bottom-comment">
-                            <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
-                           <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
-                           <ul class="comment-actions">
-                             <li class="complain">
-                               <a href="javascript:void(0)">
-                                 <i class="now-ui-icons ui-2_like"></i>
-                                 <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
-                               </a>
-                             </li>
-                             <li class="reply" @click="addCommentForm(idx)">답글</li>
-                           </ul>
+                         <div class="photo">
+                           <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
                          </div>
-                       </div>
+                         <div class="comment-block">
+                           <p class="comment-text">{{com.comment}}</p>
+                           <div class="bottom-comment">
+                              <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
+                             <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
+                             <ul class="comment-actions">
+                               <li class="complain">
+                                 <a href="javascript:void(0)">
+                                   <i class="now-ui-icons ui-2_like"></i>
+                                   <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
+                                 </a>
+                               </li>
+                               <li class="reply" @click="addCommentForm(idx)">답글</li>
+                             </ul>
+                           </div>
+                         </div>
 
+                        </div>
                       </div>
 
-
                       <div v-if="com.sub_comments">
-                         <div style="display: table; margin-left: 60px;" v-for="(sub, i) in com.sub_comments" v-bind:key="i">
-                          <div class="comment-wrap">
-                           <div class="photo">
-                             <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
+
+                          <div style="margin-left: 60px;" v-for="(sub, i) in com.sub_comments" v-bind:key="i">
+                             <div :id="'subComm-' + i">
+                              <div class="comment-wrap">
+                               <div class="photo">
+                                 <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
+                               </div>
+                               <div class="comment-block">
+                                 <p class="comment-text">{{sub.comment}}</p>
+                                 <div class="bottom-comment">
+                                    <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
+                                   <div class="comment-date">{{sub.crt_dt | dateFormat}}</div>
+                                   <ul class="comment-actions">
+                                     <li class="complain">
+                                       <a href="javascript:void(0)">
+                                         <i class="now-ui-icons ui-2_like"></i>
+                                         <span style="margin-left: 8px; color: darkgray">{{sub.like}}</span>
+                                       </a>
+                                     </li>
+                                     <li class="reply" @click="addCommentSubForm(i)">답글</li>
+                                   </ul>
+                                 </div>
+                               </div>
+                              </div>
+                            </div>
                            </div>
-                           <div class="comment-block">
-                             <p class="comment-text">{{sub.comment}}</p>
-                             <div class="bottom-comment">
-                                <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
-                               <div class="comment-date">{{sub.crt_dt | dateFormat}}</div>
-                               <ul class="comment-actions">
-                                 <li class="complain">
-                                   <a href="javascript:void(0)">
-                                     <i class="now-ui-icons ui-2_like"></i>
-                                     <span style="margin-left: 8px; color: darkgray">{{sub.like}}</span>
-                                   </a>
-                                 </li>
-                                 <li class="reply" @click="showTextArea(idx)">답글</li>
-                               </ul>
-                             </div>
-                           </div>
-                          </div>
-                         </div>
+
+
                         </div>
 
                   </div>
