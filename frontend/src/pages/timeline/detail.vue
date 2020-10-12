@@ -41,6 +41,7 @@
       DownloadSection,
       // eslint-disable-next-line vue/no-unused-components
       comment,
+      Modal,
       // eslint-disable-next-line vue/no-unused-components
       axios
     },
@@ -63,12 +64,13 @@
             + '      <textarea rows="5"></textarea>'
             + ''
             + '      <button type="button" size="sm" class="btn comment-write-btn float-right font-weight-light btn-warning btn-sm" >취소</button>'
-            + '      <button type="button" size="sm" class="btn comment-write-btn float-right font-weight-light btn-primary btn-sm" >확인</button>'
-            + ''
-            + '    </div>'
-      }
-    },
-    filters : {
+        + '      <button type="button" size="sm" class="btn comment-write-btn float-right font-weight-light btn-primary btn-sm" >확인</button>'
+        + ''
+        + '    </div>',
+        visibility : false
+  }
+  },
+  filters : {
       dateFormat :function (value) {
         return moment(String(value)).format('YYYY-MM-DD hh:mm')
       }
@@ -149,8 +151,12 @@
         commentDiv.className = 'comment-wrap'
         commentDiv.innerHTML = this.commentForm
 
+
         let comm = document.getElementById('comm-' + idx);
         comm.appendChild(commentDiv)
+
+
+
       },
       addCommentSubForm(idx){
         var commentDiv = document.createElement('div')
@@ -159,6 +165,9 @@
 
         let comm = document.getElementById('subComm-' + idx);
         comm.appendChild(commentDiv)
+      },
+      toggleComm(){
+        console.log(this.visibility)
       }
     }
   };
@@ -238,6 +247,26 @@
 
                    <hr/>
 
+                  <modal :show.sync="modals.classic" headerClasses="justify-content-center" type="mini">
+                    <h4 slot="header" class="title title-up">새 피드 작성</h4>
+
+
+
+                    <fieldset> <!--style="position: relative;"-->
+                       <textarea class="content_text" name="user_bio" placeholder="내용을 입력하세요." ></textarea>
+                    </fieldset>
+
+                  <template slot="footer">
+
+                    <n-button type="primary" @click="upload">완료</n-button>
+                    <n-button type="warning" @click.native="modals.classic = false">취소</n-button>
+
+                  </template>
+                </modal>
+
+
+
+
                    <a href="" class="comment-more" @click="goToPage">댓글 더 보기 > </a>
                     <div v-for="(com, idx) in feed.replies" v-bind:key="idx">
                       <div  :id="'comm-' + idx">
@@ -258,12 +287,16 @@
                                    <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
                                  </a>
                                </li>
-                               <li class="reply" @click="addCommentForm(idx)">답글</li>
+                              <!-- <li class="reply" @click="addCommentForm(idx)">답글</li>-->
+                               <li class="reply" @click="modals.classic = true">답글</li>
                              </ul>
                            </div>
                          </div>
 
                         </div>
+
+
+
                       </div>
 
                       <div v-if="com.sub_comments">
@@ -296,6 +329,8 @@
 
 
                         </div>
+
+
 
                   </div>
 
