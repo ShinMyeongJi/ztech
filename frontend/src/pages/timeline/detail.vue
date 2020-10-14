@@ -251,13 +251,20 @@
                     <h4 slot="header" class="title title-up">새 피드 작성</h4>
 
                     <fieldset> <!--style="position: relative;"-->
-                       <textarea class="content-text" name="user_bio" placeholder="댓글 내용을 입력하세요." style="border: none;"></textarea>
+                       <div contenteditable="true" class="content-modal-textarea">
+                         <div>@dsf</div>
+                       </div>
+
+                      <!--<textarea class="content-text" name="user_bio" placeholder="댓글 내용을 입력하세요." style="border: none;">
+
+                       </textarea>-->
                     </fieldset>
 
                   <template slot="footer">
 
-                    <n-button type="primary">완료</n-button>
-                    <n-button type="warning" @click.native="modals.classic = false">취소</n-button>
+                    <n-button type="warning" link @click.native="modals.classic = false">취소</n-button>
+                    <n-button type="primary" >완료</n-button>
+
 
                   </template>
                 </modal>
