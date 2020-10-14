@@ -1,4 +1,4 @@
-.title_text {
+.title-text {
   // display: block;
   background: rgba(255,255,255,0.1);
   border-radius: 8px;
@@ -17,11 +17,11 @@
   overflow: hidden;
 }
 
-.title_text::placeholder{
+.title-text::placeholder{
   color: darkgray;
 }
 
-.content_text {
+.content-text {
  // display: block;
   background: rgba(255,255,255,0.1);
   border-radius: 10px;
@@ -39,7 +39,7 @@
   resize: none;
 }
 
-.content_text::placeholder{
+.content-text::placeholder{
   color: darkgray;
 }
 
@@ -125,5 +125,9 @@ a.remImage img {
   font-size: 12px;
   color: white;
   margin-top: -10px;
+}
+
+.comment-modal-area{
+
 }
 

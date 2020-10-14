@@ -250,15 +250,13 @@
                   <modal :show.sync="modals.classic" headerClasses="justify-content-center" type="mini">
                     <h4 slot="header" class="title title-up">새 피드 작성</h4>
 
-
-
                     <fieldset> <!--style="position: relative;"-->
-                       <textarea class="content_text" name="user_bio" placeholder="내용을 입력하세요." ></textarea>
+                       <textarea class="content-text" name="user_bio" placeholder="댓글 내용을 입력하세요." style="border: none;"></textarea>
                     </fieldset>
 
                   <template slot="footer">
 
-                    <n-button type="primary" @click="upload">완료</n-button>
+                    <n-button type="primary">완료</n-button>
                     <n-button type="warning" @click.native="modals.classic = false">취소</n-button>
 
                   </template>

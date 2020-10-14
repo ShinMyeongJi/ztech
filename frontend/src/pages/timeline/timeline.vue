@@ -176,9 +176,9 @@
 
 
                 <fieldset> <!--style="position: relative;"-->
-                  <input class="title_text" placeholder="제목을 입력하세요." v-model="feed.subject"/>
+                  <input class="title-text" placeholder="제목을 입력하세요." v-model="feed.subject"/>
                   <!--<textarea class="title_text" name="user_bio" rows="1"></textarea>-->
-                  <textarea class="content_text" name="user_bio" placeholder="내용을 입력하세요." v-model="feed.content"></textarea>
+                  <textarea class="content-text" name="user_bio" placeholder="내용을 입력하세요." v-model="feed.content"></textarea>
                   <!--<button style="position: absolute; bottom: 30px; right: 680px; background: transparent;"><i class="now-ui-icons design_image"/></button>-->
                   <div class="float-left thumb-block" >
 
@@ -314,7 +314,7 @@
                    <div class="comment-wrap" :id="`com-text-area-${v.feed_id}`">
                      <div class="comment-write-block">
                        <p class="comment-text"></p>
-                       <textarea rows="5"></textarea>
+                       <textarea class="comment-area" rows="5"></textarea>
 
                        <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="warning">취소</n-button>
                        <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="primary">확인</n-button>
