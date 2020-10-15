@@ -28,7 +28,12 @@ db.feedInfo.belongsTo(db.users, {
 
 db.users.hasMany(db.feedComment, {
   foreignKey : "user_name",
-  targetKey : "name"
+  targetKey : "user_id"
+})
+
+db.feedComment.belongsTo(db.users, {
+  foreignKey : "user_name",
+  targetKey : "user_id"
 })
 
 db.feedInfo.hasMany(db.feedComment,{

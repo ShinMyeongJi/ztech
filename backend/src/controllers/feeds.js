@@ -82,6 +82,7 @@ router.get('/feed/:feedId', async(req, res)=>{
         let comments = await feedInfo.findOne({
           include : [
             {
+              include : [users],
               model : feedComment,
               where : {
                 feed_id : info.feed_id,
@@ -96,6 +97,7 @@ router.get('/feed/:feedId', async(req, res)=>{
             let sub_coms = await feedInfo.findOne({
               include : [
                 {
+                  include : [users],
                   model : feedComment,
                   where : {
                     parent_com_id : comment.comment_id
