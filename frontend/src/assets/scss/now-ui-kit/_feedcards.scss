@@ -571,8 +571,13 @@ a, a:hover {
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
   }
 
-
+  .comment-user-name {
+    font-size: 13px;
+    line-height: 1.3125rem;
+    margin-bottom: 1.25rem;
+  }
   .comment-text {
+    font-size: 14px;
     line-height: 1.3125rem;
     margin-bottom: 1.25rem;
   }

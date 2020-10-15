@@ -279,8 +279,10 @@
 
                          <div class="photo">
                            <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
+
                          </div>
                          <div class="comment-block">
+                           <span class="comment-user-name font-weight-bold">{{com.user.user_name}}</span>
                            <p class="comment-text">{{com.comment}}</p>
                            <div class="bottom-comment">
                               <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
@@ -313,6 +315,7 @@
                                  <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
                                </div>
                                <div class="comment-block">
+                                 <span class="comment-user-name font-weight-bold">{{sub.user.user_name}}</span>
                                  <p class="comment-text">{{sub.comment}}</p>
                                  <div class="bottom-comment">
                                     <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
