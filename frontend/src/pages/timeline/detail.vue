@@ -67,7 +67,8 @@
         + '      <button type="button" size="sm" class="btn comment-write-btn float-right font-weight-light btn-primary btn-sm" >확인</button>'
         + ''
         + '    </div>',
-        visibility : false
+        visibility : false,
+        mention : ""
   }
   },
   filters : {
@@ -146,28 +147,10 @@
       goToPage(){
         this.$router.push('/timeline/detail')
       },
-      addCommentForm(idx){
-        var commentDiv = document.createElement('div')
-        commentDiv.className = 'comment-wrap'
-        commentDiv.innerHTML = this.commentForm
-
-
-        let comm = document.getElementById('comm-' + idx);
-        comm.appendChild(commentDiv)
-
-
-
-      },
-      addCommentSubForm(idx){
-        var commentDiv = document.createElement('div')
-        commentDiv.className = 'comment-wrap'
-        commentDiv.innerHTML = this.commentForm
-
-        let comm = document.getElementById('subComm-' + idx);
-        comm.appendChild(commentDiv)
-      },
-      toggleComm(){
-        console.log(this.visibility)
+      addCommentForm(user){
+        this.modals.classic = true
+        console.log(user)
+        this.mention = user.user_name
       }
     }
   };
@@ -252,7 +235,8 @@
 
                     <fieldset> <!--style="position: relative;"-->
                        <div contenteditable="true" class="content-modal-textarea">
-                         <div>@dsf</div>
+                         <div style="background-color:indianred; display: inline-block;">@{{mention}}</div>
+                         <div>dsgsdg</div>
                        </div>
 
                       <!--<textarea class="content-text" name="user_bio" placeholder="댓글 내용을 입력하세요." style="border: none;">
@@ -272,76 +256,77 @@
 
 
 
-                   <a href="" class="comment-more" @click="goToPage">댓글 더 보기 > </a>
-                    <div v-for="(com, idx) in feed.replies" v-bind:key="idx">
-                      <div  :id="'comm-' + idx">
-                        <div class="comment-wrap">
+                    <div class="float-left font-weight-bold" style="font-size: 15px; margin-bottom: 20px;">댓글 <span>12</span></div>
+                    <div>
+                      <div v-for="(com, idx) in feed.replies" v-bind:key="idx">
+                        <div  :id="'comm-' + idx">
+                          <div class="comment-wrap">
 
-                         <div class="photo">
-                           <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
+                           <div class="photo">
+                             <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
 
-                         </div>
-                         <div class="comment-block">
-                           <span class="comment-user-name font-weight-bold">{{com.user.user_name}}</span>
-                           <p class="comment-text">{{com.comment}}</p>
-                           <div class="bottom-comment">
-                              <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
-                             <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
-                             <ul class="comment-actions">
-                               <li class="complain">
-                                 <a href="javascript:void(0)">
-                                   <i class="now-ui-icons ui-2_like"></i>
-                                   <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
-                                 </a>
-                               </li>
-                              <!-- <li class="reply" @click="addCommentForm(idx)">답글</li>-->
-                               <li class="reply" @click="modals.classic = true">답글</li>
-                             </ul>
                            </div>
-                         </div>
+                           <div class="comment-block">
+                             <span class="comment-user-name font-weight-bold">{{com.user.user_name}}</span>
+                             <p class="comment-text">{{com.comment}}</p>
+                             <div class="bottom-comment">
+                                <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
+                               <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
+                               <ul class="comment-actions">
+                                 <li class="complain">
+                                   <a href="javascript:void(0)">
+                                     <i class="now-ui-icons ui-2_like"></i>
+                                     <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
+                                   </a>
+                                 </li>
+                                <!-- <li class="reply" @click="addCommentForm(idx)">답글</li>-->
+                                 <li class="reply" @click="addCommentForm(com.user)">답글</li>
+                               </ul>
+                             </div>
+                           </div>
+
+                          </div>
+
+
 
                         </div>
 
+                        <div v-if="com.sub_comments">
 
-
-                      </div>
-
-                      <div v-if="com.sub_comments">
-
-                          <div style="margin-left: 60px;" v-for="(sub, i) in com.sub_comments" v-bind:key="i">
-                             <div :id="'subComm-' + i">
-                              <div class="comment-wrap">
-                               <div class="photo">
-                                 <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
-                               </div>
-                               <div class="comment-block">
-                                 <span class="comment-user-name font-weight-bold">{{sub.user.user_name}}</span>
-                                 <p class="comment-text">{{sub.comment}}</p>
-                                 <div class="bottom-comment">
-                                    <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
-                                   <div class="comment-date">{{sub.crt_dt | dateFormat}}</div>
-                                   <ul class="comment-actions">
-                                     <li class="complain">
-                                       <a href="javascript:void(0)">
-                                         <i class="now-ui-icons ui-2_like"></i>
-                                         <span style="margin-left: 8px; color: darkgray">{{sub.like}}</span>
-                                       </a>
-                                     </li>
-                                     <li class="reply" @click="addCommentSubForm(i)">답글</li>
-                                   </ul>
+                            <div style="margin-left: 60px;" v-for="(sub, i) in com.sub_comments" v-bind:key="i">
+                               <div :id="'subComm-' + i">
+                                <div class="comment-wrap">
+                                 <div class="photo">
+                                   <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
                                  </div>
-                               </div>
+                                 <div class="comment-block">
+                                   <span class="comment-user-name font-weight-bold">{{sub.user.user_name}}</span>
+                                   <p class="comment-text">{{sub.comment}}</p>
+                                   <div class="bottom-comment">
+                                      <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
+                                     <div class="comment-date">{{sub.crt_dt | dateFormat}}</div>
+                                     <ul class="comment-actions">
+                                       <li class="complain">
+                                         <a href="javascript:void(0)">
+                                           <i class="now-ui-icons ui-2_like"></i>
+                                           <span style="margin-left: 8px; color: darkgray">{{sub.like}}</span>
+                                         </a>
+                                       </li>
+                                       <li class="reply" @click="addCommentForm(sub.user)">답글</li>
+                                     </ul>
+                                   </div>
+                                 </div>
+                                </div>
                               </div>
-                            </div>
-                           </div>
+                             </div>
 
 
-                        </div>
+                          </div>
 
 
 
+                    </div>
                   </div>
-
 
                    <div class="comment-wrap">
                      <div class="comment-write-block">
