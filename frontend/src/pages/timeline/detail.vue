@@ -147,10 +147,12 @@
       goToPage(){
         this.$router.push('/timeline/detail')
       },
-      addCommentForm(user){
+      addCommentForm(user, depth){
+        this.mention = ""
         this.modals.classic = true
         console.log(user)
-        this.mention = user.user_name
+        if(depth == 1)
+          this.mention = user.user_name
       }
     }
   };
@@ -235,7 +237,7 @@
 
                     <fieldset> <!--style="position: relative;"-->
                        <div contenteditable="true" class="content-modal-textarea">
-                         <div style="background-color:indianred; display: inline-block;">@{{mention}}</div>
+                         <div style="background-color:darkgrey; display: inline-block;" v-if="mention != ''">@{{mention}}</div>
                          <div>dsgsdg</div>
                        </div>
 
@@ -280,7 +282,7 @@
                                    </a>
                                  </li>
                                 <!-- <li class="reply" @click="addCommentForm(idx)">답글</li>-->
-                                 <li class="reply" @click="addCommentForm(com.user)">답글</li>
+                                 <li class="reply" @click="addCommentForm(com.user, com.comment_depth)">답글</li>
                                </ul>
                              </div>
                            </div>
@@ -312,7 +314,7 @@
                                            <span style="margin-left: 8px; color: darkgray">{{sub.like}}</span>
                                          </a>
                                        </li>
-                                       <li class="reply" @click="addCommentForm(sub.user)">답글</li>
+                                       <li class="reply" @click="addCommentForm(sub.user, sub.comment_depth)">답글</li>
                                      </ul>
                                    </div>
                                  </div>
