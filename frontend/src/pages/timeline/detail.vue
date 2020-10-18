@@ -126,7 +126,7 @@
       },
       splitLink(text){
         return (text || '').split(',')
-      },
+      },c
       showTotalImgs(i){
         this.showImgs = this.splitLink(this.feed.imgs)
         this.modals.carousel=true
