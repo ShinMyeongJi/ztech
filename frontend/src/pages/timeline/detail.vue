@@ -59,14 +59,6 @@
         slideIndex : 0,
         comments : [],
         feedId : 0,
-        commentForm : '    <div class="comment-write-block">'
-            + '      <p class="comment-text"></p>'
-            + '      <textarea rows="5"></textarea>'
-            + ''
-            + '      <button type="button" size="sm" class="btn comment-write-btn float-right font-weight-light btn-warning btn-sm" >취소</button>'
-        + '      <button type="button" size="sm" class="btn comment-write-btn float-right font-weight-light btn-primary btn-sm" >확인</button>'
-        + ''
-        + '    </div>',
         visibility : false,
         mention : ""
   }
@@ -133,7 +125,7 @@
         this.$delete(this.$refs.file_input, 1)
       },
       splitLink(text){
-        return text.split(',')
+        return (text || '').split(',')
       },
       showTotalImgs(i){
         this.showImgs = this.splitLink(this.feed.imgs)
@@ -236,9 +228,9 @@
                     <h4 slot="header" class="title title-up">새 피드 작성</h4>
 
                     <fieldset> <!--style="position: relative;"-->
-                       <div contenteditable="true" class="content-modal-textarea">
-                         <div style="background-color:darkgrey; display: inline-block;" v-if="mention != ''">@{{mention}}</div>
-                         <div>dsgsdg</div>
+                       <div contenteditable="true" class="content-modal-textarea" style="overflow-y: auto">
+                         <div style="background-color:darkgrey; display: inline;" v-if="mention != ''">@{{mention}}</div>
+                         <div style="display : inline;">dsgsdg</div>
                        </div>
 
                       <!--<textarea class="content-text" name="user_bio" placeholder="댓글 내용을 입력하세요." style="border: none;">
