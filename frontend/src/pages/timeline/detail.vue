@@ -60,7 +60,20 @@
         comments : [],
         feedId : 0,
         visibility : false,
-        mention : ""
+        mention : "",
+        commentText : "",
+        comment : {
+          comment_id : null,
+          comment_depth: 0,
+          feed_id : this.$route.query.feedId,
+          user_name : "shinmj",
+          comment : "",
+          like : 0,
+          dislike : 0,
+          crt_dt : new Date(),
+          mod_dt : null,
+          parent_com_id : 0
+        }
   }
   },
   filters : {
@@ -126,7 +139,7 @@
       },
       splitLink(text){
         return (text || '').split(',')
-      },c
+      },
       showTotalImgs(i){
         this.showImgs = this.splitLink(this.feed.imgs)
         this.modals.carousel=true
@@ -145,6 +158,14 @@
         console.log(user)
         if(depth == 1)
           this.mention = user.user_name
+      },
+      writeComment(){
+        console.log(this.comment.comment)
+        //Todo 현재 사용자 추가
+
+        axios.post('/feeds/comment', this.comment).then(response => {
+          console.log(response)
+        })
       }
     }
   };
@@ -230,6 +251,7 @@
                     <fieldset> <!--style="position: relative;"-->
                        <div contenteditable="true" class="content-modal-textarea" style="overflow-y: auto">
                          <div style="background-color:darkgrey; display: inline;" v-if="mention != ''">@{{mention}}</div>
+                         <div style="display : inline;"> 　 </div>
                          <div style="display : inline;">dsgsdg</div>
                        </div>
 
@@ -325,10 +347,10 @@
                    <div class="comment-wrap">
                      <div class="comment-write-block">
                        <p class="comment-text"></p>
-                       <textarea rows="5"></textarea>
+                       <textarea rows="5" v-model="comment.comment"></textarea>
 
                        <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="warning">취소</n-button>
-                       <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="primary">확인</n-button>
+                       <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="primary" @click="writeComment">확인</n-button>
 
                      </div>
                    </div>

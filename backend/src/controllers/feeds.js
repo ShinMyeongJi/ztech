@@ -159,4 +159,12 @@ router.post('/upload', upload.array('img'), (req, res) => {
   }
 });
 
+
+router.post('/comment', async(req, res) => {
+  console.log(req.body)
+
+  const result = feedComment.create(req.body)
+  res.send(result)
+})
+
 module.exports = router;
