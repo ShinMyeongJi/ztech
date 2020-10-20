@@ -269,9 +269,6 @@
                   </template>
                 </modal>
 
-
-
-
                     <div class="float-left font-weight-bold" style="font-size: 15px; margin-bottom: 20px;">댓글 <span>12</span></div>
                     <div>
                       <div v-for="(com, idx) in feed.replies" v-bind:key="idx">
@@ -284,6 +281,8 @@
                            </div>
                            <div class="comment-block">
                              <span class="comment-user-name font-weight-bold">{{com.user.user_name}}</span>
+                             <img src="/img/more.png" class="float-right comment-more" />
+
                              <p class="comment-text">{{com.comment}}</p>
                              <div class="bottom-comment">
                                 <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
@@ -302,9 +301,6 @@
                            </div>
 
                           </div>
-
-
-
                         </div>
 
                         <div v-if="com.sub_comments">
