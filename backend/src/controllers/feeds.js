@@ -167,4 +167,13 @@ router.post('/comment', async(req, res) => {
   res.send(result)
 })
 
+router.delete('/comment/:cmt_id', async(req, res) => {
+  console.log(req.params.cmt_id)
+  /*feedComment.destroy({
+    where : {
+      comment_id : req.params.cmt_id
+    }
+  })*/
+})
+
 module.exports = router;

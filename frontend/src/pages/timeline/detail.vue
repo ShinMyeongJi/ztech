@@ -74,7 +74,7 @@
           mod_dt : null,
           parent_com_id : 0
         }
-  }
+    }
   },
   filters : {
       dateFormat :function (value) {
@@ -154,6 +154,7 @@
       },
       addCommentForm(user, depth){
         this.mention = ""
+        this.commentText = ""
         this.modals.classic = true
         console.log(user)
         if(depth == 1)
@@ -164,6 +165,15 @@
         //Todo 현재 사용자 추가
 
         axios.post('/feeds/comment', this.comment).then(response => {
+          console.log(response)
+        })
+      },
+      modifyComment(comment) {
+        this.commentText = comment
+        this.modals.classic = true
+      },
+      deleteComment(cmt_id) {
+        axios.delete(`/feeds/comment?cmt_id=${cmt_id}`).then(response => {
           console.log(response)
         })
       }
@@ -251,8 +261,8 @@
                     <fieldset> <!--style="position: relative;"-->
                        <div contenteditable="true" class="content-modal-textarea" style="overflow-y: auto">
                          <div style="background-color:darkgrey; display: inline;" v-if="mention != ''">@{{mention}}</div>
-                         <div style="display : inline;"> 　 </div>
-                         <div style="display : inline;">dsgsdg</div>
+                         <div style="display : inline;">{{commentText}}</div>
+
                        </div>
 
                       <!--<textarea class="content-text" name="user_bio" placeholder="댓글 내용을 입력하세요." style="border: none;">
@@ -281,7 +291,13 @@
                            </div>
                            <div class="comment-block">
                              <span class="comment-user-name font-weight-bold">{{com.user.user_name}}</span>
-                             <img src="/img/more.png" class="float-right comment-more" />
+                             <!--<img src="/img/more.png" class="float-right comment-more-menu" />-->
+
+                             <div class="float-right comment-more-menu">
+                               <span class="more-btn" @click="modifyComment(com.comment)">수정</span>
+                               <span> | </span>
+                               <span class="more-btn" @click="deleteComment(com.comment_id)">삭제</span>
+                             </div>
 
                              <p class="comment-text">{{com.comment}}</p>
                              <div class="bottom-comment">
