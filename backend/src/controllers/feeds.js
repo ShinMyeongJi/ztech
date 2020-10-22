@@ -168,12 +168,19 @@ router.post('/comment', async(req, res) => {
 })
 
 router.delete('/comment/:cmt_id', async(req, res) => {
-  console.log(req.params.cmt_id)
-  /*feedComment.destroy({
-    where : {
-      comment_id : req.params.cmt_id
-    }
-  })*/
+  let result = null
+  try{
+    result = feedComment.destroy({
+      where : {
+        comment_id : req.params.cmt_id
+      }
+    })
+
+  }catch (e) {
+    console.log(e)
+  }
+  res.send(result)
+
 })
 
 module.exports = router;

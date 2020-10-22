@@ -172,10 +172,16 @@
         this.commentText = comment
         this.modals.classic = true
       },
-      deleteComment(cmt_id) {
-        axios.delete(`/feeds/comment?cmt_id=${cmt_id}`).then(response => {
-          console.log(response)
-        })
+      deleteComment(i) {
+
+        this.$router.go(this.feed.replies.$remove())
+        console.log(this.feed.replies)
+        /*axios.delete(`/feeds/comment/${com.comment_id}`).then(response => {
+          if(response.status == 200){
+            //this.$router.go(this.$router.currentRoute)
+            console.log()
+          }
+        })*/
       }
     }
   };
@@ -296,7 +302,7 @@
                              <div class="float-right comment-more-menu">
                                <span class="more-btn" @click="modifyComment(com.comment)">수정</span>
                                <span> | </span>
-                               <span class="more-btn" @click="deleteComment(com.comment_id)">삭제</span>
+                               <span class="more-btn" @click="deleteComment(i)">삭제</span>
                              </div>
 
                              <p class="comment-text">{{com.comment}}</p>
