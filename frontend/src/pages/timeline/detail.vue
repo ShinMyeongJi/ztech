@@ -173,16 +173,22 @@
         this.modals.classic = true
       },
       deleteComment(com, i) {
+
         if(confirm("정말 삭제 하시겠습니까?") == true) {
-          axios.delete(`/feeds/comment/${com.comment_id}`).then(response => {
+          axios.put(`/feeds/comment/${com.comment_id}`, this.feed.replies[i]).then(response => {
             if(response.status == 200){
               this.feed.replies.splice(i, 1)
             }
           })
+
+          /*axios.delete(`/feeds/comment/${com.comment_id}`).then(response => {
+            if(response.status == 200){
+              this.feed.replies.splice(i, 1)
+            }
+          })*/
         }else {
           return false
         }
-
       }
     }
   };
@@ -303,7 +309,7 @@
                              <div class="float-right comment-more-menu">
                                <span class="more-btn" @click="modifyComment(com.comment)">수정</span>
                                <span> | </span>
-                               <span class="more-btn" @click="deleteComment(com, i)">삭제</span>
+                               <span class="more-btn" @click="deleteComment(com, idx)">삭제</span>
                              </div>
 
                              <p class="comment-text">{{com.comment}}</p>
@@ -357,8 +363,6 @@
 
 
                           </div>
-
-
 
                     </div>
                   </div>

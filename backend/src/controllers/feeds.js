@@ -183,4 +183,43 @@ router.delete('/comment/:cmt_id', async(req, res) => {
 
 })
 
+router.put('/comment/:cmt_id', async(req, res) => {
+
+  console.log(req.body)
+  let result = null
+
+  try{
+    const comment = feedComment.findOne({
+      where : {
+        comment_id : req.params.cmt_id
+      }
+    })
+
+    /*if(comment) {
+      comment.update({
+        where : {
+          deleteYn :
+        }
+      })
+    }
+*/
+
+  }catch (e) {
+    console.log(e)
+  }
+
+  /*try{
+    result = feedComment.update({
+      where : {
+        comment_id : req.params.cmt_id
+      }
+    })
+
+  }catch (e) {
+    console.log(e)
+  }*/
+  res.send(result)
+
+})
+
 module.exports = router;

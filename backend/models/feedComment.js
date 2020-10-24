@@ -39,6 +39,11 @@ module.exports = (sequelize, DataTypes) => {
     mod_dt:{
       type: DataTypes.DATE,
       allowNull:true
+    },
+    deleteYn : {
+      type : DataTypes.STRING,
+      allowNull : false,
+      defaultValue : 'N'
     }
   }, {
     timestamps : false,
