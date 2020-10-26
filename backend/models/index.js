@@ -41,6 +41,9 @@ db.feedInfo.hasMany(db.feedComment,{
   targetKey : "feed_id"
 })
 
+/*db.feedComment.sync({
+  alter : true
+})*/
 /*db.sequelize.sync({force : true});*/
 module.exports = db;
 

@@ -46,8 +46,7 @@ router.get('/', async(req, res)=> {
             {
               model : feedComment,
               where : {
-                feed_id : info.feed_id,
-                parent_com_id : null
+                feed_id : info.feed_id
               }
             }
           ]
@@ -59,6 +58,7 @@ router.get('/', async(req, res)=> {
       }
     }
 
+    //console.log(infos)
     res.send({infos});
   }catch (e)  {
     console.error(e);
@@ -86,7 +86,8 @@ router.get('/feed/:feedId', async(req, res)=>{
               model : feedComment,
               where : {
                 feed_id : info.feed_id,
-                parent_com_id : null
+                deleteYn : 'N',
+                parent_com_id : 0
               }
             }
           ]
@@ -117,10 +118,11 @@ router.get('/feed/:feedId', async(req, res)=>{
 
         if(comments) {
           info.setDataValue("replies", comments.dataValues.feed_comments)
+
         }
       }
     }
-
+    console.log(infos[0].dataValues.replies)
     res.send({infos});
   }catch (e)  {
     console.error(e);
@@ -183,42 +185,29 @@ router.delete('/comment/:cmt_id', async(req, res) => {
 
 })
 
-router.put('/comment/:cmt_id', async(req, res) => {
-
-  console.log(req.body)
+router.put('/comment/delete/:cmt_id', async(req, res) => {
   let result = null
-
   try{
-    const comment = feedComment.findOne({
+    result = await  feedComment.update({
+      deleteYn : 'Y'
+    },
+    {
       where : {
         comment_id : req.params.cmt_id
       }
     })
-
-    /*if(comment) {
-      comment.update({
-        where : {
-          deleteYn :
-        }
-      })
-    }
-*/
-
+    console.log(result)
   }catch (e) {
     console.log(e)
   }
 
-  /*try{
-    result = feedComment.update({
-      where : {
-        comment_id : req.params.cmt_id
-      }
-    })
-
-  }catch (e) {
-    console.log(e)
-  }*/
   res.send(result)
+})
+
+
+router.put('/comment/:cmt_id', async(req, res) => {
+
+  console.log(req.body)
 
 })
 

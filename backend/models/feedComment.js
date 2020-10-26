@@ -44,6 +44,11 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.STRING,
       allowNull : false,
       defaultValue : 'N'
+    },
+    parent_com_id : {
+      type : DataTypes.INTEGER,
+      allowNull : true,
+      defaultValue : 0
     }
   }, {
     timestamps : false,

@@ -51,7 +51,8 @@
         modals: {
           classic: false,
           mini: false,
-          carousel: false
+          carousel: false,
+          modify : false
         },
         filesPreview: [],
         imgUrls: [],
@@ -65,6 +66,18 @@
         comment : {
           comment_id : null,
           comment_depth: 0,
+          feed_id : this.$route.query.feedId,
+          user_name : "shinmj",
+          comment : "",
+          like : 0,
+          dislike : 0,
+          crt_dt : new Date(),
+          mod_dt : null,
+          parent_com_id : 0
+        },
+        recomment : {
+          comment_id : null,
+          comment_depth : 1,
           feed_id : this.$route.query.feedId,
           user_name : "shinmj",
           comment : "",
@@ -90,7 +103,6 @@
       getFeeds(){
         axios.get(`/feeds/feed/${this.feedId}`).then(response =>{
           this.feed = response.data.infos[0]
-          console.log(this.feed)
         })
       },
       postFeeds(){
@@ -168,24 +180,26 @@
           console.log(response)
         })
       },
-      modifyComment(comment) {
-        this.commentText = comment
-        this.modals.classic = true
+      modifyWindow(com) {
+        this.commentText = com.comment
+        this.comment = com
+        this.modals.modify = true
+      },
+      modifyComment() {
+        console.log(this.commentText)
+        this.comment.comment = this.commentText
+        axios.put(`/feeds/comment/${this.comment.comment_id}`, this.comment).then(response => {
+          console.log(response)
+        })
       },
       deleteComment(com, i) {
-
+        console.log(this.feed.replies[i])
         if(confirm("정말 삭제 하시겠습니까?") == true) {
-          axios.put(`/feeds/comment/${com.comment_id}`, this.feed.replies[i]).then(response => {
+          axios.put(`/feeds/comment/delete/${com.comment_id}`).then(response => {
             if(response.status == 200){
               this.feed.replies.splice(i, 1)
             }
           })
-
-          /*axios.delete(`/feeds/comment/${com.comment_id}`).then(response => {
-            if(response.status == 200){
-              this.feed.replies.splice(i, 1)
-            }
-          })*/
         }else {
           return false
         }
@@ -274,7 +288,7 @@
                     <fieldset> <!--style="position: relative;"-->
                        <div contenteditable="true" class="content-modal-textarea" style="overflow-y: auto">
                          <div style="background-color:darkgrey; display: inline;" v-if="mention != ''">@{{mention}}</div>
-                         <div style="display : inline;">{{commentText}}</div>
+                         <div style="display : inline;" >{{commentText}}</div>
 
                        </div>
 
@@ -286,16 +300,36 @@
                   <template slot="footer">
 
                     <n-button type="warning" link @click.native="modals.classic = false">취소</n-button>
-                    <n-button type="primary" >완료</n-button>
+                    <n-button type="primary" @click="writeComment">완료</n-button>
 
 
                   </template>
                 </modal>
 
+
+                <modal :show.sync="modals.modify" headerClasses="justify-content-center" type="mini">
+                  <h4 slot="header" class="title title-up">새 피드 작성</h4>
+
+                  <fieldset> <!--style="position: relative;"-->
+                     <div contenteditable="true" class="content-modal-textarea" style="overflow-y: auto">
+                       <div style="background-color:darkgrey; display: inline;" v-if="mention != ''">@{{mention}}</div>
+                       <div style="display : inline;" v-bind="commentText"></div>
+                     </div>
+                  </fieldset>
+
+                  <template slot="footer">
+                    <n-button type="warning" link @click.native="modals.modify = false">취소</n-button>
+                    <n-button type="primary" @click="modifyComment">완료</n-button>
+                  </template>
+                </modal>
+
+
+
                     <div class="float-left font-weight-bold" style="font-size: 15px; margin-bottom: 20px;">댓글 <span>12</span></div>
                     <div>
                       <div v-for="(com, idx) in feed.replies" v-bind:key="idx">
-                        <div  :id="'comm-' + idx">
+
+                        <div  :id="'comm-' + idx" v-if="com.deleteYn='N'">
                           <div class="comment-wrap">
 
                            <div class="photo">
@@ -307,7 +341,7 @@
                              <!--<img src="/img/more.png" class="float-right comment-more-menu" />-->
 
                              <div class="float-right comment-more-menu">
-                               <span class="more-btn" @click="modifyComment(com.comment)">수정</span>
+                               <span class="more-btn" @click="modifyWindow(com)">수정</span>
                                <span> | </span>
                                <span class="more-btn" @click="deleteComment(com, idx)">삭제</span>
                              </div>
