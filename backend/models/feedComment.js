@@ -42,8 +42,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     deleteYn : {
       type : DataTypes.STRING,
-      allowNull : false,
-      defaultValue : 'N'
+      allowNull : false
+      //defaultValue : 'N'
     },
     parent_com_id : {
       type : DataTypes.INTEGER,

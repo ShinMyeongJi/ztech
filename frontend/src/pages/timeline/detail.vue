@@ -86,7 +86,8 @@
           crt_dt : new Date(),
           mod_dt : null,
           parent_com_id : 0
-        }
+        },
+        newCommentText : ""
     }
   },
   filters : {
@@ -103,6 +104,7 @@
       getFeeds(){
         axios.get(`/feeds/feed/${this.feedId}`).then(response =>{
           this.feed = response.data.infos[0]
+          console.log(response)
         })
       },
       postFeeds(){
@@ -173,7 +175,7 @@
           this.mention = user.user_name
       },
       writeComment(){
-        console.log(this.comment.comment)
+        this.comment.comment = this.newCommentText;
         //Todo 현재 사용자 추가
 
         axios.post('/feeds/comment', this.comment).then(response => {
@@ -313,7 +315,7 @@
                   <fieldset> <!--style="position: relative;"-->
                      <div contenteditable="true" class="content-modal-textarea" style="overflow-y: auto">
                        <div style="background-color:darkgrey; display: inline;" v-if="mention != ''">@{{mention}}</div>
-                       <div style="display : inline;" v-bind="commentText"></div>
+                       <div style="display : inline;">{{commentText}}</div>
                      </div>
                   </fieldset>
 
@@ -329,7 +331,7 @@
                     <div>
                       <div v-for="(com, idx) in feed.replies" v-bind:key="idx">
 
-                        <div  :id="'comm-' + idx" v-if="com.deleteYn='N'">
+                        <div :id="'comm-' + idx" v-if="com.deleteYn='N'">
                           <div class="comment-wrap">
 
                            <div class="photo">
@@ -365,6 +367,12 @@
 
                           </div>
                         </div>
+                        <div v-else-if="com.deleteYn='Y' && com.sub_comments">
+                          삭제된 댓글입니다.
+                        </div>
+
+
+
 
                         <div v-if="com.sub_comments">
 
@@ -404,7 +412,7 @@
                    <div class="comment-wrap">
                      <div class="comment-write-block">
                        <p class="comment-text"></p>
-                       <textarea rows="5" v-model="comment.comment"></textarea>
+                       <textarea rows="5" v-model="newCommentText"></textarea>
 
                        <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="warning">취소</n-button>
                        <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="primary" @click="writeComment">확인</n-button>

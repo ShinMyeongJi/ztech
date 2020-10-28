@@ -42,7 +42,8 @@ db.feedInfo.hasMany(db.feedComment,{
 })
 
 /*db.feedComment.sync({
-  alter : true
+  //alter : true
+  force : true
 })*/
 /*db.sequelize.sync({force : true});*/
 module.exports = db;

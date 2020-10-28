@@ -68,7 +68,14 @@ router.get('/', async(req, res)=> {
 
 router.get('/feed/:feedId', async(req, res)=>{
   try{
-    const infos = await feedInfo.findAll({
+
+    const infos = await feedComment.findAll({
+      where : {
+        feed_id : req.params.feedId
+      }
+    })
+
+    /*const infos = await feedInfo.findAll({
       order : [
         ['crt_dt', 'DESC']
       ],
@@ -86,7 +93,7 @@ router.get('/feed/:feedId', async(req, res)=>{
               model : feedComment,
               where : {
                 feed_id : info.feed_id,
-                deleteYn : 'N',
+                //deleteYn : 'N',
                 parent_com_id : 0
               }
             }
@@ -118,11 +125,10 @@ router.get('/feed/:feedId', async(req, res)=>{
 
         if(comments) {
           info.setDataValue("replies", comments.dataValues.feed_comments)
-
         }
       }
     }
-    console.log(infos[0].dataValues.replies)
+    console.log(infos[0].dataValues.replies)*/
     res.send({infos});
   }catch (e)  {
     console.error(e);
