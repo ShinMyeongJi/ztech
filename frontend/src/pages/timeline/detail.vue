@@ -339,8 +339,8 @@
 
                            </div>
                            <div class="comment-block">
-                             <span class="comment-user-name font-weight-bold">{{com.user.user_name}}</span>
-                             <!--<img src="/img/more.png" class="float-right comment-more-menu" />-->
+                             <span class="comment-user-name font-weight-bold"></span>
+                             <!--<img src="/img/more.png" class="float-right comment-more-menu" />{{com.user.user_name}}-->
 
                              <div class="float-right comment-more-menu">
                                <span class="more-btn" @click="modifyWindow(com)">수정</span>
@@ -383,7 +383,7 @@
                                    <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
                                  </div>
                                  <div class="comment-block">
-                                   <span class="comment-user-name font-weight-bold">{{sub.user.user_name}}</span>
+                                   <span class="comment-user-name font-weight-bold"></span><!--{{sub.user.user_name}}-->
                                    <p class="comment-text">{{sub.comment}}</p>
                                    <div class="bottom-comment">
                                       <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->

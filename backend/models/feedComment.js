@@ -40,15 +40,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull:true
     },
-    deleteYn : {
-      type : DataTypes.STRING,
-      allowNull : false
-      //defaultValue : 'N'
-    },
     parent_com_id : {
       type : DataTypes.INTEGER,
       allowNull : true,
       defaultValue : 0
+    },
+    delFlag : {
+      type : DataTypes.STRING(5)
     }
   }, {
     timestamps : false,

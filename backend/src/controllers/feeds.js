@@ -69,13 +69,7 @@ router.get('/', async(req, res)=> {
 router.get('/feed/:feedId', async(req, res)=>{
   try{
 
-    const infos = await feedComment.findAll({
-      where : {
-        feed_id : req.params.feedId
-      }
-    })
-
-    /*const infos = await feedInfo.findAll({
+    const infos = await feedInfo.findAll({
       order : [
         ['crt_dt', 'DESC']
       ],
@@ -85,21 +79,19 @@ router.get('/feed/:feedId', async(req, res)=>{
     });
 
     if(infos) {
-      for(let info of infos) {
+      for (let info of infos) {
         let comments = await feedInfo.findOne({
-          include : [
+          include: [
             {
-              include : [users],
-              model : feedComment,
-              where : {
-                feed_id : info.feed_id,
-                //deleteYn : 'N',
-                parent_com_id : 0
+
+              model: feedComment,
+              where: {
+                feed_id: info.feed_id,
+                parent_com_id: 0
               }
             }
           ]
         })
-
         if(comments){
           for(let comment of comments.dataValues.feed_comments){
             let sub_coms = await feedInfo.findOne({
@@ -111,7 +103,7 @@ router.get('/feed/:feedId', async(req, res)=>{
                     parent_com_id : comment.comment_id
                   },
                   order : [
-                      ['comment_id', 'ASC']
+                    ['comment_id', 'ASC']
                   ]
                 }
               ]
@@ -121,14 +113,14 @@ router.get('/feed/:feedId', async(req, res)=>{
               comment.setDataValue("sub_comments", sub_coms.dataValues.feed_comments)
             }
           }
+          if (comments) {
+            info.setDataValue("replies", comments.dataValues.feed_comments)
+          }
         }
 
-        if(comments) {
-          info.setDataValue("replies", comments.dataValues.feed_comments)
-        }
       }
     }
-    console.log(infos[0].dataValues.replies)*/
+
     res.send({infos});
   }catch (e)  {
     console.error(e);
