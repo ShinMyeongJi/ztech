@@ -92,7 +92,7 @@ router.get('/feed/:feedId', async(req, res)=>{
             }
           ]
         })
-        if(comments){
+       /* if(comments){
           for(let comment of comments.dataValues.feed_comments){
             let sub_coms = await feedInfo.findOne({
               include : [
@@ -113,21 +113,33 @@ router.get('/feed/:feedId', async(req, res)=>{
               comment.setDataValue("sub_comments", sub_coms.dataValues.feed_comments)
             }
           }
-          if (comments) {
-            info.setDataValue("replies", comments.dataValues.feed_comments)
-          }
+
+        }*/
+
+        if (comments) {
+          info.setDataValue("replies", comments.dataValues.feed_comments)
         }
 
       }
     }
-
     res.send({infos});
   }catch (e)  {
     console.error(e);
   }
-
-
 });
+
+router.get('/comments/:feedId', async(req, res)=>{
+  let comments = await feedComment.findAll({
+
+        where: {
+          feed_id : req.params.feedId,
+          comment_depth: 0
+        }
+
+  })
+  console.log(comments)
+  res.send({comments})
+})
 
 router.post('/insert', async(req, res)=> {
   console.log(req.body)

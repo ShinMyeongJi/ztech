@@ -97,13 +97,18 @@
     },
     created() {
       this.feedId = this.$route.query.feedId
-      console.log(this.feedId)
       this.getFeeds()
+      this.getComments()
     },
     methods : {
       getFeeds(){
         axios.get(`/feeds/feed/${this.feedId}`).then(response =>{
           this.feed = response.data.infos[0]
+        })
+      },
+      getComments(){
+        console.log(this.feedId)
+        axios.get(`/feeds/comments/${this.feedId}`).then(response =>{
           console.log(response)
         })
       },
@@ -331,7 +336,7 @@
                     <div>
                       <div v-for="(com, idx) in feed.replies" v-bind:key="idx">
 
-                        <div :id="'comm-' + idx" v-if="com.deleteYn='N'">
+                        <div :id="'comm-' + idx" v-if="com.delFlag='NO'">
                           <div class="comment-wrap">
 
                            <div class="photo">
