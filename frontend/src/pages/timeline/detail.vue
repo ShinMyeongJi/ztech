@@ -87,7 +87,8 @@
           mod_dt : null,
           parent_com_id : 0
         },
-        newCommentText : ""
+        newCommentText : "",
+        replies : []
     }
   },
   filters : {
@@ -110,6 +111,7 @@
         console.log(this.feedId)
         axios.get(`/feeds/comments/${this.feedId}`).then(response =>{
           console.log(response)
+          this.replies = response.data.comments
         })
       },
       postFeeds(){
@@ -334,7 +336,7 @@
 
                     <div class="float-left font-weight-bold" style="font-size: 15px; margin-bottom: 20px;">댓글 <span>12</span></div>
                     <div>
-                      <div v-for="(com, idx) in feed.replies" v-bind:key="idx">
+                      <div v-for="(com, idx) in replies" v-bind:key="idx">
 
                         <div :id="'comm-' + idx" v-if="com.delFlag='NO'">
                           <div class="comment-wrap">
@@ -353,7 +355,7 @@
                                <span class="more-btn" @click="deleteComment(com, idx)">삭제</span>
                              </div>
 
-                             <p class="comment-text">{{com.comment}}</p>
+                             <p class="comment-text">{{com.comment}}{{com.delFlag}}</p>
                              <div class="bottom-comment">
                                 <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
                                <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
@@ -372,10 +374,9 @@
 
                           </div>
                         </div>
-                        <div v-else-if="com.deleteYn='Y' && com.sub_comments">
+                        <div v-else-if="com.delFlag='YES' && com.sub_comments">
                           삭제된 댓글입니다.
                         </div>
-
 
 
 
@@ -388,8 +389,8 @@
                                    <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
                                  </div>
                                  <div class="comment-block">
-                                   <span class="comment-user-name font-weight-bold"></span><!--{{sub.user.user_name}}-->
-                                   <p class="comment-text">{{sub.comment}}</p>
+                                   <span class="comment-user-name font-weight-bold"><!--{{sub.user.user_name}}--></span>
+                                   <p class="comment-text">{{sub.comment}}{{sub.delFlag}}</p>
                                    <div class="bottom-comment">
                                       <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
                                      <div class="comment-date">{{sub.crt_dt | dateFormat}}</div>
