@@ -133,36 +133,33 @@ router.get('/comments/:feedId', async(req, res)=>{
     where: {
       feed_id: req.params.feedId,
       comment_depth: 0
-    }/*,
+    },
     include: [
       {
         model: users
       }
-    ]*/
+    ]
   })
-
 
   if(comments){
     for(let comt of comments){
-      //console.log(comt.comment_id)
       let sub_coms = await feedComment.findAll({
         where : {
           feed_id : req.params.feedId,
           parent_com_id : comt.comment_id
-        }/*,
+        },
         include : [
           {
             model : users
           }
-        ]*/
+        ]
       })
-      //console.log(sub_coms)
+
       if(sub_coms){
         comt.setDataValue("sub_comments", sub_coms)
       }
     }
   }
-
 
   console.log(comments)
   res.send({comments})

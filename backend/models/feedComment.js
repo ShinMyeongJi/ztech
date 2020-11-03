@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(2000),
       allowNull: false
     },
+    delFlag : {
+      type : DataTypes.STRING(5),
+      allowNull : false
+    },
     like: {
       type: DataTypes.INTEGER,
       defaultValue: 0
@@ -44,9 +48,6 @@ module.exports = (sequelize, DataTypes) => {
       type : DataTypes.INTEGER,
       allowNull : true,
       defaultValue : 0
-    },
-    delFlag : {
-      type : DataTypes.STRING(5)
     }
   }, {
     timestamps : false,

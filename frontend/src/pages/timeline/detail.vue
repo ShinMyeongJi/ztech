@@ -107,9 +107,10 @@
           this.feed = response.data.infos[0]
         })
       },
-      getComments(){
-        console.log(this.feedId)
-        axios.get(`/feeds/comments/${this.feedId}`).then(response =>{
+      async getComments() {
+
+
+        await axios.get(`/feeds/comments/${this.feedId}`).then(response =>{
           console.log(response)
           this.replies = response.data.comments
         })
