@@ -92,7 +92,7 @@ router.get('/feed/:feedId', async(req, res)=>{
             }
           ]
         })
-       /* if(comments){
+        if(comments){
           for(let comment of comments.dataValues.feed_comments){
             let sub_coms = await feedInfo.findOne({
               include : [
@@ -114,7 +114,7 @@ router.get('/feed/:feedId', async(req, res)=>{
             }
           }
 
-        }*/
+        }
 
         if (comments) {
           info.setDataValue("replies", comments.dataValues.feed_comments)

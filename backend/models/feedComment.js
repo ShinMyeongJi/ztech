@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(2000),
       allowNull: false
     },
-    delFlag : {
+    deleteYn : {
       type : DataTypes.STRING(5),
       allowNull : false
     },

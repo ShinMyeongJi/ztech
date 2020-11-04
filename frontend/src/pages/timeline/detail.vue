@@ -105,7 +105,7 @@
       getFeeds(){
         axios.get(`/feeds/feed/${this.feedId}`).then(response =>{
           this.feed = response.data.infos[0]
-
+          console.log(this.feed)
         })
       },
       getComments() {
@@ -344,11 +344,10 @@
 
 
                     <div class="float-left font-weight-bold" style="font-size: 15px; margin-bottom: 20px;">댓글 <span>12</span></div>
+                    <div>
+                      <div v-for="(com, idx) in feed.replies" v-bind:key="idx">
 
-                      <div v-for="(com, idx) in replies.comments" v-bind:key="idx">
-                        {{com}}{{idx}}
-
-                        <div :id="'comm-' + idx" v-if="com.delFlag=='NO'">
+                        <div :id="'comm-' + idx" v-if="com.deleteYn=='N'">
                           <div class="comment-wrap">
 
                            <div class="photo">
@@ -365,7 +364,7 @@
                                <span class="more-btn" @click="deleteComment(com, idx)">삭제</span>
                              </div>
 
-                             <p class="comment-text">{{com.comment}}{{com.delFlag}}</p>
+                             <p class="comment-text">{{com.comment}}</p>
                              <div class="bottom-comment">
                                 <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
                                <div class="comment-date">{{com.crt_dt | dateFormat}}</div>
@@ -376,7 +375,7 @@
                                      <span style="margin-left: 8px; color: darkgray">{{com.like}}</span>
                                    </a>
                                  </li>
-                                <!-- <li class="reply" @click="addCommentForm(idx)">답글</li>-->
+                                 <!-- <li class="reply" @click="addCommentForm(idx)">답글</li>-->
                                  <li class="reply" @click="addCommentForm(com.user, com.comment_depth)">답글</li>
                                </ul>
                              </div>
@@ -384,25 +383,37 @@
 
                           </div>
                         </div>
-                        <!--<div v-else-if="com.delFlag='YES' && com.sub_comments">
-                          삭제된 댓글입니다.
+                        <div v-else-if="com.deleteYn=='Y' && com.sub_comments">
+                          <div class="comment-wrap">
+                           <div class="photo">
+                             <!--<div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>-->
+                           </div>
+                           <div class="comment-block">
+                             <span class="comment-user-name font-weight-bold"></span>
+                             <p class="comment-text">삭제된 댓글입니다.</p>
+                             <div class="bottom-comment">
+                                 <ul class="comment-actions">
+                                 </ul>
+                             </div>
+                           </div>
+                          </div>
                         </div>
 
-
-
+                        <!-- 대댓글 -->
                         <div v-if="com.sub_comments">
 
                             <div style="margin-left: 60px;" v-for="(sub, i) in com.sub_comments" v-bind:key="i">
-                               <div :id="'subComm-' + i">
+
+                              <div :id="'subComm-' + i" v-if="sub.deleteYn == 'N'">
                                 <div class="comment-wrap">
                                  <div class="photo">
                                    <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
                                  </div>
                                  <div class="comment-block">
-                                   <span class="comment-user-name font-weight-bold">&lt;!&ndash;{{sub.user.user_name}}&ndash;&gt;</span>
-                                   <p class="comment-text">{{sub.comment}}{{sub.delFlag}}</p>
+                                   <span class="comment-user-name font-weight-bold"></span><!--{{sub.user.user_name}}-->
+                                   <p class="comment-text">{{sub.comment}}</p>
                                    <div class="bottom-comment">
-                                      &lt;!&ndash;<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>&ndash;&gt;
+                                      <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
                                      <div class="comment-date">{{sub.crt_dt | dateFormat}}</div>
                                      <ul class="comment-actions">
                                        <li class="complain">
@@ -417,12 +428,13 @@
                                  </div>
                                 </div>
                               </div>
+
                              </div>
 
 
                           </div>
 
-                    </div>-->
+                    </div>
                   </div>
 
                    <div class="comment-wrap">
