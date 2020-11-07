@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Index from './pages/Index.vue';
 import Landing from './pages/Landing.vue';
 import Login from './pages/Login.vue';
+import NewAccout from './pages/user/newAccount';
 import Timeline from './pages/timeline/timeline.vue';
 import Feed from './pages/timeline/detail.vue';
 import Profile from './pages/Profile.vue';
@@ -59,6 +60,14 @@ export default new Router({
       components: { default: Login, header: MainNavbar },
       props: {
         header: { colorOnScroll: 400 }
+      }
+    },
+    {
+      path: '/create/user',
+      name : 'newUser',
+      components : { default : NewAccout, header : MainNavbar },
+      props : {
+        header : {colorOnScroll : 400}
       }
     },
     {

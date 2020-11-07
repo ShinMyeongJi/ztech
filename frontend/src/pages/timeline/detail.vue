@@ -99,7 +99,6 @@
     created() {
       this.feedId = this.$route.query.feedId
       this.getFeeds()
-      this.getComments()
     },
     methods : {
       getFeeds(){
@@ -107,21 +106,6 @@
           this.feed = response.data.infos[0]
           console.log(this.feed)
         })
-      },
-      getComments() {
-        let res
-        this.$http.get(`/feeds/comments/${this.feedId}`).then(response =>{
-          this.$set(this.replies, 'comments', response.data.comments)
-
-         // this.$set(this.replies, 0, response.data.comments)
-
-        })
-        console.log(this.replies)
-
-        /*axios.get(`/feeds/comments/${this.feedId}`).then(response =>{
-          console.log(response)
-          this.replies = response.data.comments
-        })*/
       },
       postFeeds(){
         axios.post('/feeds/insert', this.feed)
@@ -355,8 +339,7 @@
 
                            </div>
                            <div class="comment-block">
-                             <span class="comment-user-name font-weight-bold"></span>
-                             <!--<img src="/img/more.png" class="float-right comment-more-menu" />{{com.user.user_name}}-->
+                             <span class="comment-user-name font-weight-bold">{{com.user.user_name}}</span>
 
                              <div class="float-right comment-more-menu">
                                <span class="more-btn" @click="modifyWindow(com)">수정</span>
@@ -410,7 +393,14 @@
                                    <div class="avatar" :style="{backgroundImage : `url(https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg)`}"></div>
                                  </div>
                                  <div class="comment-block">
-                                   <span class="comment-user-name font-weight-bold"></span><!--{{sub.user.user_name}}-->
+                                   <span class="comment-user-name font-weight-bold">{{sub.user.user_name}}</span>
+
+                                   <div class="float-right comment-more-menu">
+                                     <span class="more-btn" @click="modifyWindow(com)">수정</span>
+                                     <span> | </span>
+                                     <span class="more-btn" @click="deleteComment(com, idx)">삭제</span>
+                                   </div>
+
                                    <p class="comment-text">{{sub.comment}}</p>
                                    <div class="bottom-comment">
                                       <!--<input class="comment-date" :value="com.crt_dt" readonly disabled="disabled"/>-->
@@ -442,7 +432,7 @@
                        <p class="comment-text"></p>
                        <textarea rows="5" v-model="newCommentText"></textarea>
 
-                       <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="warning">취소</n-button>
+                       <!--<n-button size="sm" class="comment-write-btn float-right font-weight-light" type="warning">취소</n-button>-->
                        <n-button size="sm" class="comment-write-btn float-right font-weight-light" type="primary" @click="writeComment">확인</n-button>
 
                      </div>
