@@ -16,7 +16,30 @@
                         <fg-input
                                 class="no-border input-lg"
                                 addon-left-icon="now-ui-icons users_circle-08"
-                                placeholder="First Name..."
+                                placeholder="ID"
+                        >
+                        </fg-input>
+
+                        <fg-input
+                                class="no-border input-lg"
+                                addon-left-icon="now-ui-icons users_circle-08"
+                                placeholder="Password"
+                        >
+                        </fg-input>
+
+                        <fg-input
+                                class="no-border input-lg"
+                                addon-left-icon="now-ui-icons users_circle-08"
+                                placeholder="Name"
+                        >
+                        </fg-input>
+
+
+
+                        <fg-input
+                                class="no-border input-lg"
+                                addon-left-icon="now-ui-icons users_circle-08"
+                                placeholder="E-mail"
                         >
                         </fg-input>
 
