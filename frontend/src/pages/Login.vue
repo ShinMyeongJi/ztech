@@ -36,7 +36,7 @@
               </div>
               <div class="pull-left">
                 <h6>
-                  <a href="#pablo" class="link footer-link">Create Account</a>
+                  <a href="javascript:void(0)" @click="goToCreate" class="link footer-link">Create Account</a>
                 </h6>
               </div>
               <div class="pull-right">
@@ -63,6 +63,11 @@ export default {
     MainFooter,
     [Button.name]: Button,
     [FormGroupInput.name]: FormGroupInput
+  },
+  methods : {
+    goToCreate(feedId){
+      this.$router.push(`/create/user`)
+    }
   }
 };
 </script>
