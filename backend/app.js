@@ -11,9 +11,10 @@ dotenv.config();
 const cors = require('cors');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./src/controllers/users');
 var listRouter = require('./src/controllers/lists');
 var feedsRouter = require('./src/controllers/feeds');
+
 
 var app = express();
 sequelize.sync();
