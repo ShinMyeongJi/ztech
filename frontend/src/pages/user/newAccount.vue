@@ -19,16 +19,33 @@
                   name : "",
                   email : ""
               },
-              pwChkFlag : false
+              idChkFlag : false,
+              nameChkFlag : false,
+              pwChkFlag : false,
+              emailChkFlag : false
           }
         },
         methods : {
             submitAccount(){
                 alert(this.account.id)
+                if(this.account.id == null || this.account.id == "") {
+                    this.idChkFlag = true;
+                }
+
+                if(this.account.name == null || this.account.name == "") {
+                    this.nameChkFlag = true;
+                }
+
+                if(this.account.email == null || this.account.email == "") {
+                    this.emailChkFlag = true;
+                }
             },
             pwdValidate(){
-                if(this.account.pw == this.account.pwChk){
+                this.pwChkFlag=false
+                if(this.account.pw != this.account.pwChk){
                     this.pwChkFlag = true
+                }else{
+                    this.pwChkFlag = false
                 }
             }
         }
@@ -55,13 +72,19 @@
                             <img v-lazy="'img/now-logo.png'" alt="" />
                         </div>
 
-                        <fg-input
-                                class="no-border input-lg"
-                                addon-left-icon="now-ui-icons users_circle-08"
-                                placeholder="ID"
-                                v-model="account.id"
-                        >
-                        </fg-input>
+                        <div style="margin-bottom: 50px;">
+                            <fg-input
+                                    class="no-border input-lg"
+                                    addon-left-icon="now-ui-icons users_circle-08"
+                                    placeholder="ID"
+                                    v-model="account.id"
+                                    @keyup="idChkFlag = false"
+                                    style="margin-bottom: -40px;"
+
+                            >
+                            </fg-input>
+                            <span style="font-size: 11px;" v-if="idChkFlag"><i class="now-ui-icons travel_info"></i> ID를 입력하세요.</span>
+                        </div>
 
                         <fg-input
                                 type="password"
@@ -69,6 +92,7 @@
                                 addon-left-icon="now-ui-icons ui-1_lock-circle-open"
                                 placeholder="Password"
                                 v-model="account.pw"
+                                @keyup="pwdValidate"
                         >
                         </fg-input>
 
@@ -79,32 +103,39 @@
                                     addon-left-icon="now-ui-icons ui-1_lock-circle-open"
                                     placeholder="Password Check"
                                     v-model="account.pwChk"
-                                    @keypress="pwdValidate"
+                                    @keyup="pwdValidate"
                                     style="margin-bottom: -40px;"
                             >
                             </fg-input>
                             <span style="font-size: 11px;" v-if="pwChkFlag"><i class="now-ui-icons travel_info"></i> 비밀번호를 확인하세요.</span>
-
-
                         </div>
 
+                        <div style="margin-bottom: 50px;">
+                            <fg-input
+                                    class="no-border input-lg"
+                                    addon-left-icon="now-ui-icons users_single-02"
+                                    placeholder="Name"
+                                    v-model="account.name"
+                                    @keyup="nameChkFlag = false"
+                                    style="margin-bottom: -40px;"
+                            >
+                            </fg-input>
+                            <span style="font-size: 11px;" v-if="nameChkFlag"><i class="now-ui-icons travel_info"></i> 이름을 입력하세요.</span>
+                        </div>
 
-                        <fg-input
-                                class="no-border input-lg"
-                                addon-left-icon="now-ui-icons users_single-02"
-                                placeholder="Name"
-                                v-model="account.name"
-                        >
-                        </fg-input>
+                        <div style="margin-bottom: 50px;">
+                            <fg-input
+                                    class="no-border input-lg"
+                                    addon-left-icon="now-ui-icons ui-1_email-85"
+                                    placeholder="E-mail"
+                                    style="margin-bottom: -40px;"
+                                    @keyup="emailChkFlag = false"
+                                    v-model="account.email"
+                            >
+                            </fg-input>
+                            <span style="font-size: 11px;" v-if="nameChkFlag"><i class="now-ui-icons travel_info"></i> 이메일을 입력하세요.</span>
 
-                        <fg-input
-                                class="no-border input-lg"
-                                addon-left-icon="now-ui-icons ui-1_email-85"
-                                placeholder="E-mail"
-                                style="margin-bottom: 0px;"
-                                v-model="account.email"
-                        >
-                        </fg-input>
+                        </div>
 
 
 

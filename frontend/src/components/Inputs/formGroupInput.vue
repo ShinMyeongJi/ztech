@@ -36,7 +36,7 @@
           v-if="addonRightIcon"
           class="input-group-addon input-group-append"
         >
-          <i class="input-group-text" :class="addonRightIcon"></i>
+          <i class="input-group-text" :class="addonRightIcon" style="padding-right: 15px;"></i>
         </span>
       </slot>
 
