@@ -1,7 +1,7 @@
 
 <script>
     import { Card, Button, FormGroupInput } from '@/components';
-
+    import axios from "axios";
     export default {
         name: 'login-page',
         bodyClass: 'login-page',
@@ -27,7 +27,7 @@
         },
         methods : {
             submitAccount(){
-                alert(this.account.id)
+
                 if(this.account.id == null || this.account.id == "") {
                     this.idChkFlag = true;
                 }
@@ -39,6 +39,13 @@
                 if(this.account.email == null || this.account.email == "") {
                     this.emailChkFlag = true;
                 }
+
+                if(this.idChkFlag == false && this.pwChkFlag== false && this.nameChkFlag == false && this.emailChkFlag == false) {
+                    axios.post('/users',this.account)
+                        .then(response => console.log(response))
+                }
+
+
             },
             pwdValidate(){
                 this.pwChkFlag=false
@@ -133,7 +140,7 @@
                                     v-model="account.email"
                             >
                             </fg-input>
-                            <span style="font-size: 11px;" v-if="nameChkFlag"><i class="now-ui-icons travel_info"></i> 이메일을 입력하세요.</span>
+                            <span style="font-size: 11px;" v-if="emailChkFlag"><i class="now-ui-icons travel_info"></i> 이메일을 입력하세요.</span>
 
                         </div>
 

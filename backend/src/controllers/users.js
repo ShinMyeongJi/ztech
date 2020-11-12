@@ -30,6 +30,7 @@ const upload = multer({
 })
 
 router.post('/', async(req, res)=> {
+  console.log(req.body)
   try{
     const result = users.create(req.body)
     res.send(result)
