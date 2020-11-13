@@ -13,11 +13,12 @@
         data() {
           return {
               account : {
-                  id : "",
-                  pw : "",
+                  user_id : "",
+                  user_pwd : "",
                   pwChk : "",
-                  name : "",
-                  email : ""
+                  user_name : "",
+                  email : "",
+                  profile_img : null
               },
               idChkFlag : false,
               nameChkFlag : false,
@@ -28,11 +29,11 @@
         methods : {
             submitAccount(){
 
-                if(this.account.id == null || this.account.id == "") {
+                if(this.account.user_id == null || this.account.user_id == "") {
                     this.idChkFlag = true;
                 }
 
-                if(this.account.name == null || this.account.name == "") {
+                if(this.account.user_name == null || this.account.user_name == "") {
                     this.nameChkFlag = true;
                 }
 
@@ -49,7 +50,7 @@
             },
             pwdValidate(){
                 this.pwChkFlag=false
-                if(this.account.pw != this.account.pwChk){
+                if(this.account.user_pwd != this.account.pwChk){
                     this.pwChkFlag = true
                 }else{
                     this.pwChkFlag = false
@@ -84,7 +85,7 @@
                                     class="no-border input-lg"
                                     addon-left-icon="now-ui-icons users_circle-08"
                                     placeholder="ID"
-                                    v-model="account.id"
+                                    v-model="account.user_id"
                                     @keyup="idChkFlag = false"
                                     style="margin-bottom: -40px;"
 
@@ -98,7 +99,7 @@
                                 class="no-border input-lg"
                                 addon-left-icon="now-ui-icons ui-1_lock-circle-open"
                                 placeholder="Password"
-                                v-model="account.pw"
+                                v-model="account.user_pwd"
                                 @keyup="pwdValidate"
                         >
                         </fg-input>
@@ -122,7 +123,7 @@
                                     class="no-border input-lg"
                                     addon-left-icon="now-ui-icons users_single-02"
                                     placeholder="Name"
-                                    v-model="account.name"
+                                    v-model="account.user_name"
                                     @keyup="nameChkFlag = false"
                                     style="margin-bottom: -40px;"
                             >
