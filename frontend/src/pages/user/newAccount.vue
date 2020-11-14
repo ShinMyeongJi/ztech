@@ -2,6 +2,7 @@
 <script>
     import { Card, Button, FormGroupInput } from '@/components';
     import axios from "axios";
+
     export default {
         name: 'login-page',
         bodyClass: 'login-page',
@@ -29,6 +30,7 @@
         methods : {
             submitAccount(){
 
+
                 if(this.account.user_id == null || this.account.user_id == "") {
                     this.idChkFlag = true;
                 }
@@ -43,9 +45,14 @@
 
                 if(this.idChkFlag == false && this.pwChkFlag== false && this.nameChkFlag == false && this.emailChkFlag == false) {
                     axios.post('/users',this.account)
-                        .then(response => console.log(response))
-                }
+                        .then(response => {
+                            console.log(response)
+                            if(response.status == 200){
+                                this.$router.push('/login?create=y')
+                            }
+                        })
 
+                }
 
             },
             pwdValidate(){

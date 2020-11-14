@@ -1,9 +1,12 @@
 <template>
   <div class="page-header clear-filter" filter-color="orange">
+
     <div
       class="page-header-image"
       style="background-image: url('img/login.jpg')"
     ></div>
+
+
     <div class="content">
       <div class="container">
         <div class="col-md-5 ml-auto mr-auto">
@@ -45,27 +48,46 @@
                   <a href="#pablo" class="link footer-link">Need Help?</a>
                 </h6>
               </div>
+
             </template>
           </card>
         </div>
       </div>
+      <alert type="success" dismissible v-if="flag">
+        <div class="alert-icon">
+          <i class="now-ui-icons ui-2_like"></i>
+        </div>
+        <strong>Well done!</strong> 회원가입이 완료되었습니다😊👍
+      </alert>
     </div>
 
   </div>
 </template>
 <script>
 import { Card, Button, FormGroupInput } from '@/components';
+import { Alert } from '@/components';
 export default {
   name: 'login-page',
   bodyClass: 'login-page',
   components: {
     Card,
     [Button.name]: Button,
-    [FormGroupInput.name]: FormGroupInput
+    [FormGroupInput.name]: FormGroupInput,
+    Alert
   },
   methods : {
     goToCreate(feedId){
       this.$router.push(`/create/user`)
+    }
+  },
+  data() {
+    return {
+      flag : false
+    }
+  },
+  created() {
+    if(this.$route.query.create){
+      this.flag = this.$route.query.create
     }
   }
 };
