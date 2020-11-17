@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sequelize = require('./models').sequelize;
 var dotenv = require('dotenv');
+const bodyParser = require('body-parser');
+
 dotenv.config();
 
 
@@ -35,6 +37,8 @@ app.use('/users', usersRouter);
 app.use('/lists', listRouter);
 app.use('/feeds', feedsRouter);
 
+
+app.use(bodyParser.json())
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

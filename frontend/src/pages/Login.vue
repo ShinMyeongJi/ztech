@@ -33,8 +33,9 @@
             <template slot="raw-content">
               <div class="card-footer text-center">
                 <a
-                  href="#pablo"
+                  href="javascript:void(0)"
                   class="btn btn-primary btn-round btn-lg btn-block"
+                  @click="get"
                   >Get Started</a
                 >
               </div>
@@ -64,6 +65,8 @@
   </div>
 </template>
 <script>
+  /* eslint-disable vue/no-unused-components */
+import axios from "axios";
 import { Card, Button, FormGroupInput } from '@/components';
 import { Alert } from '@/components';
 export default {
@@ -73,16 +76,30 @@ export default {
     Card,
     [Button.name]: Button,
     [FormGroupInput.name]: FormGroupInput,
-    Alert
+    Alert,
+    axios
   },
   methods : {
     goToCreate(feedId){
       this.$router.push(`/create/user`)
+    },
+    login() {
+      axios.post('/index/login', this.user).then(response => console.log(response))
+    },
+    getFeeds(){
+      axios.get(`/feeds/feed/1`).then(response =>{
+        this.feed = response.data.infos[0]
+        console.log(this.feed)
+      })
     }
   },
   data() {
     return {
-      flag : false
+      flag : false,
+      user : {
+        user_name : "shinmj",
+        user_pws : ""
+      }
     }
   },
   created() {
