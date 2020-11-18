@@ -19,14 +19,16 @@
             <fg-input
               class="no-border input-lg"
               addon-left-icon="now-ui-icons users_circle-08"
-              placeholder="First Name..."
+              placeholder="ID"
+              v-model="user.user_name"
             >
             </fg-input>
 
             <fg-input
               class="no-border input-lg"
-              addon-left-icon="now-ui-icons text_caps-small"
-              placeholder="Last Name..."
+              addon-left-icon="now-ui-icons ui-1_lock-circle-open"
+              placeholder="Password"
+              v-model="user.user_pwd"
             >
             </fg-input>
 
@@ -35,7 +37,7 @@
                 <a
                   href="javascript:void(0)"
                   class="btn btn-primary btn-round btn-lg btn-block"
-                  @click="get"
+                  @click="login"
                   >Get Started</a
                 >
               </div>
@@ -84,7 +86,7 @@ export default {
       this.$router.push(`/create/user`)
     },
     login() {
-      axios.post('/index/login', this.user).then(response => console.log(response))
+      axios.post('/login', this.user).then(response => console.log(response))
     },
     getFeeds(){
       axios.get(`/feeds/feed/1`).then(response =>{
@@ -97,8 +99,8 @@ export default {
     return {
       flag : false,
       user : {
-        user_name : "shinmj",
-        user_pws : ""
+        user_name : "",
+        user_pwd : ""
       }
     }
   },

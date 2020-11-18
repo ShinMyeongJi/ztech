@@ -7,13 +7,7 @@ const uuid = require('uuid');
 
 const dbs = require('../database');
 
-router.post('/login', (req, res, next) => {
-  console.log(req.body.user_name)
 
-  /*db.query(
-      'SELECT * FROM users WHERE user_name = ${db.escape(req.body.user_name)}';
-  )*/
-})
 
 
 const path = require('path');
