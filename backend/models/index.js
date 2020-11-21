@@ -1,13 +1,4 @@
 var express = require('express');
-var router = express.Router();
-const jwt = require('jsonwebtoken');
-
-const bcrypt = require('bcryptjs');
-const uuid = require('uuid');
-
-const dbs = require('../database');
-
-
 
 
 const path = require('path');

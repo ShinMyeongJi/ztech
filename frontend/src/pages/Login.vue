@@ -28,6 +28,7 @@
               class="no-border input-lg"
               addon-left-icon="now-ui-icons ui-1_lock-circle-open"
               placeholder="Password"
+              type="password"
               v-model="user.user_pwd"
             >
             </fg-input>
@@ -86,7 +87,12 @@ export default {
       this.$router.push(`/create/user`)
     },
     login() {
-      axios.post('/login', this.user).then(response => console.log(response))
+      axios.post('/login', this.user)
+      .then(response => {
+        if(response.status == 200){
+        //  this.$router.push('/timeline')
+        }
+      })
     },
     getFeeds(){
       axios.get(`/feeds/feed/1`).then(response =>{

@@ -83,16 +83,22 @@
         <nav-link to="/landing">
           <i class="now-ui-icons education_paper"></i> Landing
         </nav-link>
-        <nav-link to="/login">
-          <i class="now-ui-icons users_circle-08"></i> Login
-        </nav-link>
+
         <nav-link to="/profile">
           <i class="now-ui-icons users_single-02"></i> Profile
         </nav-link>
       </drop-down>
-
-
       <li class="nav-item">
+        <a
+                class="nav-link"
+                href="/login"
+        >
+          <i class="now-ui-icons users_circle-08"></i>
+          <p>Login</p>
+        </a>
+      </li>
+
+      <!--<li class="nav-item">
         <a
           class="nav-link"
           rel="tooltip"
@@ -130,7 +136,7 @@
           <i class="fab fa-instagram"></i>
           <p class="d-lg-none d-xl-none">Instagram</p>
         </a>
-      </li>
+      </li>-->
     </template>
   </navbar>
 </template>
