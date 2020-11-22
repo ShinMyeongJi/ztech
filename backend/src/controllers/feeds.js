@@ -9,6 +9,9 @@ const fs = require('fs')
 const path = require('path')
 const aws = require('aws-sdk')
 
+const jwt = require('jsonwebtoken');
+const key = require('../../config/jwt')
+
 aws.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY,
   secretAccessKey: process.env.AWS_SECRET_KEY,
@@ -33,33 +36,42 @@ const upload = multer({
 
 router.get('/', async(req, res)=> {
   try{
-    const infos = await feedInfo.findAll({
-      order : [
-        ['crt_dt', 'DESC']
-      ]
-    });
+  /*  let token = req.cookies.user;
+    console.log(token)
+    let decoded = jwt.verify(token, key.secret)*/
 
-    if(infos) {
-      for(let info of infos) {
-        let comments = await feedInfo.findOne({
-          include : [
-            {
-              model : feedComment,
-              where : {
-                feed_id : info.feed_id
+    //if(decoded){
+      const infos = await feedInfo.findAll({
+        order : [
+          ['crt_dt', 'DESC']
+        ]
+      });
+
+      if(infos) {
+        for(let info of infos) {
+          let comments = await feedInfo.findOne({
+            include : [
+              {
+                model : feedComment,
+                where : {
+                  feed_id : info.feed_id
+                }
               }
-            }
-          ]
-        })
-        if(comments) {
-          info.setDataValue("replies", comments.dataValues.feed_comments)
+            ]
+          })
+          if(comments) {
+            info.setDataValue("replies", comments.dataValues.feed_comments)
+          }
+
         }
-
       }
-    }
 
+      res.send({infos});
+   // }else{
+  //    res.send("권한이 없습니다.")
+  //  }
     //console.log(infos)
-    res.send({infos});
+
   }catch (e)  {
     console.error(e);
   }

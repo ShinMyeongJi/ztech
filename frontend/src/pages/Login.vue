@@ -90,7 +90,7 @@ export default {
       axios.post('/login', this.user)
       .then(response => {
         if(response.status == 200){
-        //  this.$router.push('/timeline')
+          this.$router.push('/timeline')
         }
       })
     },

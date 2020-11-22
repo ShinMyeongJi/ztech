@@ -9,7 +9,7 @@ const uuid = require('uuid');
 
 const dbs = require('../database');
 /* GET home page. */
-router.post('/login', async (req, res, next) => {
+router.post('/login', (req, res, next) => {
 
   let token = jwt.sign({
     id : req.body.user_name
@@ -19,7 +19,7 @@ router.post('/login', async (req, res, next) => {
     expiresIn : '5m'
   })
 
-  const loginUser = await user.findOne({
+  const loginUser = user.findOne({
     where : {
       user_id : req.body.user_name
     }
