@@ -74,6 +74,7 @@
       }
     },
     created() {
+
       this.getFeeds()
     },
     methods : {

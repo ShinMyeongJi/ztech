@@ -35,6 +35,12 @@ const upload = multer({
 })
 
 router.get('/', async(req, res)=> {
+  console.log("====================================")
+  console.log(req.get("Authorization"));
+  console.log("====================================")
+
+
+
   try{
   /*  let token = req.cookies.user;
     console.log(token)

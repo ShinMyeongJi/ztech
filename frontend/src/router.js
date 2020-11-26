@@ -10,6 +10,7 @@ import Profile from './pages/Profile.vue';
 import MainNavbar from './layout/MainNavbar.vue';
 import MainFooter from './layout/MainFooter.vue';
 import axios from 'axios';
+import store from './store'
 
 Vue.use(Router);
 Vue.prototype.$http = axios;
@@ -70,6 +71,7 @@ export default new Router({
       props : {
         header : {colorOnScroll : 400},
         footer: { backgroundColor: 'black' }
+
       }
     },
     {
@@ -92,6 +94,7 @@ export default new Router({
 });
 
 axios.interceptors.request.use(config => {
+  config.headers["Authorization"] = `Bearer ${store.state.token}`;
   config.baseURL = process.env.VUE_APP_API_HOST;
   return config;
 },error => {

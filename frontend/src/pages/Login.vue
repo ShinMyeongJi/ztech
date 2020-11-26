@@ -70,8 +70,10 @@
 <script>
   /* eslint-disable vue/no-unused-components */
 import axios from "axios";
+
 import { Card, Button, FormGroupInput } from '@/components';
 import { Alert } from '@/components';
+
 export default {
   name: 'login-page',
   bodyClass: 'login-page',
@@ -88,8 +90,10 @@ export default {
     },
     login() {
       axios.post('/login', this.user)
-      .then(response => {
+      .then((response) => {
         if(response.status == 200){
+          console.log(response.data.token)
+          this.$store.commit('JWTTOKEN', response.data.token);
           this.$router.push('/timeline')
         }
       })
@@ -103,11 +107,11 @@ export default {
   },
   data() {
     return {
-      flag : false,
-      user : {
-        user_name : "",
-        user_pwd : ""
-      }
+        flag : false,
+        user : {
+          user_name : "",
+          user_pwd : ""
+        }
     }
   },
   created() {
