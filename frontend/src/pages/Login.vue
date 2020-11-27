@@ -92,8 +92,9 @@ export default {
       axios.post('/login', this.user)
       .then((response) => {
         if(response.status == 200){
-          console.log(response.data.token)
-          this.$store.commit('JWTTOKEN', response.data.token);
+
+          this.$store.commit('JWTTOKEN', response.data.token)
+          this.$store.commit('SETLOGINSTATE', true)
           this.$router.push('/timeline')
         }
       })

@@ -74,7 +74,7 @@
       }
     },
     created() {
-
+      console.log(this.$store.state)
       this.getFeeds()
     },
     methods : {

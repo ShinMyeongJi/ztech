@@ -13,9 +13,24 @@
       NavLink,
       [Popover.name]: Popover
     },
+    created() {
+      this.isLogin()
+    },
+    data() {
+      return {
+        login : false
+      }
+    },
     methods : {
       goToPage(){
         this.$router.push('/timeline')
+      },
+      isLogin(){
+        if(this.$store.state.isLogin) {
+          this.login = true
+        }else {
+          this.login = false
+        }
       }
     }
   };
@@ -88,7 +103,7 @@
           <i class="now-ui-icons users_single-02"></i> Profile
         </nav-link>
       </drop-down>
-      <li class="nav-item">
+      <li class="nav-item" v-if=!login>
         <a
                 class="nav-link"
                 href="/login"
@@ -97,6 +112,24 @@
           <p>Login</p>
         </a>
       </li>
+
+      <drop-down
+              tag="li"
+              title="Examples"
+              icon="now-ui-icons users_circle-08"
+              class="nav-item"
+      >
+
+
+        <nav-link to="/profile">
+          <i class="now-ui-icons users_single-02"></i> Profile
+        </nav-link>
+        <nav-link to="/landing">
+          <i class="now-ui-icons education_paper"></i> Logout
+        </nav-link>
+      </drop-down>
+
+
 
       <!--<li class="nav-item">
         <a
