@@ -14,7 +14,8 @@
       [Popover.name]: Popover
     },
     created() {
-      this.isLogin()
+        console.log(this.$store.state)
+        this.test()
     },
     data() {
       return {
@@ -25,11 +26,16 @@
       goToPage(){
         this.$router.push('/timeline')
       },
-      isLogin(){
-        if(this.$store.state.isLogin) {
-          this.login = true
-        }else {
-          this.login = false
+      logout(){
+          this.$store.state.isLogin = false
+          this.$store.state.token = ""
+      },
+      test(){
+        console.log(this.$refs)
+        if(this.$store.state.isLogin){
+         // this.$refs.loginButton.style.visibility = hidden;
+        }else{
+        // this.$refs.logined.style.visibility = hidden;
         }
       }
     }
@@ -103,7 +109,7 @@
           <i class="now-ui-icons users_single-02"></i> Profile
         </nav-link>
       </drop-down>
-      <li class="nav-item" v-if=!login>
+      <li class="nav-item" ref="loginButton">
         <a
                 class="nav-link"
                 href="/login"
@@ -118,13 +124,14 @@
               title="Examples"
               icon="now-ui-icons users_circle-08"
               class="nav-item"
+              ref="logined"
       >
 
 
         <nav-link to="/profile">
           <i class="now-ui-icons users_single-02"></i> Profile
         </nav-link>
-        <nav-link to="/landing">
+        <nav-link to="/login" @click="logout">
           <i class="now-ui-icons education_paper"></i> Logout
         </nav-link>
       </drop-down>
