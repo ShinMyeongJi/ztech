@@ -1,6 +1,7 @@
 <script>
   import { DropDown, Navbar, NavLink } from '@/components';
   import { Popover } from 'element-ui';
+  import axios from 'axios';
   export default {
     name: 'main-navbar',
     props: {
@@ -12,10 +13,14 @@
       Navbar,
       NavLink,
       [Popover.name]: Popover
+
     },
     created() {
-        console.log(this.$store.state)
-        this.test()
+
+      this.curUser()
+    },
+    mounted() {
+      this.isLogin()
     },
     data() {
       return {
@@ -30,13 +35,15 @@
           this.$store.state.isLogin = false
           this.$store.state.token = ""
       },
-      test(){
-        console.log(this.$refs)
+      isLogin(){
         if(this.$store.state.isLogin){
-         // this.$refs.loginButton.style.visibility = hidden;
+          this.login = true
         }else{
-        // this.$refs.logined.style.visibility = hidden;
+          this.login = false
         }
+      },
+      curUser() {
+        axios.get('/current').then(response => console.log(response))
       }
     }
   };
@@ -109,7 +116,7 @@
           <i class="now-ui-icons users_single-02"></i> Profile
         </nav-link>
       </drop-down>
-      <li class="nav-item" ref="loginButton">
+      <li class="nav-item" v-if="!login">
         <a
                 class="nav-link"
                 href="/login"
@@ -124,7 +131,7 @@
               title="Examples"
               icon="now-ui-icons users_circle-08"
               class="nav-item"
-              ref="logined"
+              v-if="login"
       >
 
 

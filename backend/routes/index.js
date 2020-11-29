@@ -31,8 +31,10 @@ router.post('/login', (req, res, next) => {
       })
     }
   })
+})
 
-
+router.get('/current', (req, res, next) => {
+  console.log(req.get("Authorization"))
 })
 
 module.exports = router;
