@@ -17,14 +17,15 @@
     },
     created() {
 
-      this.curUser()
+      this.getCurUser()
     },
     mounted() {
       this.isLogin()
     },
     data() {
       return {
-        login : false
+        login : false,
+        curUser : {}
       }
     },
     methods : {
@@ -42,8 +43,12 @@
           this.login = false
         }
       },
-      curUser() {
-        axios.get('/current').then(response => console.log(response))
+      getCurUser() {
+        axios.get('/current').then(response =>{
+            this.curUser = response.data
+            console.log(this.curUser)
+          }
+        )
       }
     }
   };

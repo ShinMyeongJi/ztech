@@ -33,8 +33,19 @@ router.post('/login', (req, res, next) => {
   })
 })
 
-router.get('/current', (req, res, next) => {
-  console.log(req.get("Authorization"))
+router.get('/current', async(req, res, next) => {
+
+  let token = req.get("Authorization").replace("Bearer ", "")
+  let id = jwt.decode(token).id
+
+  const loginUser = await user.findOne({
+    where : {
+      user_id : id
+    }
+  })
+
+  res.send(loginUser)
+
 })
 
 module.exports = router;
