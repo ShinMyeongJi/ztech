@@ -17,10 +17,13 @@
     },
     created() {
 
-      this.getCurUser()
+
     },
     mounted() {
       this.isLogin()
+      if(this.login) {
+        this.getCurUser()
+      }
     },
     data() {
       return {
@@ -46,10 +49,13 @@
       getCurUser() {
         axios.get('/current').then(response =>{
             this.curUser = response.data
-            console.log(this.curUser)
-          }
+         }
         )
+      },
+      goToProfile() {
+        this.$router.push(`/profile/${this.curUser.user_id}`)
       }
+
     }
   };
 </script>
@@ -107,7 +113,7 @@
           <i class="now-ui-icons design_bullet-list-67"></i> Documentation
         </a>
       </drop-down>
-      <drop-down
+      <!--<drop-down
               tag="li"
               title="Examples"
               icon="now-ui-icons design_image"
@@ -120,7 +126,7 @@
         <nav-link to="/profile">
           <i class="now-ui-icons users_single-02"></i> Profile
         </nav-link>
-      </drop-down>
+      </drop-down>-->
       <li class="nav-item" v-if="!login">
         <a
                 class="nav-link"
@@ -133,16 +139,14 @@
 
       <drop-down
               tag="li"
-              title="Examples"
+              :title="curUser.user_name"
               icon="now-ui-icons users_circle-08"
               class="nav-item"
               v-if="login"
       >
-
-
-        <nav-link to="/profile">
+        <a class="dropdown-item" :href="`/profile?id=${curUser.user_id}`">
           <i class="now-ui-icons users_single-02"></i> Profile
-        </nav-link>
+        </a>
         <nav-link to="/login" @click="logout">
           <i class="now-ui-icons education_paper"></i> Logout
         </nav-link>
