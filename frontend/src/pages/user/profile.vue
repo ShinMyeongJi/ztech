@@ -1,4 +1,44 @@
-<template>
+<script>
+    import { Tabs, TabPane, Modal } from '@/components';
+    import axios from 'axios';
+    export default {
+        name: 'profile',
+        bodyClass: 'profile-page',
+        components: {
+            Tabs,
+            TabPane,
+            Modal
+        },
+        data() {
+            return {
+                user_id : "",
+                user_info : {},
+                modals: {
+                    classic: false,
+                    mini: false,
+                    carousel: false,
+                    modify : false
+                }
+            }
+        },
+        created() {
+            /* this.user_id = this.$route.query.id
+             console.log(this.user_id)*/
+        },
+        mounted() {
+            this.getUserInfo()
+        },
+        methods : {
+            getUserInfo() {
+                axios.get('/current').then(response =>{
+                        this.user_info = response.data
+                        console.log(this.user_info)
+                    }
+                )
+            }
+        }
+    };
+</script><template>
     <div>
         <div class="page-header clear-filter" filter-color="orange">
             <parallax
@@ -10,7 +50,9 @@
                 <div class="photo-container">
                     <img v-if="user_info.profile_img" :src="user_info.profile_img" alt="" />
                     <img v-else src="img/default-avatar.png"/>
+
                 </div>
+                <a href="javascript:void(0)" @click="modals.modify=true">수정</a>
                 <h3 class="title">{{user_info.user_name}}</h3>
                 <p class="category">{{user_info.email}}</p>
                 <div class="content">
@@ -29,6 +71,21 @@
                 </div>
             </div>
         </div>
+        <modal :show.sync="modals.modify" headerClasses="justify-content-center" type="mini">
+            <h4 slot="header" class="title title-up">새 피드 작성</h4>
+
+            <fieldset> <!--style="position: relative;"-->
+                <div contenteditable="true" class="content-modal-textarea" style="overflow-y: auto">
+                    <div style="background-color:darkgrey; display: inline;" v-if="mention != ''">@{{mention}}</div>
+                    <div style="display : inline;">{{commentText}}</div>
+                </div>
+            </fieldset>
+
+            <template slot="footer">
+                <n-button type="warning" link @click.native="modals.modify = false">취소</n-button>
+                <n-button type="primary">완료</n-button>
+            </template>
+        </modal>
         <div class="section">
             <div class="container">
                 <div class="button-container">
@@ -123,39 +180,7 @@
             </div>
         </div>
     </div>
+
 </template>
-<script>
-    import { Tabs, TabPane } from '@/components';
-    import axios from 'axios';
-    export default {
-        name: 'profile',
-        bodyClass: 'profile-page',
-        components: {
-            Tabs,
-            TabPane
-        },
-        data() {
-            return {
-                user_id : "",
-                user_info : {}
-            }
-        },
-        created() {
-           /* this.user_id = this.$route.query.id
-            console.log(this.user_id)*/
-        },
-        mounted() {
-            this.getUserInfo()
-        },
-        methods : {
-            getUserInfo() {
-                axios.get('/current').then(response =>{
-                        this.user_info = response.data
-                        console.log(this.user_info)
-                    }
-                )
-            }
-        }
-    };
-</script>
+
 <style></style>
