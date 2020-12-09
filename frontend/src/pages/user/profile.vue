@@ -18,7 +18,8 @@
                     mini: false,
                     carousel: false,
                     modify : false
-                }
+                },
+                uploaded_profile : null
             }
         },
         created() {
@@ -35,6 +36,9 @@
                         console.log(this.user_info)
                     }
                 )
+            },
+            popPickImg(){
+                this.$refs.file_input.click()
             }
         }
     };
@@ -48,7 +52,7 @@
             </parallax>
             <div class="container">
                 <div class="photo-container">
-                    <img v-if="user_info.profile_img" :src="user_info.profile_img" alt="" />
+                    <img v-if="uploaded_profile" :src="uploaded_profile" alt="" />
                     <img v-else src="img/default-avatar.png"/>
 
                 </div>
@@ -72,13 +76,39 @@
             </div>
         </div>
         <modal :show.sync="modals.modify" headerClasses="justify-content-center" type="mini">
-            <h4 slot="header" class="title title-up">새 피드 작성</h4>
+            <h4 slot="header" class="title title-up">프로필 수정</h4>
 
-            <fieldset> <!--style="position: relative;"-->
+            <!--<fieldset> &lt;!&ndash;style="position: relative;"&ndash;&gt;
                 <div contenteditable="true" class="content-modal-textarea" style="overflow-y: auto">
                     <div style="background-color:darkgrey; display: inline;" v-if="mention != ''">@{{mention}}</div>
                     <div style="display : inline;">{{commentText}}</div>
                 </div>
+            </fieldset>-->
+            <fieldset>
+                <div class="photo-container float-left" >
+                    <img v-if="user_info.profile_img" :src="user_info.profile_img" alt="" />
+                    <img v-else src="img/default-avatar.png"/>
+
+                </div>
+
+                 <div class="float-left thumb-block" >
+
+                    <div class="thumb-item" >
+                        <img class="thumb-img" >
+                        <a class="remImage" href="javascript:void(0)">
+                            <img class="delete-icon" src="img/criss-cross.png" >
+                        </a>
+                    </div>
+                    <button class="add-btn float-left" @click="popPickImg">
+                        <i class="now-ui-icons design_image" style="color: white;"/>
+                        <span>사진</span>
+                    </button>
+                </div>
+
+
+                <input type="file" class="file_input_hidden" ref="file_input" accept="image/x-png,image/gif,image/jpeg"/>
+
+
             </fieldset>
 
             <template slot="footer">
