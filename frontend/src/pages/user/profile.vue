@@ -1,5 +1,5 @@
 <script>
-    import { Tabs, TabPane, Modal } from '@/components';
+    import { Tabs, TabPane, Modal, FormGroupInput } from '@/components';
     import axios from 'axios';
     export default {
         name: 'profile',
@@ -7,7 +7,8 @@
         components: {
             Tabs,
             TabPane,
-            Modal
+            Modal,
+            [FormGroupInput.name]: FormGroupInput
         },
         data() {
             return {
@@ -91,18 +92,25 @@
 
                 </div>
 
-                 <div class="float-left thumb-block" >
-
-                    <div class="thumb-item" >
+                 <div class="user-info thumb-block" >
+                    <div>
+                     <span class="font-weight-bold">닉네임</span>
+                         <fg-input placeholder="Regular" style="display: inline-block; padding-left: 10px;"></fg-input>
+                    </div>
+                     <div>
+                         <span class="font-weight-bold">닉네임</span>
+                         <fg-input placeholder="Regular" style="display: inline-block; padding-left: 10px;"></fg-input>
+                     </div>
+                     <!--<div class="thumb-item" >
                         <img class="thumb-img" >
                         <a class="remImage" href="javascript:void(0)">
                             <img class="delete-icon" src="img/criss-cross.png" >
                         </a>
-                    </div>
-                    <button class="add-btn float-left" @click="popPickImg">
+                    </div>-->
+                    <!--<button class="add-btn float-left" @click="popPickImg">
                         <i class="now-ui-icons design_image" style="color: white;"/>
                         <span>사진</span>
-                    </button>
+                    </button>-->
                 </div>
 
 
