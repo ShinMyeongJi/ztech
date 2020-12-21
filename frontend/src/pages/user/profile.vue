@@ -87,18 +87,29 @@
             </fieldset>-->
             <fieldset>
                 <div class="photo-container float-left" >
-                    <img v-if="user_info.profile_img" :src="user_info.profile_img" alt="" />
-                    <img v-else src="img/default-avatar.png"/>
+                    <div>
+                        <img v-if="user_info.profile_img" :src="user_info.profile_img" alt="" />
+                        <img v-else src="img/default-avatar.png"/>
+                    </div>
+                    <div>
+                        <button>
+                            수정
+                        </button>
+                    </div>
 
                 </div>
 
                  <div class="user-info thumb-block" >
-                    <div>
-                     <span class="font-weight-bold">닉네임</span>
-                         <fg-input placeholder="Regular" style="display: inline-block; padding-left: 10px;"></fg-input>
-                    </div>
                      <div>
-                         <span class="font-weight-bold">닉네임</span>
+                         <span class="font-weight-bold">이름 </span>
+                         <span>홍길동</span>
+                     </div>
+                     <div>
+                      <span class="font-weight-bold">닉네임</span>
+                          <fg-input placeholder="Regular" style="display: inline-block; padding-left: 10px;"></fg-input>
+                     </div>
+                     <div>
+                         <span class="font-weight-bold">이메일</span>
                          <fg-input placeholder="Regular" style="display: inline-block; padding-left: 10px;"></fg-input>
                      </div>
                      <!--<div class="thumb-item" >
