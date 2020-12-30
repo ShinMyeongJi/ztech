@@ -1,14 +1,17 @@
 <script>
-    import { Tabs, TabPane, Modal, FormGroupInput } from '@/components';
+    import { Tabs, TabPane, Modal, FormGroupInput, Button } from '@/components';
     import axios from 'axios';
+    import NButton from "../../components/Button";
     export default {
         name: 'profile',
         bodyClass: 'profile-page',
         components: {
+            NButton,
             Tabs,
             TabPane,
             Modal,
-            [FormGroupInput.name]: FormGroupInput
+            [FormGroupInput.name]: FormGroupInput,
+            [Button.name]: Button,
         },
         data() {
             return {
@@ -40,7 +43,24 @@
             },
             popPickImg(){
                 this.$refs.file_input.click()
+            },
+            fileSelected(e){
+                console.log(e)
+                /*let files = e.target.files
+
+                for(var i = 0; i < files.length; i++){
+
+                    this.imgUrls.push(URL.createObjectURL(files[i]))
+                    if(this.imgUrls.length == 11) {
+                        this.imgUrls.splice(10,1)
+                        alert("이미지는 10개까지 업로드 할 수 있습니다.")
+                        e.preventDefault();
+                        break;
+                    }
+                }
+                console.log(this.imgUrls)*/
             }
+
         }
     };
 </script><template>
@@ -86,23 +106,28 @@
                 </div>
             </fieldset>-->
             <fieldset>
-                <div class="photo-container float-left" >
-                    <div>
-                        <img v-if="user_info.profile_img" :src="user_info.profile_img" alt="" />
-                        <img v-else src="img/default-avatar.png"/>
+                <div style="position:fixed;">
+                    <div class="photo-container float-left" >
+                        <div>
+                            <img v-if="user_info.profile_img" :src="user_info.profile_img" alt="" />
+                            <img v-else src="img/default-avatar.png"/>
+                        </div>
+
+
                     </div>
-                    <div>
-                        <button>
-                            수정
-                        </button>
+                    <div style="text-align: center;" @click="popPickImg">
+                        수정
                     </div>
+                    <input v-on:change="fileSelected" type="file" class="file_input_hidden" ref="file_input" multiple="multiple" accept="image/x-png,image/gif,image/jpeg"/>
+
+
 
                 </div>
 
                  <div class="user-info thumb-block" >
                      <div>
                          <span class="font-weight-bold">이름 </span>
-                         <span>홍길동</span>
+                         <span>{{user_info.user_name}}</span>
                      </div>
                      <div>
                       <span class="font-weight-bold">닉네임</span>
@@ -110,7 +135,7 @@
                      </div>
                      <div>
                          <span class="font-weight-bold">이메일</span>
-                         <fg-input placeholder="Regular" style="display: inline-block; padding-left: 10px;"></fg-input>
+                         <fg-input placeholder="Regular" style="display: inline-block; padding-left: 10px;" v-bind:value="user_info.email"></fg-input>
                      </div>
                      <!--<div class="thumb-item" >
                         <img class="thumb-img" >
