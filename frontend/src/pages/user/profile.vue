@@ -45,8 +45,8 @@
                 this.$refs.file_input.click()
             },
             fileSelected(e){
-                console.log(e)
-                /*let files = e.target.files
+                console.log(event.target.value)
+                let files = e.target.files
 
                 for(var i = 0; i < files.length; i++){
 
@@ -58,7 +58,7 @@
                         break;
                     }
                 }
-                console.log(this.imgUrls)*/
+                console.log(this.imgUrls)
             }
 
         }
@@ -118,10 +118,7 @@
                     <div style="text-align: center;" @click="popPickImg">
                         수정
                     </div>
-                    <input v-on:change="fileSelected" type="file" class="file_input_hidden" ref="file_input" multiple="multiple" accept="image/x-png,image/gif,image/jpeg"/>
-
-
-
+                    <input v-on:change="fileSelected" type="file" class="file_input_hidden" ref="file_input" accept="image/x-png,image/gif,image/jpeg" hidden/>
                 </div>
 
                  <div class="user-info thumb-block" >
@@ -148,9 +145,6 @@
                         <span>사진</span>
                     </button>-->
                 </div>
-
-
-                <input type="file" class="file_input_hidden" ref="file_input" accept="image/x-png,image/gif,image/jpeg"/>
 
 
             </fieldset>
