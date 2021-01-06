@@ -45,8 +45,11 @@
                 this.$refs.file_input.click()
             },
             fileSelected(e){
-                console.log(event.target.value)
-                let files = e.target.files
+                console.log(e.target.files)
+                //this.uploaded_profile = URL.createObjectURL(e.target.files[0])
+                this.user_info.profile_img = URL.createObjectURL(e.target.files[0])
+                console.log(this.user_info.profile_img)
+                /*let files = e.target.files
 
                 for(var i = 0; i < files.length; i++){
 
@@ -58,7 +61,7 @@
                         break;
                     }
                 }
-                console.log(this.imgUrls)
+                console.log(this.imgUrls)*/
             }
 
         }
