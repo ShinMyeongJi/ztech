@@ -2,6 +2,7 @@
     import { Tabs, TabPane, Modal, FormGroupInput, Button } from '@/components';
     import axios from 'axios';
     import NButton from "../../components/Button";
+
     export default {
         name: 'profile',
         bodyClass: 'profile-page',
@@ -62,6 +63,21 @@
                     }
                 }
                 console.log(this.imgUrls)*/
+            },
+            modifyProfile() {
+
+                let formData = new FormData()
+                formData.append('profile', this.$refs.file_input.files[0])
+
+                console.log(formData)
+                if(this.uploaded_profile) {
+                    this.user_info.profile_img = this.uploaded_profile
+                }
+
+
+                axios.post('/users/profile', formData).then(response => {
+                    console.log(response)
+                })
             }
 
         }
@@ -118,7 +134,7 @@
 
 
                     </div>
-                    <div style="text-align: center;" @click="popPickImg">
+                    <div style="text-align: center;" @click="popPickImg" class="pic-modify-btn">
                         수정
                     </div>
                     <input v-on:change="fileSelected" type="file" class="file_input_hidden" ref="file_input" accept="image/x-png,image/gif,image/jpeg" hidden/>
@@ -154,7 +170,7 @@
 
             <template slot="footer">
                 <n-button type="warning" link @click.native="modals.modify = false">취소</n-button>
-                <n-button type="primary">완료</n-button>
+                <n-button type="primary" @click="modifyProfile">완료</n-button>
             </template>
         </modal>
         <div class="section">

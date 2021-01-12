@@ -14,7 +14,6 @@ aws.config.update({
 })
 
 var router = express.Router();
-var imgUrls = ""
 const upload = multer({
   storage : multerS3({
     s3: new aws.S3(),
@@ -26,6 +25,7 @@ const upload = multer({
       let extName = path.extname(file.originalname)
       cb(null, path.basename(file.originalname, extName) + "_" + new Date().valueOf() + extName);
     }
+
   })
 })
 
@@ -39,4 +39,13 @@ router.post('/', async(req, res)=> {
   }
 });
 
+
+router.post('/profile', upload.array('profile'), async(req,res) => {
+  try{
+    console.log(req.files.length)
+  }catch (e) {
+    console.log(e)
+  }
+
+})
 module.exports = router;

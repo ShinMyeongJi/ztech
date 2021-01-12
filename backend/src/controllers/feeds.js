@@ -196,7 +196,7 @@ router.post('/insert', async(req, res)=> {
 router.post('/upload', upload.array('img'), (req, res) => {
   try{
     imgUrls = ""
-    console.log("req.file: ", req);
+    console.log("req.file: ", req.files);
 
     const locations = [];
     for(let i = 0; i < req.files.length; i++){
